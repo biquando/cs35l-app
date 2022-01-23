@@ -1,9 +1,12 @@
 const { Router } = require("express");
+const authRouter = require("./auth/auth.routes");
 
 const apiRouter = Router();
-apiRouter.get("/", async function (req, res) {
+
+apiRouter.use("/auth", authRouter);
+apiRouter.all("/*", async function (req, res) {
   res.json({
-    data: "Hi there! This is a placeholder endpoint to make sure everything is working.",
+    data: "Hi there! Right domain, but wrong path. Make sure the path is what you're looking for.",
   });
 });
 
