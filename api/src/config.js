@@ -9,6 +9,7 @@ const config = {
   SALT_ROUNDS: +process.env.SALT_ROUNDS,
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
   REFRESH_TOKEN_SECRET: process.env.REFRESH_TOKEN_SECRET,
+  TOKEN_EXPIRATION_DAYS: 7,
 };
 
 module.exports = config;

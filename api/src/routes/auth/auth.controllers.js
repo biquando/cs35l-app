@@ -3,6 +3,12 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const config = require("../../config");
 
+function signToken(userId) {
+  return jwt.sign({ user_id: userId.toString() }, config.ACCESS_TOKEN_SECRET, {
+    expiresIn: `${config.TOKEN_EXPIRATION_DAYS}d`,
+  });
+}
+
 module.exports.signUp = async function (req, res) {
   try {
     const { username, password } = req.body;
@@ -11,12 +17,12 @@ module.exports.signUp = async function (req, res) {
       username,
       password_hash: passwordHash,
     });
-    const token = jwt.sign({ user_id: user._id }, config.ACCESS_TOKEN_SECRET);
-    res.send({ token });
+    const token = signToken(user._id);
+    res.json({ token });
   } catch (error) {
     res
       .status(400)
-      .send({ error: error.message, details: JSON.stringify(error) });
+      .json({ error: error.message, details: JSON.stringify(error) });
   }
 };
 
@@ -26,10 +32,24 @@ module.exports.login = async function (req, res) {
     const user = await User.findOne({ username });
     if (!user || !(await bcrypt.compare(password, user.password_hash)))
       throw new Error("Incorrect username or password");
-    const token = jwt.sign({ user_id: user._id }, config.ACCESS_TOKEN_SECRET);
-    res.send({ token });
+    const token = signToken(user._id);
+    res.json({ token });
   } catch (error) {
     res.status(400).send({
+      error: error.message,
+      details: JSON.stringify(error),
+    });
+  }
+};
+
+module.exports.verify = async function (req, res) {
+  try {
+    const token = req.body.token;
+    const payload = jwt.verify(token, config.ACCESS_TOKEN_SECRET);
+    const refreshedToken = signToken(payload.user_id);
+    res.json({ token: refreshedToken });
+  } catch (error) {
+    res.status(400).json({
       error: error.message,
       details: JSON.stringify(error),
     });
