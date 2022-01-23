@@ -6,4 +6,5 @@ apiRouter.get("/", async function (req, res) {
     data: "Hi there! This is a placeholder endpoint to make sure everything is working.",
   });
 });
+
 module.exports = apiRouter;
