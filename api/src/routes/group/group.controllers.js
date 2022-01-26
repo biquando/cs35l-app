@@ -40,6 +40,24 @@ module.exports.createGroup = async function (req, res) {
   }
 };
 
+module.exports.queryGroup = async function (req, res) {
+  try {
+    const { name, description, id } = req.query;
+    var searchObject = {};
+    Object.assign(searchObject, name        && {name},
+                                description && {description},
+                                id          && {_id: id});
+
+    groups = await Group.find(searchObject);
+    res.json({ data: groups })
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+      details: JSON.stringify(error),
+    });
+  }
+};
+
 module.exports.getGroup = async function (req, res) {
   try {
     const tokenVerification = verifyBearerToken(req);
@@ -61,7 +79,7 @@ module.exports.getGroup = async function (req, res) {
       details: JSON.stringify(error),
     });
   }
-}
+};
 
 module.exports.deleteGroup = async function (req, res) {
   try {
