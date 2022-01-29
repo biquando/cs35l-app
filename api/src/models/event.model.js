@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema({
   },
   description: {
     type: String,
-    reuiqred: false,
+    required: false,
   },
   group_id: {
     type: mongoose.Types.ObjectId,
