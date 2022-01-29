@@ -1,13 +1,15 @@
 const { Router } = require("express");
 const eventRouter = require("./event/event.routes");
 const groupControllers = require("./group.controllers");
+const { authMiddleware } = require("../../middlewares/auth.middlewares");
+const { groupMemberMiddleware, groupOwnerMiddleware } = require("../../middlewares/group.middlewares");
 
 const groupRouter = Router();
 
-groupRouter.post("/", groupControllers.createGroup);
+groupRouter.post("/", authMiddleware(), groupControllers.createGroup);
 groupRouter.get("/", groupControllers.queryGroup);
-groupRouter.get("/:group_id", groupControllers.getGroup);
-groupRouter.delete("/:group_id", groupControllers.deleteGroup);
+groupRouter.get("/:group_id", authMiddleware(), groupMemberMiddleware(), groupControllers.getGroup);
+groupRouter.delete("/:group_id", authMiddleware(), groupOwnerMiddleware(), groupControllers.deleteGroup);
 
 groupRouter.use("/:group_id/event", eventRouter);
 
