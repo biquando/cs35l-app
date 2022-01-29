@@ -62,14 +62,16 @@ module.exports.updateEvent = async function (req, res) {
     // omer: instead of fetching by id, validating user id, then updating
     const group = await Group.findById(groupId);
 
-    if (group.creator_id.toString() !== senderId) {
+    if (group.owner_id.toString() !== senderId) {
       return res.status(403).json({
         error: "You aren't authorized to update this event",
       });
     }
 
     // new: true will have it return the event after the change
-    const event = Event.findByIdAndUpdate(eventId, updates, { new: true });
+    const event = await Event.findByIdAndUpdate(eventId, updates, {
+      new: true,
+    });
 
     res.status(201).json({
       data: event,
@@ -77,7 +79,7 @@ module.exports.updateEvent = async function (req, res) {
   } catch (error) {
     res.status(400).json({
       error: error.message,
-      details: JSON.stringify(error),
+      details: error.toString(),
     });
   }
 };
@@ -90,7 +92,7 @@ module.exports.deleteEvent = async function (req, res) {
     // omer: instead of fetching by id, validating user id, then updating
     const group = await Group.findById(groupId);
 
-    if (group.creator_id.toString() !== senderId) {
+    if (group.owner_id.toString() !== senderId) {
       return res.status(403).json({
         error: "You aren't authorized to delete this event",
       });
