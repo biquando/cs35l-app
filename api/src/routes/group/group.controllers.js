@@ -25,11 +25,11 @@ module.exports.createGroup = async function (req, res) {
 
 module.exports.queryGroup = async function (req, res) {
   try {
-    const { name, description, id } = req.query;
-    var searchObject = {};
-    Object.assign(searchObject, name        && {name},
-                                description && {description},
-                                id          && {_id: id});
+    let searchObject = {};
+    try {
+      const queryString = decodeURIComponent(req.query.query);
+      searchObject = JSON.parse(queryString);
+    } catch (error) {}
 
     groups = await Group.find(searchObject);
     res.json({ data: groups })
