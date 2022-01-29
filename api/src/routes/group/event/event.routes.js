@@ -8,6 +8,6 @@ const eventRouter = Router({ mergeParams: true });
 // Event Routes
 
 // Message Routes
-eventRouter.use(messageRouter);
+eventRouter.use("/:event_id/message", messageRouter);
 
 module.exports = eventRouter;

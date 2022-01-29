@@ -9,6 +9,6 @@ groupRouter.get("/", groupControllers.queryGroup);
 groupRouter.get("/:group_id", groupControllers.getGroup);
 groupRouter.delete("/:group_id", groupControllers.deleteGroup);
 
-groupRouter.use("/:group_id", eventRouter);
+groupRouter.use("/:group_id/event", eventRouter);
 
 module.exports = groupRouter;
