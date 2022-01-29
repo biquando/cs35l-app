@@ -15,7 +15,7 @@ module.exports.groupMemberMiddleware = function (options = {}) {
       if (group.user_ids.indexOf(user_id) === -1)
         throw new Error();
       
-      req.payload = group;
+      req.payload.group = group;
       next();
     } catch (error) {
       res.status(403).json({
@@ -36,10 +36,11 @@ module.exports.groupOwnerMiddleware = function (options = {}) {
         res.status(400).json({
           error: "Couldn't find this group. Make sure you have the right group_id."
         })
-      if (group.owner_id !== user_id)
+      if (group.owner_id != user_id)
         throw new Error();
 
-      req.payload = group;
+
+      req.payload.group = group;
       next();
     } catch (error) {
       res.status(403).json({
