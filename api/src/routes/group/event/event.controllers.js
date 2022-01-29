@@ -3,7 +3,14 @@ const { Group } = require("../../../models/group.model");
 
 module.exports.createEvent = async function (req, res) {
   try {
-    const event = await Event.create(req.body);
+    const groupId = req.params.group_id;
+    const eventObj = {
+      ...req.body,
+      group_id: groupId,
+      // omer: json can only hold primitive representations of dates (numbers, strings)
+      date: new Date(req.body.date),
+    };
+    const event = await Event.create(eventObj);
     res.json({
       data: event,
     });
