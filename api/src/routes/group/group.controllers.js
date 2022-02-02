@@ -1,6 +1,4 @@
 const { Group } = require("../../models/group.model");
-const jwt = require("jsonwebtoken");
-const config = require("../../config");
 
 module.exports.createGroup = async function (req, res) {
   try {

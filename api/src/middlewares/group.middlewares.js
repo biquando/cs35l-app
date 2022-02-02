@@ -1,4 +1,3 @@
-const config = require("../config");
 const { Group } = require("../models/group.model");
 
 module.exports.groupMemberMiddleware = function (options = {}) {
