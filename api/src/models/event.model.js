@@ -17,6 +17,10 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     required: true,
   },
+  message_ids: {
+    type: [mongoose.Types.ObjectId],
+    required: true,
+  },
 });
 
 const Event = mongoose.model("Event", eventSchema);
