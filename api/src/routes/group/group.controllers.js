@@ -29,7 +29,7 @@ module.exports.queryGroup = async function (req, res) {
       searchObject = JSON.parse(queryString);
     } catch (error) {}
 
-    groups = await Group.find(searchObject);
+    const groups = await Group.find(searchObject);
     res.json({ data: groups })
   } catch (error) {
     res.status(400).json({

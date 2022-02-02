@@ -3,8 +3,10 @@ const { Message } = require("../../../../models/message.model");
 
 module.exports.getMessage = async function (req, res) {
   try {
-    const { event } = req.payload;
-    res.json({ data: event.messages });
+    const { event_id } = req.params;
+    const messages = await Message.find({ event_id })
+                                  .sort({ createdAt: "descending" });
+    res.json({ data: messages });
   } catch (error) {
     res.status(400).json({
       error: error.message,
@@ -26,9 +28,6 @@ module.exports.postMessage = async function (req, res) {
       user_id: req.payload.user_id,
       text,
     })
-    await Event.findByIdAndUpdate(req.params.event_id, {
-      message_ids: event.message_ids.concat([newMessage._id]),
-    });
 
     res.json({
       data: newMessage,
