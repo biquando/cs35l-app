@@ -13,7 +13,7 @@ messageRouter.use(authMiddleware(), groupMemberMiddleware(), verifyEventFromGrou
 // Message Routes
 messageRouter.get("/", messageControllers.getMessage);
 messageRouter.post("/", messageControllers.postMessage);
-messageRouter.patch("/:message_id", canEditMessage, messageControllers.editMessage);
-messageRouter.delete("/:message_id", canDeleteMessage, messageControllers.deleteMessage);
+messageRouter.patch("/:message_id", canEditMessage(), messageControllers.editMessage);
+messageRouter.delete("/:message_id", canDeleteMessage(), messageControllers.deleteMessage);
 
 module.exports = messageRouter;

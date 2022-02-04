@@ -5,7 +5,7 @@ module.exports.getMessage = async function (req, res) {
   try {
     const { event_id } = req.params;
     const messages = await Message.find({ event_id })
-                                  .sort({ createdAt: "descending" });
+                                  .sort({ createdAt: "ascending" });
     res.json({ data: messages });
   } catch (error) {
     res.status(400).json({
@@ -44,7 +44,17 @@ module.exports.postMessage = async function (req, res) {
 
 module.exports.editMessage = async function (req, res) {
   try {
-    throw new Error("WIP");
+    const newText = req.body.new_text;
+    if (!newText || newText == "")
+      throw new Error("The request body must have a non-empty 'new_text' property.");
+
+    const modifiedMessage = await Message.findByIdAndUpdate(req.params.message_id, {
+      text: newText,
+    }, { new: true });
+    res.json({
+      data: modifiedMessage,
+    });
+
   } catch (error) {
     res.status(400).json({
       error: error.message,
@@ -55,7 +65,10 @@ module.exports.editMessage = async function (req, res) {
 
 module.exports.deleteMessage = async function (req, res) {
   try {
-    throw new Error("WIP");
+    const oldMessage = await Message.findByIdAndDelete(req.params.message_id);
+    res.json({
+      data: oldMessage,
+    })
   } catch (error) {
     res.status(400).json({
       error: error.message,
