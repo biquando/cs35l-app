@@ -1,5 +1,5 @@
-const { Event } = require("../../../../models/event.model");
 const { Message } = require("../../../../models/message.model");
+const { User } = require("../../../../models/user.model");
 
 module.exports.getMessage = async function (req, res) {
   try {
@@ -17,21 +17,22 @@ module.exports.getMessage = async function (req, res) {
 
 module.exports.postMessage = async function (req, res) {
   try {
-    const { event } = req.payload;
     const { text } = req.body;
-
     if (!text || text == "")
       throw new Error("The request body must have a non-empty 'text' property.");
+
+    const user = await User.findById(req.payload.user_id);
 
     const newMessage = await Message.create({
       event_id: req.params.event_id,
       user_id: req.payload.user_id,
+      username: user.username,      
       text,
-    })
+    });
 
     res.json({
       data: newMessage,
-    })
+    });
 
   } catch (error) {
     res.status(400).json({

@@ -9,6 +9,9 @@ const messageSchema = new mongoose.Schema(
     user_id: {
       type: mongoose.Types.ObjectId,
     },
+    username: {
+      type: String,
+    },
     text: {
       type: String,
       required: true,
