@@ -1,5 +1,6 @@
 const { Router } = require("express");
 const { authMiddleware } = require("../../../middlewares/auth.middlewares");
+const { verifyEventFromGroup } = require("../../../middlewares/event.middlewares");
 const eventControllers = require("./event.controllers");
 const messageRouter = require("./message/message.routes");
 
@@ -12,11 +13,11 @@ eventRouter.use(authMiddleware());
 
 eventRouter.post("/", eventControllers.createEvent);
 eventRouter.get("/", eventControllers.getEvents);
-eventRouter.get("/:event_id", eventControllers.getEvent);
-eventRouter.patch("/:event_id", eventControllers.updateEvent);
-eventRouter.delete("/:event_id", eventControllers.deleteEvent);
+eventRouter.get("/:event_id", verifyEventFromGroup(), eventControllers.getEvent);
+eventRouter.patch("/:event_id", verifyEventFromGroup(), eventControllers.updateEvent);
+eventRouter.delete("/:event_id", verifyEventFromGroup(), eventControllers.deleteEvent);
 
 // Message Routes
-eventRouter.use("/:event_id/message", messageRouter);
+eventRouter.use("/:event_id/message", verifyEventFromGroup(), messageRouter);
 
 module.exports = eventRouter;

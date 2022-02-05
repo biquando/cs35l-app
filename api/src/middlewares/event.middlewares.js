@@ -1,5 +1,6 @@
 const { Event } = require("../models/event.model");
 
+// Make sure that Event[event_id] actually belongs to the Group[group_id]
 module.exports.verifyEventFromGroup = function (options = {}) {
   return async function (req, res, next) {
     try {

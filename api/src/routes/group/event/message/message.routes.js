@@ -8,7 +8,7 @@ const { verifyEventFromGroup } = require("../../../../middlewares/event.middlewa
 // omer: mergeParams is to be able to have access to req.params.event_id and req.params.group_id
 const messageRouter = Router({ mergeParams: true });
 
-messageRouter.use(authMiddleware(), groupMemberMiddleware(), verifyEventFromGroup());
+messageRouter.use(groupMemberMiddleware());
 
 // Message Routes
 messageRouter.get("/", messageControllers.getMessage);
