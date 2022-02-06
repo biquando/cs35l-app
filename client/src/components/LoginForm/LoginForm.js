@@ -34,39 +34,41 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div className="center text-center">
-        <div className="login-card">
-          <h1 className="font">Log In</h1>
-          <form onSubmit={this.onSubmit} className="form-signin">
-            <input
-              name="username"
-              type="text"
-              value={this.state.username}
-              onChange={this.onChange}
-              placeholder="Username"
-              autoFocus
-              className="form-control"
-            />
-            <input
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.onChange}
-              placeholder="Password"
-              className="form-control"
-            />
-            <button
-              className="btn btn-lg btn-primary btn-block"
-              disabled={this.props.loadingSubmit}
-            >
-              {this.props.loadingSubmit ? (
-                <span className="spinner-border spinner-border-sm" />
-              ) : (
-                "Submit"
-              )}
-            </button>
-          </form>
-          {/* TODO: register link */}
-          <p>Register</p>
+        <div className="inner-container">
+          <div className="login-card">
+            <h1 className="font">Bubble</h1>
+            <form onSubmit={this.onSubmit} className="form-signin">
+              <input
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.onChange}
+                placeholder="Username"
+                autoFocus
+                className="form-control"
+              />
+              <input
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.onChange}
+                placeholder="Password"
+                className="form-control"
+              />
+              <button
+                className="button btn btn-lg btn-primary btn-block"
+                disabled={this.props.loadingSubmit}
+              >
+                {this.props.loadingSubmit ? (
+                  <span className="spinner-border spinner-border-sm" />
+                ) : (
+                  "Login"
+                )}
+              </button>
+            </form>
+            {/* TODO: register link */}
+            <p>Register</p>
+          </div>
         </div>
       </div>
     );
