@@ -11,42 +11,54 @@ class RegisterForm extends React.Component {
       password: "",
       msg: null,
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(prevProps) {
-    const { error, isAuthenticated } = this.props;
-    if (error !== prevProps.error) {
-      // Check for a signup error
-      if (error.id === "LOGIN_FAIL") {
-        this.setState({ msg: error.msg.msg });
-      } else {
-        this.setState({ msg: null });
-      }
-    }
+  //TODO: what to do when user submits
+  // componentDidUpdate(prevProps) {
+  //   const { error, isAuthenticated } = this.props;
+  //   if (error !== prevProps.error) {
+  //     // Check for a signup error
+  //     if (error.id === "LOGIN_FAIL") {
+  //       this.setState({ msg: error.msg.msg });
+  //     } else {
+  //       this.setState({ msg: null });
+  //     }
+  //   }
 
-    // TODO: change to schedule page?
-    // if (isAuthenticated) {
-    //     window.location = "/blap/#/"
-    // }
-  }
+  //   if (isAuthenticated) {
+  //     window.location = "/blap/#/";
+  //   }
+  // }
 
-  Login = () => {
-    console.log("login");
-  };
-
-  Logout = () => {
-    console.log("Logout");
-  };
-
-  onChange = () => {
+  handleChange(e) {
+    const { name, value } = e.target;
+    console.log(name);
+    console.log(value);
+    this.setState({
+      [name]: value,
+    });
     console.log("change");
-  };
+  }
 
-  onSubmit = () => {
+  handleSubmit(e) {
     console.log("submit");
-  };
+    console.log(this.state.username, this.state.password);
+    // e.preventDefault();
+
+    const { username, password } = this.state;
+    const user = {
+      username,
+      password,
+    };
+
+    console.log(this.state.username, this.state.password);
+
+    // Attempt to log in
+    // this.props.login(user);
+    // console.log("submit");
+  }
 
   render() {
     return (
@@ -54,12 +66,12 @@ class RegisterForm extends React.Component {
         <div className="inner-container">
           <div className="login-card">
             <h1 className="font">{"bubble"}</h1>
-            <form onSubmit={this.onSubmit} className="form-signin">
+            <form onSubmit={this.handleSubmit} className="form-signin">
               <input
                 name="username"
                 type="text"
                 value={this.state.username}
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 placeholder="Username"
                 autoFocus
                 className="form-control"
@@ -68,7 +80,7 @@ class RegisterForm extends React.Component {
                 name="password"
                 type="password"
                 value={this.state.password}
-                onChange={this.onChange}
+                onChange={this.handleChange}
                 placeholder="Password"
                 className="form-control"
               />
@@ -83,7 +95,6 @@ class RegisterForm extends React.Component {
                 )}
               </button>
             </form>
-            {/* TODO: register link */}
             <p>
               <Link to="/">Login</Link>
             </p>
