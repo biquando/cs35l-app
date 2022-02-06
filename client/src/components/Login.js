@@ -1,6 +1,6 @@
 import React from "react";
 // import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import "../styles/signup.css";
+import "../styles/login.css";
 import { Link } from "react-router-dom";
 
 class LoginForm extends React.Component {

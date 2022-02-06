@@ -3,12 +3,14 @@ import React from "react";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
 
-class RegisterForm extends React.Component {
+class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       username: "",
+      email: "",
       password: "",
+      confirmPassword: "",
       msg: null,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -64,7 +66,7 @@ class RegisterForm extends React.Component {
     return (
       <div className="center text-center">
         <div className="inner-container">
-          <div className="login-card">
+          <div className="signup-card">
             <h1 className="font">{"bubble"}</h1>
             <form onSubmit={this.handleSubmit} className="form-signin">
               <input
@@ -77,11 +79,28 @@ class RegisterForm extends React.Component {
                 className="form-control"
               />
               <input
-                name="password"
+                name="email"
                 type="password"
+                value={this.state.email}
+                onChange={this.handleChange}
+                placeholder="Email"
+                autoFocus
+                className="form-control sharp-corners"
+              />
+              <input
+                name="password"
+                type="text"
                 value={this.state.password}
                 onChange={this.handleChange}
                 placeholder="Password"
+                className="form-control"
+              />
+              <input
+                name="confirm-password"
+                type="password"
+                value={this.state.confirmPassword}
+                onChange={this.handleChange}
+                placeholder="Confirm Password"
                 className="form-control"
               />
               <button
@@ -105,4 +124,4 @@ class RegisterForm extends React.Component {
   }
 }
 
-export default RegisterForm;
+export default SignUpForm;
