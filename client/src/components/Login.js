@@ -66,7 +66,7 @@ class LoginForm extends React.Component {
         <div className="inner-container">
           <div className="login-card">
             <h1 className="font">{"bubble"}</h1>
-            <form onSubmit={this.handleSubmit} className="form-signin">
+            <form onSubmit={this.handleSubmit} className="form-login">
               <input
                 name="username"
                 type="text"

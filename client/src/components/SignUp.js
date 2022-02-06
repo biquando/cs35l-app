@@ -71,7 +71,7 @@ class SignUpForm extends React.Component {
             <form onSubmit={this.handleSubmit} className="form-signin">
               <input
                 name="username"
-                type="text"
+                type="username"
                 value={this.state.username}
                 onChange={this.handleChange}
                 placeholder="Username"
@@ -80,23 +80,22 @@ class SignUpForm extends React.Component {
               />
               <input
                 name="email"
-                type="password"
+                type="email"
                 value={this.state.email}
                 onChange={this.handleChange}
                 placeholder="Email"
-                autoFocus
                 className="form-control sharp-corners"
               />
               <input
                 name="password"
-                type="text"
+                type="password"
                 value={this.state.password}
                 onChange={this.handleChange}
                 placeholder="Password"
                 className="form-control"
               />
               <input
-                name="confirm-password"
+                name="confirmPassword"
                 type="password"
                 value={this.state.confirmPassword}
                 onChange={this.handleChange}
