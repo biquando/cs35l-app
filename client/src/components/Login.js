@@ -36,7 +36,7 @@ class LoginForm extends React.Component {
       <div className="center text-center">
         <div className="inner-container">
           <div className="login-card">
-            <h1 className="font">{"Bubble"}</h1>
+            <h1 className="font">{"bubble"}</h1>
             <form onSubmit={this.onSubmit} className="form-signin">
               <input
                 name="username"

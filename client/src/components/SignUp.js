@@ -15,6 +15,23 @@ class RegisterForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    const { error, isAuthenticated } = this.props;
+    if (error !== prevProps.error) {
+      // Check for a signup error
+      if (error.id === "LOGIN_FAIL") {
+        this.setState({ msg: error.msg.msg });
+      } else {
+        this.setState({ msg: null });
+      }
+    }
+
+    // TODO: change to schedule page?
+    // if (isAuthenticated) {
+    //     window.location = "/blap/#/"
+    // }
+  }
+
   Login = () => {
     console.log("login");
   };
@@ -36,7 +53,7 @@ class RegisterForm extends React.Component {
       <div className="center text-center">
         <div className="inner-container">
           <div className="login-card">
-            <h1 className="font">{"Bubble"}</h1>
+            <h1 className="font">{"bubble"}</h1>
             <form onSubmit={this.onSubmit} className="form-signin">
               <input
                 name="username"
