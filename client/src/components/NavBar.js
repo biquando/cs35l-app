@@ -29,13 +29,16 @@ class NavBar extends React.Component {
     // window.location.reload(true)
   }
 
+  // TODO: username/profile text not right aligning
   render() {
     return (
-      <nav className="spreadnav topbar navbar navbar-expand-lg sticky-top">
+      <nav className="spreadnav topbar navbar  sticky-top">
         <Link to="/" className="navbar-brand">
           <span className="logo text-dark">bubble</span>
         </Link>
-        <span className="profile">username</span>
+        <Link to="/" className="">
+          <span className="profile">username</span>
+        </Link>
       </nav>
     );
   }
