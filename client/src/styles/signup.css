@@ -14,12 +14,12 @@
   margin: auto;
 }
 
-.signup-card {
+.login-card {
   background-color: white;
   border-radius: 15px;
   padding: 15px;
   width: 270px;
-  height: 415px;
+  height: 280px;
 
   /* Center vertically and horizontally */
   position: absolute;
@@ -48,20 +48,17 @@
   font-size: 18px;
 }
 .form-signin .form-control:focus {
-  z-index: 1;
+  z-index: 2;
 }
-.form-signin input[type="username"] {
+.form-signin input[type="text"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
-.form-signin input[type="email"] {
+.form-signin input[type="password"] {
   margin-bottom: 20px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 20px;
 }
 
 .alert {

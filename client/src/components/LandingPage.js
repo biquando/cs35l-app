@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Navbar from './NavBar.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
 
-class LandingPage extends Component{
+
+class App extends Component{
 
     render(){
 
         return(
-                   <div>
-
-                        <Navbar />
-
-
+                <div>
                     <Table striped bordered hover = "sm">
                       <thead>
                         <tr>
@@ -153,18 +147,11 @@ class LandingPage extends Component{
 
                       </tbody>
                     </Table>
-
-
-
                </div>
-
-
-
-
 
             );
     }
 
 
 }
-export default LandingPage;
+export default App;
