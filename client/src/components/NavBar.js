@@ -31,10 +31,11 @@ class NavBar extends React.Component {
 
   render() {
     return (
-      <nav className="topbar navbar navbar-expand-lg sticky-top">
+      <nav className="spreadnav topbar navbar navbar-expand-lg sticky-top">
         <Link to="/" className="navbar-brand">
-          <span className="logo font-weight-bold text-dark">bubble</span>
+          <span className="logo text-dark">bubble</span>
         </Link>
+        <span className="profile">username</span>
       </nav>
     );
   }

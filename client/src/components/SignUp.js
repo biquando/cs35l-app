@@ -45,6 +45,10 @@ class SignUpForm extends React.Component {
   }
 
   handleSubmit(e) {
+    if (this.state.password === this.state.confirmPassword) {
+      console.log("Passwords are different!");
+      return;
+    }
     console.log("submit");
     console.log(this.state.username, this.state.password);
     // e.preventDefault();
