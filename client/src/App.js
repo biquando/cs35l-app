@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
+import LandingPage from "./components/LandingPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -15,11 +16,14 @@ function App() {
           <SideBar />
           <Link to="/"> Login </Link>
           <Link to="/about"> SignUp </Link>
+          
         </nav>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path = "/LandingPage" element={<LandingPage />} />
         </Routes>
+
       </Router>
     </div>
   );

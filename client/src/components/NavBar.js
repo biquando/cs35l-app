@@ -36,6 +36,9 @@ class NavBar extends React.Component {
         <Link to="/" className="navbar-brand">
           <span className="logo text-dark">bubble</span>
         </Link>
+        <Link to="/LandingPage" className="landing-page">
+          <span className="landing-page">schedule</span>
+        </Link>
         <Link to="/" className="">
           <span className="profile">username</span>
         </Link>

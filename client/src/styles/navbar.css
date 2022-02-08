@@ -3,6 +3,10 @@
   font-weight: 500;
 }
 
+.landing-page{
+    padding-left: 10px;
+}
+
 .topbar {
   display: flex;
   background-color: white;

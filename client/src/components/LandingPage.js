@@ -1,23 +1,17 @@
 import React, { Component } from 'react';
 import Table from 'react-bootstrap/Table';
-import Navbar from './NavBar.js'
-import Sidebar from './SideBar.js'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css'
+//import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/landingpage.css";
 
 class LandingPage extends Component{
 
     render(){
 
         return(
-                   <div>
-
-                        <Navbar />
-                        <Sidebar />
+                   <div style = {{width:'87%',margin:'auto'}}>
 
 
-
-                    <Table striped bordered hover = "sm">
+                    <Table striped bordered hover>
                       <thead>
                         <tr>
                           <th>Time</th>
