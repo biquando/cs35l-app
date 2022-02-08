@@ -12,138 +12,34 @@ class LandingPage extends Component{
 
 
                     <Table striped bordered hover>
-                      <thead>
-                        <tr>
-                          <th>Time</th>
-                          <th>Mon</th>
-                          <th>Tue</th>
-                          <th>Wed</th>
-                          <th>Thur</th>
-                          <th>Fri</th>
-                          <th>Sat</th>
-                          <th>Sun</th>
-                        </tr>
-                      </thead>
+
                       <tbody>
                         <tr>
-                          <td>800</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Monday 28</td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>900</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Tuesday 29</td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>1000</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Wednesday 30</td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>1100</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Thursday 31</td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>1200</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Friday 1</td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>1300</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Saturday 2</td>
                           <td></td>
                         </tr>
                         <tr>
-                          <td>1400</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td>1500</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td>1600</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td>1700</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                          <td>1800</td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>Saturday 3</td>
                           <td></td>
                         </tr>
 

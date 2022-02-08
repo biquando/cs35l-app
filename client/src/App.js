@@ -16,7 +16,7 @@ function App() {
           <SideBar />
           <Link to="/"> Login </Link>
           <Link to="/about"> SignUp </Link>
-          
+
         </nav>
         <Routes>
           <Route path="/" element={<Login />} />
