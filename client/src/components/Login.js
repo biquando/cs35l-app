@@ -2,6 +2,7 @@ import React from "react";
 // import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
+import { signUp } from "../utils/auth.js";
 
 class LoginForm extends React.Component {
   constructor(props) {
@@ -34,26 +35,29 @@ class LoginForm extends React.Component {
 
   handleChange(e) {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
+    // console.log(name);
+    // console.log(value);
     this.setState({
       [name]: value,
     });
-    console.log("change");
+    // console.log("change");
   }
 
   handleSubmit(e) {
-    console.log("submit");
-    console.log(this.state.username, this.state.password);
-    // e.preventDefault();
+    // console.log("submit");
+    // console.log(this.state.username, this.state.password);
+    e.preventDefault();
 
     const { username, password } = this.state;
+    signUp({ username, password }).then((result) => {
+      console.log(result);
+    });
     const user = {
       username,
       password,
     };
 
-    console.log(this.state.username, this.state.password);
+    // console.log(this.state.username, this.state.password);
 
     // Attempt to log in
     // this.props.login(user);
