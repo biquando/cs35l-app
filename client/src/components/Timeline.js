@@ -22,47 +22,54 @@ function Day(props) {
   );
 }
 
-function Timeline() {
-  const list = [
-    {
-      date: "07 Feb Monday",
-      events: [
+class Timeline extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      list: [
         {
-          title: "Assignment 1",
-          description: "This is the first assignment.",
+          date: "07 Feb Monday",
+          events: [
+            {
+              title: "Assignment 1",
+              description: "This is the first assignment.",
+            },
+            {
+              title: "Assignment 2",
+              description: "This is the second assignment.",
+            },
+          ],
         },
         {
-          title: "Assignment 2",
-          description: "This is the second assignment.",
+          date: "08 Feb Tuesday",
+          events: [
+            {
+              title: "Assignment 3",
+              description: "This is the third assignment.",
+            },
+          ],
+        },
+        {
+          date: "10 Feb Thursday",
+          events: [
+            {
+              title: "Midterm",
+            },
+          ],
         },
       ],
-    },
-    {
-      date: "08 Feb Tuesday",
-      events: [
-        {
-          title: "Assignment 3",
-          description: "This is the third assignment.",
-        },
-      ],
-    },
-    {
-      date: "10 Feb Thursday",
-      events: [
-        {
-          title: "Midterm",
-        },
-      ],
-    },
-  ];
+    };
+  }
 
-  return (
-    <div className="App">
-      {list.map((day) => (
-        <Day date={day.date} events={day.events} />
-      ))}
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        {this.state.list.map((day) => (
+          <Day date={day.date} events={day.events} />
+        ))}
+      </div>
+    );
+  }
 }
 
 export default Timeline;
