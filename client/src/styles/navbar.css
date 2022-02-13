@@ -1,0 +1,15 @@
+.logo {
+  padding-left: 15px;
+  font-weight: 500;
+}
+
+.topbar {
+  display: flex;
+  background-color: white;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+    0 15px 40px rgba(166, 173, 201, 0.2);
+}
+
+.profile {
+  padding-right: 15px;
+}
