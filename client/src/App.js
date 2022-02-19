@@ -3,6 +3,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp";
 import NavBar from "./components/NavBar";
 import SideBar from "./components/SideBar";
+import CreateEvent from "./components/CreateEvent"
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
@@ -15,10 +16,12 @@ function App() {
           <SideBar />
           <Link to="/"> Login </Link>
           <Link to="/about"> SignUp </Link>
+          <Link to="/create-event"> CreateEvent </Link>
         </nav>
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/create-event" element={<CreateEvent />} />
         </Routes>
       </Router>
     </div>
