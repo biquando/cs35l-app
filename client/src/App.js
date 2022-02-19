@@ -6,10 +6,11 @@ import Body from "./components/Body";
 import Timeline from "./components/body/Timeline";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
+import AuthContextProvider from "./contexts/AuthContext";
 
 function App() {
   return (
-    <div>
+    <AuthContextProvider>
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -17,7 +18,7 @@ function App() {
           <Route path="/" element={<Body />} />
         </Routes>
       </Router>
-    </div>
+    </AuthContextProvider>
   );
 }
 
