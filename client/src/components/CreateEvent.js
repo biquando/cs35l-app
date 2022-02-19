@@ -55,6 +55,19 @@ class CreateEventForm extends React.Component {
                 />
               </div>
 
+              <div className="date-time-picker">
+                <DatePicker
+                  name="eventdate"
+                  selected={this.state.eventdate}
+                  onChange={this.handleChange}
+                  showTimeSelect
+                  timeFormat="HH:mm"
+                  timeIntervals={15}
+                  timeCaption="time"
+                  dateFormat="MMMM d, yyyy h:mm aa"
+                />
+              </div>
+
               <div className="save-button">
                 <button
                   className="button btn btn-lg btn-primary btn-block"
