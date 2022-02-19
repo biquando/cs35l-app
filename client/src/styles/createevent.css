@@ -19,6 +19,12 @@
     left: 10%;
   }
 
+  .save-button {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
+  }
+
   .font {
     font-size: 25px;
   }

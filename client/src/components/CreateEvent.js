@@ -52,6 +52,19 @@ class CreateEventForm extends React.Component {
                   className="form-control"
                 />
               </div>
+
+              <div className="save-button">
+                <button
+                  className="button btn btn-lg btn-primary btn-block"
+                  disabled={this.props.loadingSubmit}
+                >
+                  {this.props.loadingSubmit ? (
+                    <span className="spinner-border spinner-border-sm" />
+                  ) : (
+                    "Save"
+                  )}
+                </button>
+              </div>
               
             </form>
           </div>
