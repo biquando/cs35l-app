@@ -117,7 +117,7 @@ function Comments(props) {
   ];
   return (
     <div className="parent-container expand">
-      <div className="comments-container">
+      <div className="content-container">
         {comments.map((comment) => (
           <Comment username={comment.username} text={comment.text} />
         ))}
