@@ -1,4 +1,5 @@
 const { Group } = require("../../models/group.model");
+const { User } = require("../../models/user.model");
 
 module.exports.createGroup = async function (req, res) {
   try {
@@ -11,8 +12,14 @@ module.exports.createGroup = async function (req, res) {
       description,
       user_ids: [user_id],
     });
-    res.json({ data: group });
 
+    const user = await User.findById(user_id);
+    const newGroupIds = user.group_ids.concat([group._id]);
+    await User.findByIdAndUpdate(user_id, {
+      group_ids: newGroupIds,
+    });
+
+    res.json({ data: group });
   } catch (error) {
     res.status(400).json({
       error: error.message,
@@ -30,7 +37,7 @@ module.exports.queryGroup = async function (req, res) {
     } catch (error) {}
 
     const groups = await Group.find(searchObject);
-    res.json({ data: groups })
+    res.json({ data: groups });
   } catch (error) {
     res.status(400).json({
       error: error.message,
@@ -53,7 +60,20 @@ module.exports.getGroup = async function (req, res) {
 
 module.exports.deleteGroup = async function (req, res) {
   try {
+    const group = await Group.findById(req.params.group_id);
+    const memberIds = group.user_ids;
     await Group.findByIdAndDelete(req.params.group_id);
+
+    // Remove group_id from each member
+    memberIds.forEach(async user_id => {
+      const user = await User.findById(user_id);
+      const newGroupIds = user.group_ids.filter(
+        gid => gid != req.params.group_id
+      );
+      await User.findByIdAndUpdate(user_id, {
+        group_ids: newGroupIds,
+      });
+    });
     res.status(200).end();
   } catch (error) {
     res.status(400).json({
@@ -88,15 +108,21 @@ module.exports.joinGroup = async function (req, res) {
   try {
     const { user_id } = req.payload;
     const group = await Group.findById(req.params.group_id);
-    if (!group)
-      throw new Error("There is no group with this id.");
+    if (!group) throw new Error("There is no group with this id.");
     if (group.user_ids.indexOf(user_id) !== -1)
       throw new Error("User is already in this group!");
 
-    newUserIds = group.user_ids.concat([ user_id ]),
-    await Group.findByIdAndUpdate(req.params.group_id, {
-      user_ids: newUserIds,
-    })
+    (newUserIds = group.user_ids.concat([user_id])),
+      await Group.findByIdAndUpdate(req.params.group_id, {
+        user_ids: newUserIds,
+      });
+
+    const user = await User.findById(user_id);
+    const newGroupIds = user.group_ids.concat([group._id]);
+    await User.findByIdAndUpdate(user_id, {
+      group_ids: newGroupIds,
+    });
+
     res.status(200).end();
   } catch (error) {
     res.status(400).json({
@@ -115,7 +141,17 @@ module.exports.leaveGroup = async function (req, res) {
     const newUserIds = group.user_ids.filter(item => item != user_id);
     await Group.findByIdAndUpdate(req.params.group_id, {
       user_ids: newUserIds,
-    })
+    });
+
+    // Remove group_id from each member
+    const user = await User.findById(user_id);
+    const newGroupIds = user.group_ids.filter(
+      gid => gid != req.params.group_id
+    );
+    await User.findByIdAndUpdate(user_id, {
+      group_ids: newGroupIds,
+    });
+
     res.status(200).end();
   } catch (error) {
     res.status(400).json({
