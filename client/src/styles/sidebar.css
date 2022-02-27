@@ -5,7 +5,9 @@
   box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
     0 15px 40px rgba(166, 173, 201, 0.2);
   flex-direction: row;
+  height: 100vh;
   min-height: 100%;
+  width: 100%;
 }
 
 .group-container {
@@ -40,9 +42,8 @@
   width: 100px;
   height: 100vh;
   /* fafafa */
-  padding: 10px 3px;
+  padding: 50px 3px;
   /* position: fixed; */
   overflow: scroll;
   font-size: large;
-  padding-top: 10px;
 }

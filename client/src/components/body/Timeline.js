@@ -1,7 +1,7 @@
 // import "./App.css";
 import React from "react";
 import { Link } from "react-router-dom";
-import "../styles/timeline.css";
+import "../../styles/timeline.css";
 
 function Day(props) {
   return (
@@ -29,6 +29,36 @@ class Timeline extends React.Component {
     super(props);
     this.state = {
       list: [
+        {
+          date: "07 Feb Monday",
+          events: [
+            {
+              title: "Assignment 1",
+              description: "This is the first assignment.",
+            },
+            {
+              title: "Assignment 2",
+              description: "This is the second assignment.",
+            },
+          ],
+        },
+        {
+          date: "08 Feb Tuesday",
+          events: [
+            {
+              title: "Assignment 3",
+              description: "This is the third assignment.",
+            },
+          ],
+        },
+        {
+          date: "10 Feb Thursday",
+          events: [
+            {
+              title: "Midterm",
+            },
+          ],
+        },
         {
           date: "07 Feb Monday",
           events: [

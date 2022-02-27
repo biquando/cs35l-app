@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/sidebar.css";
 
-import Timeline from "./Timeline";
+import Timeline from "./body/Timeline";
+import Comments from "./body/Comments";
 
 class SideBar extends React.Component {
   constructor(props) {
@@ -103,6 +104,7 @@ class SideBar extends React.Component {
           </div>
         </div>
         <Timeline />
+        <Comments />
       </div>
     );
   }
