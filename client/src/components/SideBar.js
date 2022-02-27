@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/sidebar.css";
 
+import Timeline from "./body/Timeline";
+import Comments from "./body/Comments";
+
 class SideBar extends React.Component {
   constructor(props) {
     super(props);
@@ -31,12 +34,12 @@ class SideBar extends React.Component {
 
   render() {
     return (
-      <div className="wrapper">
-        <nav className="wrapper sidebar sticky-top">
-          <Link to="/" className="navbar-brand">
+      <div className="super-wrapper">
+        <div className="wrappersidebar sticky-top">
+          {/* <Link to="/" className="navbar-brand">
             <span className="logo text-dark">bubble</span>
-          </Link>
-          <div className="line"></div>
+          </Link> */}
+          {/* <div className="line"></div> */}
           <div className="group-container">
             <Link to="/" className="btn-secondary group-box">
               <span className="group-title text-light">group</span>
@@ -53,8 +56,55 @@ class SideBar extends React.Component {
             <Link to="/" className="btn-secondary group-box">
               <span className="group-title text-light">group</span>
             </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
+            <Link to="/" className="btn-secondary group-box">
+              <span className="group-title text-light">group</span>
+            </Link>
           </div>
-        </nav>
+        </div>
+        <Timeline />
+        <Comments />
       </div>
     );
   }
