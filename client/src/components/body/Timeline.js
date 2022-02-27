@@ -2,6 +2,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/timeline.css";
+import "../../styles/body.css";
 
 function Day(props) {
   return (
@@ -95,36 +96,15 @@ class Timeline extends React.Component {
 
   render() {
     return (
-      // <div className="timeline-wrapper">
-      //   <nav className="wrapper sidebar sticky-top">
-      //     <Link to="/" className="navbar-brand">
-      //       <span className="logo text-dark">bubble</span>
-      //     </Link>
-      //     <div className="line"></div>
-      //     <div className="group-container">
-      //       <Link to="/" className="btn-secondary group-box">
-      //         <span className="group-title text-light">group</span>
-      //       </Link>
-      //       <Link to="/" className="btn-secondary group-box">
-      //         <span className="group-title text-light">group</span>
-      //       </Link>
-      //       <Link to="/" className="btn-secondary group-box">
-      //         <span className="group-title text-light">group</span>
-      //       </Link>
-      //       <Link to="/" className="btn-secondary group-box">
-      //         <span className="group-title text-light">group</span>
-      //       </Link>
-      //       <Link to="/" className="btn-secondary group-box">
-      //         <span className="group-title text-light">group</span>
-      //       </Link>
-      //     </div>
-      //   </nav>
-      // </div>
-
-      <div className="timeline-wrapper">
-        {this.state.list.map((day) => (
-          <Day date={day.date} events={day.events} />
-        ))}
+      <div className="parent-container">
+        <div className="content-container">
+          {this.state.list.map((day) => (
+            <Day date={day.date} events={day.events} />
+          ))}
+        </div>
+        <Link to="/" className="add-btn">
+          <span className="group-title text-light">Add Group</span>
+        </Link>
       </div>
     );
   }

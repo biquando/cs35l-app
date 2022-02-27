@@ -1,0 +1,17 @@
+.group-box {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background-color: #bababa;
+  height: 60px;
+  width: 60px;
+  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
+    0 15px 40px rgba(166, 173, 201, 0.2);
+  text-decoration: none;
+}
+
+.group-title {
+  font-weight: bold;
+}

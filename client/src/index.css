@@ -5,3 +5,11 @@
 body {
   margin: 0;
 }
+
+// TODO: wrap entire page (with sidebar)
+// to keep everything in a fixed position with scrolling
+.root-wrapper {
+  height: 100%;
+  background-color: red;
+  z-index: 5;
+}

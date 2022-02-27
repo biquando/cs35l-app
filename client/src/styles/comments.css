@@ -1,10 +1,10 @@
-.comments-wrapper {
-  background-color: #bababa;
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-    0 15px 40px rgba(166, 173, 201, 0.2);
+.comments-container {
   flex-direction: column;
-  display: flex;
-  min-height: 100%;
-  width: 100%;
+  padding: 16px;
+  background-color: white;
   overflow: scroll;
+}
+
+.expand {
+  flex: auto;
 }
