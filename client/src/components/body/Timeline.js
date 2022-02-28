@@ -7,12 +7,12 @@ import "../../styles/body.css";
 function Day(props) {
   return (
     <div>
-      <div className="card">
-        <div className="card-body">
-          <h2 className="card-title">{props.date}</h2>
+      <div>
+        <div>
+          <h6 className="">{props.date}</h6>
           <ul className="list-group">
             {props.events.map((event) => (
-              <li className="list-group-item">
+              <li className="list-group-item shadow-realm">
                 <b>{event.title}</b>
                 {event.description && <p>{event.description}</p>}
               </li>

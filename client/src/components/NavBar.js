@@ -13,15 +13,16 @@ function NavBar(props) {
 
   return (
     // navbar sticky-top
-    <nav className="topbar navbar">
+    <nav className="topbar">
       <Link to="/" className="navbar-brand">
         <span className="logo text-dark">bubble</span>
       </Link>
-      <Link to="/" className="">
-        <button className="profile" onClick={handleClick}>
-          username
-        </button>
-      </Link>
+      <button
+        className="profile button btn btn-md btn-primary btn-block"
+        onClick={handleClick}
+      >
+        Profile
+      </button>
       {showProfile && <Profile />}
     </nav>
   );

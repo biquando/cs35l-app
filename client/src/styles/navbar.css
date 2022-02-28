@@ -1,16 +1,18 @@
 .logo {
-  padding-left: 15px;
   font-weight: 500;
 }
 
 .topbar {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: white;
-  box-shadow: 0 5px 10px rgba(154, 160, 185, 0.05),
-    0 15px 40px rgba(166, 173, 201, 0.2);
-  z-index: 10;
+  padding: 16px;
+  border-bottom: 1px;
+  border-bottom-color: #bababa;
+  border-bottom-style: solid;
 }
 
 .profile {
-  padding-right: 16px;
+  width: 100px;
 }
