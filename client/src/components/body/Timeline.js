@@ -102,9 +102,11 @@ class Timeline extends React.Component {
             <Day date={day.date} events={day.events} />
           ))}
         </div>
-        <Link to="/" className="add-btn">
-          <span className="group-title text-light">Add Group</span>
-        </Link>
+        <div className="sticky-bot">
+          <button className="button btn btn-md btn-primary btn-block">
+            Create Event
+          </button>
+        </div>
       </div>
     );
   }

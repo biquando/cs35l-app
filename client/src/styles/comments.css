@@ -1,10 +1,11 @@
-.comments-container {
-  flex-direction: column;
-  padding: 16px;
-  background-color: white;
-  overflow: scroll;
-}
-
 .expand {
   flex: auto;
+}
+
+.comment-input {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding: 3.5px;
+  font-size: 18px;
 }

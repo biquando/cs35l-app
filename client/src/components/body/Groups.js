@@ -53,9 +53,11 @@ function Sidebar(props) {
           <span className="group-title text-light">group</span>
         </Link>
       </div>
-      <Link to="/" className="add-btn">
-        <span className="group-title text-light">Add Group</span>
-      </Link>
+      <div className="sticky-bot">
+        <button className="add-group-btn button btn btn-md btn-primary">
+          +
+        </button>
+      </div>
     </div>
   );
 }

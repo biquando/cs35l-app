@@ -15,3 +15,8 @@
 .group-title {
   font-weight: bold;
 }
+
+.add-group-button {
+  border-radius: 10px;
+  border-width: 0px;
+}

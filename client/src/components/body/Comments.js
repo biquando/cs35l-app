@@ -115,6 +115,11 @@ function Comments(props) {
       text: "This is the second assignment.",
     },
   ];
+
+  const handleComment = () => {
+    return;
+  };
+
   return (
     <div className="parent-container expand">
       <div className="content-container">
@@ -122,9 +127,17 @@ function Comments(props) {
           <Comment username={comment.username} text={comment.text} />
         ))}
       </div>
-      <Link to="/" className="add-btn">
-        <span className="group-title text-light">Add Group</span>
-      </Link>
+      <div className="sticky-bot">
+        <input
+          name="username"
+          type="comment"
+          value={comments.text}
+          onChange={handleComment}
+          placeholder="Add a comment..."
+          autoFocus
+          className="comment-input"
+        />
+      </div>
     </div>
   );
 }
