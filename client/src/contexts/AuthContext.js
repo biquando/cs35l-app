@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login, signUp, verifyToken } from "../utils/auth";
 
 const AuthContext = React.createContext({
@@ -13,7 +13,7 @@ export default function AuthContextProvider({ children }) {
   const [token, setToken] = useState(null);
   const [authAttempted, setAuthAttempted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
-  const history = useHistory();
+  const history = useNavigate();
 
   useEffect(() => {
     initializeAuth();
