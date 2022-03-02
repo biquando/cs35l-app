@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login, signUp, verifyToken } from "../utils/auth";
 
 const AuthContext = React.createContext({
@@ -13,7 +13,7 @@ export default function AuthContextProvider({ children }) {
   const [token, setToken] = useState(null);
   const [authAttempted, setAuthAttempted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(true);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     initializeAuth();
@@ -25,7 +25,7 @@ export default function AuthContextProvider({ children }) {
       setToken(token);
     } catch (error) {
       console.error(error);
-      history.push("/login");
+      navigate("/login");
       setErrorMessage(error.message);
     }
     setAuthAttempted(true);
@@ -35,11 +35,11 @@ export default function AuthContextProvider({ children }) {
     try {
       const { token } = await signUp({ username, password });
       setToken(token);
-      history.push("/");
+      navigate("/");
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
-      history.push("/login");
+      navigate("/login");
     }
     setAuthAttempted(true);
   }
@@ -48,11 +48,11 @@ export default function AuthContextProvider({ children }) {
     try {
       const { token } = await login({ username, password });
       setToken(token);
-      history.push("/");
+      navigate("/");
     } catch (error) {
       console.error(error);
       setErrorMessage(error.message);
-      history.push("/login");
+      navigate("/login");
     }
     setAuthAttempted(true);
   }
