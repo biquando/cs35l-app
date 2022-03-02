@@ -1,0 +1,11 @@
+.expand {
+  flex: auto;
+}
+
+.comment-input {
+  width: 100%;
+  position: relative;
+  box-sizing: border-box;
+  padding: 5.75px;
+  font-size: 15px;
+}

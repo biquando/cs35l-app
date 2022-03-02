@@ -1,47 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
-class NavBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchTarget: "",
-      showMenu: false,
-    };
-    this.onChange = this.onChange.bind(this);
-    this.submitSearch = this.submitSearch.bind(this);
-  }
+import Profile from "./Profile";
 
-  onChange(e) {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
-  }
+function NavBar(props) {
+  const [showProfile, setShowProfile] = useState(false);
 
-  submitSearch(e) {
-    e.preventDefault();
-    if (this.state.searchTarget.trim() === "") {
-      return;
-    }
+  const handleClick = () => {
+    setShowProfile(!showProfile);
+  };
 
-    // window.location =
-    //     "/blap/#/search?target=" + this.state.searchTarget.trim()
-    // window.location.reload(true)
-  }
-
-  // TODO: username/profile text not right aligning
-  render() {
-    return (
-      <nav className="spreadnav topbar navbar  sticky-top">
-        <Link to="/" className="navbar-brand">
-          <span className="logo text-dark">bubble</span>
-        </Link>
-        <Link to="/" className="">
-          <span className="profile">username</span>
-        </Link>
-      </nav>
-    );
-  }
+  return (
+    // navbar sticky-top
+    <nav className="topbar">
+      <Link to="/" className="navbar-brand">
+        <span className="logo text-dark">bubble</span>
+      </Link>
+      <button
+        className="profile button btn btn-md btn-primary btn-block"
+        onClick={handleClick}
+      >
+        Profile
+      </button>
+      {showProfile && <Profile />}
+    </nav>
+  );
 }
 
 export default NavBar;
