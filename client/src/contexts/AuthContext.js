@@ -7,12 +7,15 @@ const AuthContext = React.createContext({
   authAttempted: false,
   handleLogIn: () => {},
   handleSignUp: () => {},
+  errorMessage: () => {},
+  loading: false,
 });
 
 export default function AuthContextProvider({ children }) {
   const [token, setToken] = useState(null);
   const [authAttempted, setAuthAttempted] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,6 +23,7 @@ export default function AuthContextProvider({ children }) {
   }, []);
 
   async function initializeAuth() {
+    setLoading(true);
     try {
       const { token } = await verifyToken();
       setToken(token);
@@ -29,9 +33,11 @@ export default function AuthContextProvider({ children }) {
       setErrorMessage(error.message);
     }
     setAuthAttempted(true);
+    setLoading(false);
   }
 
   async function handleSignUp({ username, password }) {
+    setLoading(true);
     try {
       const { token } = await signUp({ username, password });
       setToken(token);
@@ -42,9 +48,11 @@ export default function AuthContextProvider({ children }) {
       navigate("/login");
     }
     setAuthAttempted(true);
+    setLoading(false);
   }
 
   async function handleLogIn({ username, password }) {
+    setLoading(true);
     try {
       const { token } = await login({ username, password });
       setToken(token);
@@ -55,11 +63,19 @@ export default function AuthContextProvider({ children }) {
       navigate("/login");
     }
     setAuthAttempted(true);
+    setLoading(false);
   }
 
   return (
     <AuthContext.Provider
-      value={{ token, authAttempted, errorMessage, handleSignUp, handleLogIn }}
+      value={{
+        token,
+        loading,
+        authAttempted,
+        errorMessage,
+        handleSignUp,
+        handleLogIn,
+      }}
     >
       {children}
     </AuthContext.Provider>
