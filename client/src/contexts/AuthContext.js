@@ -1,28 +1,68 @@
 import React, { useContext, useEffect, useState } from "react";
-import { verifyToken } from "../utils/auth";
+import { useHistory } from "react-router-dom";
+import { login, signUp, verifyToken } from "../utils/auth";
 
-const initialState = {
+const AuthContext = React.createContext({
   token: null,
   authAttempted: false,
-};
-const AuthContext = React.createContext(initialState);
+  handleLogIn: () => {},
+  handleSignUp: () => {},
+});
 
 export default function AuthContextProvider({ children }) {
-  const [authState, setAuthState] = useState(initialState);
+  const [token, setToken] = useState(null);
+  const [authAttempted, setAuthAttempted] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(true);
+  const history = useHistory();
 
   useEffect(() => {
-    verifyToken()
-      .then(({ token }) => {
-        setAuthState((prev) => ({ ...prev, token, authAttempted: true }));
-      })
-      .catch((error) => {
-        console.error(error);
-        setAuthState((prev) => ({ ...prev, authAttempted: true }));
-      });
+    initializeAuth();
   }, []);
 
+  async function initializeAuth() {
+    try {
+      const { token } = await verifyToken();
+      setToken(token);
+    } catch (error) {
+      console.error(error);
+      history.push("/login");
+      setErrorMessage(error.message);
+    }
+    setAuthAttempted(true);
+  }
+
+  async function handleSignUp({ username, password }) {
+    try {
+      const { token } = await signUp({ username, password });
+      setToken(token);
+      history.push("/");
+    } catch (error) {
+      console.error(error);
+      setErrorMessage(error.message);
+      history.push("/login");
+    }
+    setAuthAttempted(true);
+  }
+
+  async function handleLogIn({ username, password }) {
+    try {
+      const { token } = await login({ username, password });
+      setToken(token);
+      history.push("/");
+    } catch (error) {
+      console.error(error);
+      setErrorMessage(error.message);
+      history.push("/login");
+    }
+    setAuthAttempted(true);
+  }
+
   return (
-    <AuthContext.Provider value={authState}>{children}</AuthContext.Provider>
+    <AuthContext.Provider
+      value={{ token, authAttempted, errorMessage, handleSignUp, handleLogIn }}
+    >
+      {children}
+    </AuthContext.Provider>
   );
 }
 
