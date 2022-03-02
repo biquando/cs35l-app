@@ -18,7 +18,8 @@ module.exports.signUp = async function (req, res) {
       password_hash: passwordHash,
     });
     const token = signToken(user._id);
-    res.json({ token });
+    const { password_hash, ...userInfo } = user._doc;
+    res.json({ token, user: userInfo });
   } catch (error) {
     res
       .status(400)
@@ -33,7 +34,8 @@ module.exports.login = async function (req, res) {
     if (!user || !(await bcrypt.compare(password, user.password_hash)))
       throw new Error("Incorrect username or password");
     const token = signToken(user._id);
-    res.json({ token });
+    const { password_hash, ...userInfo } = user._doc;
+    res.json({ token, user: userInfo });
   } catch (error) {
     res.status(400).send({
       error: error.message,
@@ -47,7 +49,10 @@ module.exports.verify = async function (req, res) {
     const token = req.body.token;
     const payload = jwt.verify(token, config.ACCESS_TOKEN_SECRET);
     const refreshedToken = signToken(payload.user_id);
-    res.json({ token: refreshedToken });
+
+    const user = await User.findById(payload.user_id);
+    const { password_hash, ...userInfo } = user._doc;
+    res.json({ token: refreshedToken, user: userInfo });
   } catch (error) {
     res.status(400).json({
       error: error.message,
