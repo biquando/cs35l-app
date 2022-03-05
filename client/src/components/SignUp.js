@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import "../styles/signup.css";
 import { Link } from "react-router-dom";
-import { signUp } from "../utils/auth.js";
+import { useAuth } from "../contexts/AuthContext";
 import { Redirect } from "react-router";
 
 function SignUp(props) {
@@ -10,7 +10,11 @@ function SignUp(props) {
     username: "",
     password: "",
     confirmPassword: "",
+    passwordsDifferent: false,
   });
+
+  const { handleSignUp, errorMessage } = useAuth();
+
   function handleChange(e) {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
@@ -18,18 +22,14 @@ function SignUp(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setState((prev) => ({ ...prev, passwordsDifferent: false }));
     if (state.password !== state.confirmPassword) {
-      alert("Passwords are different!");
+      // alert("Passwords are different!");
+      setState((prev) => ({ ...prev, passwordsDifferent: true }));
       return;
     }
     const { username, password } = state;
-    signUp({ username, password })
-      .then((result) => {
-        console.log(result);
-      })
-      .then((error) => {
-        alert(error.message);
-      });
+    handleSignUp({ username, password });
   }
   return (
     <div className="center text-center">
@@ -76,6 +76,12 @@ function SignUp(props) {
           <p>
             <Link to="/login">Login</Link>
           </p>
+          <div style={{ marginTop: "5px", color: "red" }}>
+            {errorMessage && "Username already in use."}
+          </div>
+          <div style={{ marginTop: "5px", color: "red" }}>
+            {state.passwordsDifferent && "Password doesn't match!"}
+          </div>
         </div>
       </div>
     </div>
