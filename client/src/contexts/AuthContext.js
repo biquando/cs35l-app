@@ -9,10 +9,12 @@ const AuthContext = React.createContext({
   handleSignUp: () => {},
   errorMessage: () => {},
   loading: false,
+  user: null,
 });
 
 export default function AuthContextProvider({ children }) {
   const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
   const [authAttempted, setAuthAttempted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -25,8 +27,9 @@ export default function AuthContextProvider({ children }) {
   async function initializeAuth() {
     setLoading(true);
     try {
-      const { token } = await verifyToken();
+      const { token, user } = await verifyToken();
       setToken(token);
+      setUser(user);
     } catch (error) {
       console.error(error);
       navigate("/login");
@@ -42,7 +45,7 @@ export default function AuthContextProvider({ children }) {
       setToken(token);
       navigate("/");
     } catch (error) {
-      console.error(error);
+      console.log(error);
       setErrorMessage(error.message);
       navigate("/signup");
     }
@@ -74,6 +77,7 @@ export default function AuthContextProvider({ children }) {
         errorMessage,
         handleSignUp,
         handleLogIn,
+        user,
       }}
     >
       {children}
