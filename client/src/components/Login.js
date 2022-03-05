@@ -13,7 +13,7 @@ function Login(props) {
     confirmPassword: "",
   });
 
-  const { handleLogIn, errorMessage } = useAuth();
+  const { handleLogIn, errorMessage, loading } = useAuth();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -52,9 +52,9 @@ function Login(props) {
             />
             <button
               className="button btn btn-lg btn-primary btn-block"
-              disabled={props.loadingSubmit}
+              disabled={loading}
             >
-              {props.loadingSubmit ? (
+              {loading ? (
                 <span className="spinner-border spinner-border-sm" />
               ) : (
                 "Login"
