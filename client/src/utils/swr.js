@@ -10,33 +10,35 @@ import { getUser } from "./user";
 // technically be anything (hashable) that uniquely identifies the
 // request.
 
-export function useGroups({ ownerId, name, description, userIds }) {
+export function useGroups(
+  { ownerId, name, description, userIds },
+  isReady = true
+) {
   return useSWR(
-    `/group?name=${name}&description=${description}&userIds=${userIds.join(
-      ","
-    )}`,
+    isReady
+      ? `/group?name=${name}&description=${description}&userIds=${userIds.join(
+          ","
+        )}`
+      : null,
     async () => (await getGroups({ ownerId, name, description, userIds })).data
   );
 }
 
-export function useGroup({ groupId }) {
+export function useGroup({ groupId }, isReady = true) {
   return useSWR(
-    `/group/${groupId}`,
+    isReady ? `/group/${groupId}` : null,
     async () => (await getGroup({ groupId })).data
   );
 }
 
-export function useEvents({
-  groupId,
-  before,
-  after,
-  name,
-  description,
-  startDate,
-  endDate,
-}) {
+export function useEvents(
+  { groupId, before, after, name, description, startDate, endDate },
+  isReady = true
+) {
   return useSWR(
-    `/group/${groupId}/event?before=${before}&after=${after}&name=${name}&description=${description}&startDate=${startDate}&endDate=${endDate}`,
+    isReady
+      ? `/group/${groupId}/event?before=${before}&after=${after}&name=${name}&description=${description}&startDate=${startDate}&endDate=${endDate}`
+      : null,
     async () =>
       (
         await getEvents({
@@ -52,23 +54,23 @@ export function useEvents({
   );
 }
 
-export function useEvent({ groupId, eventId }) {
+export function useEvent({ groupId, eventId }, isReady = true) {
   return useSWR(
-    `/group/${groupId}/event/${eventId}`,
+    isReady ? `/group/${groupId}/event/${eventId}` : null,
     async () => (await getEvent({ groupId, eventId })).data
   );
 }
 
-export function useMessages({ groupId, eventId }) {
+export function useMessages({ groupId, eventId }, isReady = true) {
   return useSWR(
-    `/group/${groupId}/event/${eventId}/message`,
+    isReady ? `/group/${groupId}/event/${eventId}/message` : null,
     async () => (await getMessages({ groupId, eventId })).data
   );
 }
 
-export function useUser({ userId }) {
+export function useUser({ userId }, isReady = true) {
   return useSWR(
-    `/user/${userId}`,
+    isReady ? `/user/${userId}` : null,
     async () => (await getUser({ userId })).data
   );
 }
