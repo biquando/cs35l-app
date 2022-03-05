@@ -26,10 +26,14 @@ export async function login({ username, password }) {
   return result.data;
 }
 
-export async function verifyToken(token = localStorage.getItem("authToken")) {
+export async function verifyToken(token = getStoredAuthToken()) {
   const result = await apiClient.post("/auth/verify", { token });
   const newToken = result.data.token;
   addAuthTokenToApiClientHeader(newToken);
   localStorage.setItem("authToken", newToken);
   return result.data;
+}
+
+export function getStoredAuthToken() {
+  return localStorage.getItem("authToken");
 }

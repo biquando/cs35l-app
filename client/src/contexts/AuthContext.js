@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, signUp, verifyToken } from "../utils/auth";
+import { getStoredAuthToken, login, signUp, verifyToken } from "../utils/auth";
 
 const AuthContext = React.createContext({
   token: null,
@@ -30,7 +30,6 @@ export default function AuthContextProvider({ children }) {
     } catch (error) {
       console.error(error);
       navigate("/login");
-      setErrorMessage(error.message);
     }
     setAuthAttempted(true);
     setLoading(false);
