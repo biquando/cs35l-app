@@ -1,6 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getStoredAuthToken, login, signUp, verifyToken } from "../utils/auth";
+import {
+  getStoredAuthToken,
+  login,
+  removeAuthToken,
+  signUp,
+  verifyToken,
+} from "../utils/auth";
 
 const AuthContext = React.createContext({
   token: null,
@@ -8,6 +14,7 @@ const AuthContext = React.createContext({
   handleLogIn: () => {},
   handleSignUp: () => {},
   errorMessage: () => {},
+  handleLogout: () => {},
   loading: false,
   user: null,
 });
@@ -68,6 +75,11 @@ export default function AuthContextProvider({ children }) {
     setLoading(false);
   }
 
+  function handleLogout() {
+    removeAuthToken();
+    navigate("/login");
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -77,6 +89,7 @@ export default function AuthContextProvider({ children }) {
         errorMessage,
         handleSignUp,
         handleLogIn,
+        handleLogout,
         user,
       }}
     >
