@@ -17,6 +17,8 @@ function NavBar(props) {
       <Link to="/" className="navbar-brand">
         <span className="logo text-dark">bubble</span>
       </Link>
+      <Link to="/"> Login </Link>
+      <Link to="/about"> SignUp </Link>
       <button
         className="profile button btn btn-md btn-primary btn-block"
         onClick={handleClick}
