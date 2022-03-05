@@ -41,7 +41,7 @@ class CreateEventForm extends React.Component {
 
   render() {
     return (
-      <div className="center text-center">
+      <div className="text-center">
         <div className="inner-container">
             <form onSubmit={this.handleSubmit} className="form-event">
               <div className="eventname-input">
