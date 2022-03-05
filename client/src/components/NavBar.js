@@ -17,6 +17,9 @@ function NavBar(props) {
       <Link to="/" className="navbar-brand">
         <span className="logo text-dark">bubble</span>
       </Link>
+        <Link to ="/create-group" className="">
+            <span className="create-group">Create Group</span>
+        </Link>
       <Link to="/"> Login </Link>
       <Link to="/about"> SignUp </Link>
       <button

@@ -48,8 +48,9 @@ export default function AuthContextProvider({ children }) {
   async function handleSignUp({ username, password }) {
     setLoading(true);
     try {
-      const { token } = await signUp({ username, password });
+      const { token, user } = await signUp({ username, password });
       setToken(token);
+      setUser(user);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -63,8 +64,9 @@ export default function AuthContextProvider({ children }) {
   async function handleLogIn({ username, password }) {
     setLoading(true);
     try {
-      const { token } = await login({ username, password });
+      const { token, user } = await login({ username, password });
       setToken(token);
+      setUser(user);
       navigate("/");
     } catch (error) {
       console.error(error);
