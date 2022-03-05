@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import "../styles/login.css";
 import { Link } from "react-router-dom";
 import { signUp } from "../utils/auth.js";
+import { useAuth } from "../contexts/AuthContext";
+import { Redirect } from "react-router-dom";
 
 function Login(props) {
   const [state, setState] = useState({
@@ -11,14 +13,18 @@ function Login(props) {
     confirmPassword: "",
   });
 
+  const { handleLogIn, errorMessage } = useAuth();
+
   function handleChange(e) {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   }
 
   function handleSubmit(e) {
+    console.log("pressed login");
     e.preventDefault();
     const { username, password } = state;
+    handleLogIn({ username, password });
   }
 
   return (
@@ -58,6 +64,9 @@ function Login(props) {
           <p>
             <Link to="/signup">Sign Up</Link>
           </p>
+          <div style={{ marginTop: "5px", color: "red" }}>
+            {errorMessage ? "Incorrect login!" : null}
+          </div>
         </div>
       </div>
     </div>
