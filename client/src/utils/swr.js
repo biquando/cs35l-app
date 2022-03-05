@@ -14,12 +14,15 @@ export function useGroups({ ownerId, name, description, userIds }) {
     `/group?name=${name}&description=${description}&userIds=${userIds.join(
       ","
     )}`,
-    async () => getGroups({ ownerId, name, description, userIds })
+    async () => (await getGroups({ ownerId, name, description, userIds })).data
   );
 }
 
 export function useGroup({ groupId }) {
-  return useSWR(`/group/${groupId}`, async () => getGroup({ groupId }));
+  return useSWR(
+    `/group/${groupId}`,
+    async () => (await getGroup({ groupId })).data
+  );
 }
 
 export function useEvents({
@@ -34,26 +37,30 @@ export function useEvents({
   return useSWR(
     `/group/${groupId}/event?before=${before}&after=${after}&name=${name}&description=${description}&startDate=${startDate}&endDate=${endDate}`,
     async () =>
-      getEvents({
-        groupId,
-        before,
-        after,
-        name,
-        description,
-        startDate,
-        endDate,
-      })
+      (
+        await getEvents({
+          groupId,
+          before,
+          after,
+          name,
+          description,
+          startDate,
+          endDate,
+        })
+      ).data
   );
 }
 
 export function useEvent({ groupId, eventId }) {
-  return useSWR(`/group/${groupId}/event/${eventId}`, async () =>
-    getEvent({ groupId, eventId })
+  return useSWR(
+    `/group/${groupId}/event/${eventId}`,
+    async () => (await getEvent({ groupId, eventId })).data
   );
 }
 
 export function useMessages({ groupId, eventId }) {
-  return useSWR(`/group/${groupId}/event/${eventId}/message`, async () =>
-    getMessages({ groupId, eventId })
+  return useSWR(
+    `/group/${groupId}/event/${eventId}/message`,
+    async () => (await getMessages({ groupId, eventId })).data
   );
 }
