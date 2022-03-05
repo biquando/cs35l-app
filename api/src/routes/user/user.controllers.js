@@ -14,3 +14,22 @@ module.exports.getUser = async function (req, res) {
     });
   }
 };
+
+module.exports.updateUser = async function (req, res) {
+  try {
+    const { new_description } = req.body;
+    const newUser = await User.findByIdAndUpdate(
+      req.payload.user_id,
+      { description: new_description },
+      { new: true }
+    );
+    res.json({
+      data: newUser,
+    });
+  } catch (error) {
+    res.status(400).json({
+      error: error.message,
+      details: JSON.stringify(error),
+    });
+  }
+};
