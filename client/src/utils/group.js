@@ -6,8 +6,9 @@ export async function createGroup({ name, description }) {
   return result.data;
 }
 
-export async function getGroups({ ownerId, name, description }) {
+export async function getGroups({ ownerId, name, description, userIds }) {
   const query = { ownerId, name, description };
+  if (userIds?.length) query.user_ids = { $in: userIds };
   const queryString = configureQueryString(query);
   const result = await apiClient.get(`/group${queryString}`);
   return result.data;
