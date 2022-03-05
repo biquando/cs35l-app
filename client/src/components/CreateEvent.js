@@ -10,7 +10,7 @@ class CreateEventForm extends React.Component {
     this.state = {
       eventname: "",
       eventdate: new Date(),
-      msg: null,
+      details: null,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,7 +56,7 @@ class CreateEventForm extends React.Component {
               </div>
 
               <div className="date-time-picker">
-                <DatePicker
+                {/* <DatePicker
                   name="eventdate"
                   selected={this.state.eventdate}
                   onChange={this.handleChange}
@@ -65,6 +65,12 @@ class CreateEventForm extends React.Component {
                   timeIntervals={15}
                   timeCaption="time"
                   dateFormat="MMMM d, yyyy h:mm aa"
+                /> */}
+                <DatePicker 
+                  name="eventdate"
+                  selected={this.state.eventdate}
+                  onChange={this.handleChange}
+                  className="form-control"
                 />
               </div>
 
@@ -80,7 +86,6 @@ class CreateEventForm extends React.Component {
                   )}
                 </button>
               </div>
-              
             </form>
           </div>
         </div>
