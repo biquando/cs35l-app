@@ -16,7 +16,6 @@
   .eventname-input {
     position: absolute;
     top: 10%;
-    left: 10%;
   }
 
   .save-button {
@@ -28,7 +27,11 @@
   .date-time-picker {
     position: absolute;
     top: 20%;
-    left: 10%;
+  }
+
+  .event-details {
+    position: absolute;
+    top: 30%;
   }
   
   .font {

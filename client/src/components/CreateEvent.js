@@ -5,12 +5,13 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 class CreateEventForm extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
       eventname: "",
       eventdate: new Date(),
-      details: null,
+      details: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,13 +44,13 @@ class CreateEventForm extends React.Component {
       <div className="center text-center">
         <div className="inner-container">
             <form onSubmit={this.handleSubmit} className="form-event">
-              <div className="eventname-input ">
+              <div className="eventname-input">
                 <input
                   name="eventname"
                   type="text"
                   value={this.state.eventname}
                   onChange={this.handleChange}
-                  placeholder="New Event"
+                  placeholder="Event Name"
                   autoFocus
                   className="form-control"
                 />
@@ -70,6 +71,18 @@ class CreateEventForm extends React.Component {
                   name="eventdate"
                   selected={this.state.eventdate}
                   onChange={this.handleChange}
+                  className="form-control"
+                />
+              </div>
+
+              <div className="event-details">
+                <input
+                  name="details"
+                  type="text"
+                  value={this.state.eventname}
+                  onChange={this.handleChange}
+                  placeholder="Event Details"
+                  autoFocus
                   className="form-control"
                 />
               </div>
