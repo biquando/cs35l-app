@@ -64,9 +64,9 @@ function SignUp(props) {
             />
             <button
               className="button btn btn-lg btn-primary btn-block"
-              disabled={props.loadingSubmit}
+              disabled={true}
             >
-              {props.loadingSubmit ? (
+              {true ? (
                 <span className="spinner-border spinner-border-sm" />
               ) : (
                 "Sign Up"

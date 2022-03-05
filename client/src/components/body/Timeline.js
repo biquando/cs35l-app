@@ -103,9 +103,11 @@ class Timeline extends React.Component {
           ))}
         </div>
         <div className="sticky-bot">
-          <button className="button btn btn-md btn-primary btn-block">
-            Create Event
-          </button>
+          <Link to="/create-event">
+            <button className="button btn btn-md btn-primary btn-block">
+              Create Event
+            </button>
+          </Link>
         </div>
       </div>
     );

@@ -37,3 +37,7 @@ export async function verifyToken(token = getStoredAuthToken()) {
 export function getStoredAuthToken() {
   return localStorage.getItem("authToken");
 }
+
+export function removeAuthToken() {
+  localStorage.removeItem("authToken");
+}
