@@ -2,6 +2,7 @@ import { getEvent, getEvents } from "./event";
 import { getGroup, getGroups } from "./group";
 import { getMessages } from "./message";
 import useSWR from "swr";
+import { getUser } from "./user";
 
 // NOTE: the strings I pass into swr don't act as endpoints.
 // They're just unique identifiers so swr can check if a
@@ -62,5 +63,12 @@ export function useMessages({ groupId, eventId }) {
   return useSWR(
     `/group/${groupId}/event/${eventId}/message`,
     async () => (await getMessages({ groupId, eventId })).data
+  );
+}
+
+export function useUser({ userId }) {
+  return useSWR(
+    `/user/${userId}`,
+    async () => (await getUser({ userId })).data
   );
 }
