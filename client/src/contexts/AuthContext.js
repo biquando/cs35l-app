@@ -47,7 +47,7 @@ export default function AuthContextProvider({ children }) {
     } catch (error) {
       console.log(error);
       setErrorMessage(error.message);
-      navigate("/login");
+      navigate("/signup");
     }
     setAuthAttempted(true);
     setLoading(false);
