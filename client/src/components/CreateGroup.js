@@ -1,15 +1,18 @@
 import React from "react";
-import "../styles/createevent.css";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import NavBar from "./NavBar";
+import "../styles/creategroup.css";
+
+
+
 
 class CreateGroup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventname: "",
-      eventdate: new Date(),
+      groupname: "",
+      groupdescrip: "",
       msg: null,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -28,62 +31,68 @@ class CreateGroup extends React.Component {
 
   handleSubmit(e) {
     console.log("submit");
-    console.log(this.state.eventname, this.state.eventdate);
+    console.log(this.state.groupname);
 
-    const { eventname, eventdate } = this.state;
-    const event = {
-      eventname,
-      eventdate
+    const { groupname} = this.state;
+    const group = {
+      groupname
     };
-    console.log(this.state.eventname);
+    console.log(this.state.groupname);
   }
 
   render() {
     return (
-      <div className="center text-center">
-        <div className="inner-container">
-            <form onSubmit={this.handleSubmit} className="form-event">
-              <div className="eventname-input ">
-                <input
-                  name="eventname"
-                  type="text"
-                  value={this.state.eventname}
-                  onChange={this.handleChange}
-                  placeholder="New Event"
-                  autoFocus
-                  className="form-control"
-                />
-              </div>
+        <div>
+            <NavBar />
+            <div className="text-center">
+                    <div className="inner-container">
+                        <form onSubmit={this.handleSubmit} className="form-event">
+                          <div className="group-input ">
+                            <input
+                              name="groupname"
+                              type="text"
+                              value={this.state.groupname}
+                              onChange={this.handleChange}
+                              placeholder="Enter Group Name"
+                              autoFocus
+                              className="form-control"
+                            />
+                            <div className = "group-descrip">
+                            <input
+                              name="groupdescrip"
+                              type="text"
+                              value={this.state.groupdescrip}
+                              onChange={this.handleChange}
+                              placeholder="Description"
+                              className="form-control"
+                            />
+                            </div>
 
-              <div className="date-time-picker">
-                <DatePicker
-                  name="eventdate"
-                  selected={this.state.eventdate}
-                  onChange={this.handleChange}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  timeCaption="time"
-                  dateFormat="MMMM d, yyyy h:mm aa"
-                />
-              </div>
+                          </div>
+            <div className = "group-owner">
+                <p>created by </p>
+                         </div>
 
-              <div className="save-button">
-                <button
-                  className="button btn btn-lg btn-primary btn-block"
-                  disabled={this.props.loadingSubmit}
-                >
-                  {this.props.loadingSubmit ? (
-                    <span className="spinner-border spinner-border-sm" />
-                  ) : (
-                    "Save"
-                  )}
-                </button>
-              </div>
+                          <div className="add">
+                            <button
+                              className="button btn btn-lg btn-primary btn-block"
+                              disabled={this.props.loadingSubmit}
+                            >
+                              {this.props.loadingSubmit ? (
+                                <span className="spinner-border spinner-border-sm" />
+                              ) : (
+                                "Add"
+                              )}
+                            </button>
+                          </div>
 
-            </form>
-          </div>
+                        </form>
+                      </div>
+                    </div>
+
+
         </div>
+
     );
   }
 }
