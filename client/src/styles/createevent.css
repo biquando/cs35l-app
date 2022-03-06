@@ -30,9 +30,10 @@
     position: absolute;
     top: 20%;
     left: 5%;
+    width: 20%
   }
 
-  .event-details {
+  .event-description {
     position: absolute;
     top: 30%;
     left: 5%;

@@ -9,9 +9,9 @@ class CreateEventForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      eventname: "",
-      eventdate: new Date(),
-      details: "",
+      name: "",
+      eventdate: false,
+      description: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -19,24 +19,21 @@ class CreateEventForm extends React.Component {
 
   handleChange(e) {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
     this.setState({
       [name]: value,
     });
-    console.log("change");
   }
 
   handleSubmit(e) {
     console.log("submit");
-    console.log(this.state.eventname, this.state.eventdate);
+    console.log(this.state.name, this.state.eventdate);
 
-    const { eventname, eventdate } = this.state;
+    const { name, eventdate, description } = this.state;
     const event = {
-      eventname,
-      eventdate
+      name,
+      eventdate,
+      description
     };
-    console.log(this.state.eventname);
   }
 
   render() {
@@ -46,9 +43,9 @@ class CreateEventForm extends React.Component {
             <form onSubmit={this.handleSubmit} className="form-event">
               <div className="eventname-input">
                 <input
-                  name="eventname"
+                  name="name"
                   type="text"
-                  value={this.state.eventname}
+                  value={this.state.name}
                   onChange={this.handleChange}
                   placeholder="Event Name"
                   autoFocus
@@ -69,19 +66,22 @@ class CreateEventForm extends React.Component {
                 /> */}
                 <DatePicker 
                   name="eventdate"
+                  placeholderText="Click to select the due date"
                   selected={this.state.eventdate}
-                  onChange={this.handleChange}
+                  onChange={(date) => {
+                    this.setState({eventdate: date})
+                  }}
                   className="form-control"
                 />
               </div>
 
-              <div className="event-details">
+              <div className="event-description">
                 <input
-                  name="details"
+                  name="description"
                   type="text"
-                  value={this.state.eventname}
+                  value={this.state.description}
                   onChange={this.handleChange}
-                  placeholder="Event Details"
+                  placeholder="Event Description"
                   autoFocus
                   className="form-control"
                 />
