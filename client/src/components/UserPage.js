@@ -15,9 +15,9 @@ function UserPage(props) {
   const isGroupsLoading = !groups && isValidatingGroups;
 
   return (
-    <div className="page-wrapper">
+    <div>
       <NavBar />
-      <div className="body-wrapper">
+      <div className="user-page">
         <div className="parent-container expand">
           <div className="content-container">
             <h1>{user?.username}</h1>
