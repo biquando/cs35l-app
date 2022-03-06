@@ -44,6 +44,7 @@ function CreateGroup(props){
             <div className="text-center">
                     <div className="inner-container">
                         <form onSubmit={handleSubmit} className="form-event">
+                          <h1 className="header"> Create New Group </h1>
                           <div className="group-input ">
                             <input
                               name="name"
@@ -59,7 +60,7 @@ function CreateGroup(props){
                               type="text"
                               value={state.description}
                               onChange={handleChange}
-                              placeholder="Description"
+                              placeholder="Enter Group Description"
                               className="form-control"
                             />
                             </div>

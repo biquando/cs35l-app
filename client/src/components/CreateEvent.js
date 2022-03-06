@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/createevent.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import NavBar from "./NavBar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createEvent } from "../utils/event";
@@ -48,56 +49,58 @@ function CreateEvent(props) {
   }
 
     return (
-      <div className="text-center">
-        <div className="inner-container">
+      <div>
+        <NavBar />
+        <div className="text-center">
+          <div className="inner-container">
             <form onSubmit={handleSubmit} className="form-event">
-              <h1 className="font"> Create Event : {group?.name}</h1>
-              <div className="eventname-input">
-                <input
-                  name="name"
-                  type="text"
-                  value={name}
-                  onChange={handleChange}
-                  placeholder="Event Name"
-                  autoFocus
-                  className="form-control"
-                />
-              </div>
+                <h1 className="header"> Create Event : {group?.name}</h1>
+                <div className="eventname-input">
+                  <input
+                    name="name"
+                    type="text"
+                    value={name}
+                    onChange={handleChange}
+                    placeholder="Enter Event Name"
+                    autoFocus
+                    className="form-control"
+                  />
+                </div>
 
-              <div className="date-time-picker">
-                <DatePicker 
-                  name="eventdate"
-                  placeholderText="Click to select the due date"
-                  selected={eventdate}
-                  onChange={(date) => {
-                    setEventdate(date)
-                  }}
-                  className="form-control"
-                />
-              </div>
+                <div className="date-time-picker">
+                  <DatePicker 
+                    name="eventdate"
+                    placeholderText="Click to select the due date"
+                    selected={eventdate}
+                    onChange={(date) => {
+                      setEventdate(date)
+                    }}
+                    className="form-control"
+                  />
+                </div>
 
-              <div className="event-description">
-                <input
-                  name="description"
-                  type="text"
-                  value={description}
-                  onChange={handleChange}
-                  placeholder="Event Description"
-                  autoFocus
-                  className="form-control"
-                />
-              </div>
+                <div className="event-description">
+                  <input
+                    name="description"
+                    type="text"
+                    value={description}
+                    onChange={handleChange}
+                    placeholder="Enter Event Description"
+                    className="form-control"
+                  />
+                </div>
 
-              <div className="save-button">
-                <button
-                  className="button btn btn-lg btn-primary btn-block"
-                >
-                  Save
-                </button>
-              </div>
+                <div className="save-button">
+                  <button
+                    className="button btn btn-lg btn-primary btn-block"
+                  >
+                    Save
+                  </button>
+                </div>
             </form>
           </div>
         </div>
+      </div>
     );
 }
 
