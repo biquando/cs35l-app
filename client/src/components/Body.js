@@ -97,7 +97,7 @@ function getInitialGroup(groups) {
 
 function getInitialEvent(events, selectedGroup) {
   if (!events.length) return null;
-  const eventKey = getEventKey(selectedGroup._id);
+  const eventKey = getEventKey(selectedGroup?._id);
   const storedEventId = localStorage.getItem(eventKey);
   if (storedEventId) {
     return events.find((event) => event._id === storedEventId);
