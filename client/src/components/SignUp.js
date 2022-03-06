@@ -13,7 +13,7 @@ function SignUp(props) {
     passwordsDifferent: false,
   });
 
-  const { handleSignUp, errorMessage } = useAuth();
+  const { handleSignUp, errorMessage, loading } = useAuth();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -64,9 +64,9 @@ function SignUp(props) {
             />
             <button
               className="button btn btn-lg btn-primary btn-block"
-              disabled={true}
+              disabled={loading}
             >
-              {true ? (
+              {loading ? (
                 <span className="spinner-border spinner-border-sm" />
               ) : (
                 "Sign Up"

@@ -1,12 +1,39 @@
-.hello {
+.profile-card {
   border-radius: 10px;
   position: absolute;
-  margin-top: 200px;
+  margin-top: 55px;
   margin-right: 16px;
   right: 0;
-  height: 100px;
+  height: 80px;
   width: 100px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: left;
+}
+
+.username {
+  font-weight: bold;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.logout-text {
+  text-decoration: none;
+  color: #bababa;
+}
+
+.logout-btn {
+  border-radius: 10px;
+  border-width: 0px;
+}
+/* for some reason not working */
+.logout-btn logout-btn:hover {
+  color: #b1caff;
+  background-color: #b1caff;
 }
