@@ -18,3 +18,8 @@
   border-radius: 10px;
   border-width: 0px;
 }
+
+.add-group-text {
+  text-decoration: none;
+  color: white;
+}
