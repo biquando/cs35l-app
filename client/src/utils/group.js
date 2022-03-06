@@ -15,7 +15,7 @@ export async function getGroups({ ownerId, name, description, userIds }) {
 }
 
 export async function getGroup({ groupId }) {
-  const result = await apiClient.get(`/group/${groupId}}`);
+  const result = await apiClient.get(`/group/${groupId}`);
   return result.data;
 }
 
