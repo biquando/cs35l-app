@@ -4,7 +4,7 @@ import "../../styles/groups.css";
 import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Groups(props) {
+function Groups({ groups, onChangeGroup }) {
   // const groupData = getGroups({ userIds: [] })
   return (
     <div className="parent-container">
