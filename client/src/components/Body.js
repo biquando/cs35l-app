@@ -30,7 +30,9 @@ function Body(props) {
 
   React.useEffect(() => {
     if (groups) {
-      setSelectedGroup(getInitialGroup(groups));
+      const initialGroup = getInitialGroup(groups);
+      console.log({ groups, initialGroup });
+      setSelectedGroup(initialGroup);
     }
   }, [!!groups]);
   React.useEffect(() => {
@@ -87,12 +89,10 @@ const getEventKey = (groupId) => `selectedEvent-${groupId}`;
 function getInitialGroup(groups) {
   if (!groups.length) return null;
   const storedGroupId = localStorage.getItem(SELECTED_GROUP_KEY);
-  if (storedGroupId) {
-    return groups.find((group) => group._id === storedGroupId);
-  } else {
-    localStorage.setItem(SELECTED_GROUP_KEY, groups[0]._id);
-    return groups[0];
-  }
+  const initialGroup =
+    groups.find((group) => group._id === storedGroupId) || groups[0];
+  localStorage.setItem(SELECTED_GROUP_KEY, initialGroup);
+  return initialGroup;
 }
 
 function getInitialEvent(events, selectedGroup) {
