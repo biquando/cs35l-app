@@ -14,7 +14,7 @@ function Day(props) {
           <ul className="list-group">
             {props.events.map((event) => (
               <li className="list-group-item shadow-realm">
-                <b>{event.title}</b>
+                <b>{event.name}</b>
                 {event.description && <p>{event.description}</p>}
               </li>
             ))}
@@ -28,6 +28,7 @@ function Day(props) {
 
 function Timeline({ events, loading, selectedGroup }) {
   const days = useMemo(() => getDays(events), [events]);
+  console.log({ days });
   return (
     <div className="parent-container">
       <div className="content-container">
@@ -82,4 +83,5 @@ function getDays(events) {
       days.push({ date: new Date(event.end_date), events: [event] });
     }
   });
+  return days;
 }
