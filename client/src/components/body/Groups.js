@@ -2,8 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../../styles/groups.css";
 import "../../styles/body.css";
+import { useAuth } from "../../contexts/AuthContext";
 
-function Groups({ groups, onChangeGroup }) {
+function Groups(props) {
+  // const groupData = getGroups({ userIds: [] })
   return (
     <div className="parent-container">
       <div className="content-container">
