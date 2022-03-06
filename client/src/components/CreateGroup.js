@@ -1,68 +1,64 @@
 import React from "react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import NavBar from "./NavBar";
 import "../styles/creategroup.css";
+import { createGroup } from "../utils/group.js";
+import { useAuth } from "../contexts/AuthContext";
 
 
 
 
-class CreateGroup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      groupname: "",
-      groupdescrip: "",
+function CreateGroup(props){
+
+    const[state,setState] = useState({
+      name: "",
+      description: "",
       msg: null,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    });
 
-  handleChange(e) {
+    const { loading } = useAuth();
+    let navigate = useNavigate();
+
+ function handleChange(e) {
     const { name, value } = e.target;
     console.log(name);
     console.log(value);
-    this.setState({
-      [name]: value,
-    });
-    console.log("change");
+    setState((prev) => ({...prev, [name]:value}));
   }
 
-  handleSubmit(e) {
+ async function handleSubmit(e) {
     console.log("submit");
-    console.log(this.state.groupname);
+    //console.log(this.state.groupname);
+    e.preventDefault();
 
-    const { groupname} = this.state;
-    const group = {
-      groupname
-    };
-    console.log(this.state.groupname);
+    const {name, description} = state;
+    await createGroup({name,description});
+    navigate("/")
   }
 
-  render() {
+
     return (
         <div>
             <NavBar />
             <div className="text-center">
                     <div className="inner-container">
-                        <form onSubmit={this.handleSubmit} className="form-event">
+                        <form onSubmit={handleSubmit} className="form-event">
                           <div className="group-input ">
                             <input
-                              name="groupname"
+                              name="name"
                               type="text"
-                              value={this.state.groupname}
-                              onChange={this.handleChange}
+                              value={state.name}
+                              onChange={handleChange}
                               placeholder="Enter Group Name"
-                              autoFocus
                               className="form-control"
                             />
                             <div className = "group-descrip">
                             <input
-                              name="groupdescrip"
+                              name="description"
                               type="text"
-                              value={this.state.groupdescrip}
-                              onChange={this.handleChange}
+                              value={state.description}
+                              onChange={handleChange}
                               placeholder="Description"
                               className="form-control"
                             />
@@ -75,10 +71,11 @@ class CreateGroup extends React.Component {
 
                           <div className="add">
                             <button
+
                               className="button btn btn-lg btn-primary btn-block"
-                              disabled={this.props.loadingSubmit}
+                              disabled={loading}
                             >
-                              {this.props.loadingSubmit ? (
+                              {loading ? (
                                 <span className="spinner-border spinner-border-sm" />
                               ) : (
                                 "Add"
@@ -94,7 +91,7 @@ class CreateGroup extends React.Component {
         </div>
 
     );
-  }
+
 }
 
 export default CreateGroup;
