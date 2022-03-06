@@ -1,13 +1,21 @@
 import React from "react";
 import "../styles/createevent.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { createEvent } from "../utils/event";
+import { useGroup } from "../utils/swr";
 
 function CreateEvent(props) {
   const [name, setName] = React.useState("")
   const [eventdate, setEventdate] = React.useState(false)
   const [description, setDescription] = React.useState("")
+
+  const params = useParams()
+  const currentGroupId =  params.groupId
+  const {data: group} = useGroup({groupId: params.groupId})
+
+  let navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -26,19 +34,24 @@ function CreateEvent(props) {
     }
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
+    e.preventDefault();
     console.log("submit");
     const event = {
       name,
-      eventdate,
-      description
+      description,
+      currentGroupId,
+      eventdate
     };
+    await createEvent({name, description, endDate: eventdate, groupId: currentGroupId});
+    navigate("/");
   }
 
     return (
       <div className="text-center">
         <div className="inner-container">
             <form onSubmit={handleSubmit} className="form-event">
+              <h1 className="font"> Create Event : {group?.name}</h1>
               <div className="eventname-input">
                 <input
                   name="name"
@@ -52,16 +65,6 @@ function CreateEvent(props) {
               </div>
 
               <div className="date-time-picker">
-                {/* <DatePicker
-                  name="eventdate"
-                  selected={eventdate}
-                  onChange={handleChange}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  timeCaption="time"
-                  dateFormat="MMMM d, yyyy h:mm aa"
-                /> */}
                 <DatePicker 
                   name="eventdate"
                   placeholderText="Click to select the due date"
