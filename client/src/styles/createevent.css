@@ -15,8 +15,9 @@
   
   .eventname-input {
     position: absolute;
-    top: 10%;
-    left: 10%;
+    top: 15%;
+    left: 5%;
+    width: 70%;
   }
 
   .save-button {
@@ -27,17 +28,26 @@
 
   .date-time-picker {
     position: absolute;
-    top: 20%;
-    left: 10%;
+    top: 25%;
+    left: 5%;
+    width: 20%
+  }
+
+  .event-description {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    width: 70%;
   }
   
   .font {
     font-size: 25px;
+    padding: 25px;
   }
   
   .form-event {
-    width: 100%;
-    max-width: 330px;
+    /* width: 100%;
+    max-width: 330px; */
     padding: 10px;
     margin: auto;
   }

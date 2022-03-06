@@ -1,5 +1,4 @@
 import { apiClient } from "./apiClient";
-import { configureQueryString } from "./query";
 
 export async function createGroup({ name, description }) {
   const result = await apiClient.post(`/group`, { name, description });
@@ -9,13 +8,13 @@ export async function createGroup({ name, description }) {
 export async function getGroups({ ownerId, name, description, userIds }) {
   const query = { ownerId, name, description };
   if (userIds?.length) query.user_ids = { $in: userIds };
-  const queryString = configureQueryString(query);
+  const queryString = "?query=" + JSON.stringify(query);
   const result = await apiClient.get(`/group${queryString}`);
   return result.data;
 }
 
 export async function getGroup({ groupId }) {
-  const result = await apiClient.get(`/group/${groupId}}`);
+  const result = await apiClient.get(`/group/${groupId}`);
   return result.data;
 }
 

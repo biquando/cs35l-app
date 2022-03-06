@@ -1,5 +1,4 @@
 import { apiClient } from "./apiClient";
-import { configureQueryString } from "./query";
 
 export async function createEvent({
   name,
@@ -40,7 +39,7 @@ export async function getEvents({
     startDate,
     endDate,
   });
-  const queryString = configureQueryString(query);
+  const queryString = "?query=" + JSON.stringify(query);
   const result = await apiClient.get(`/group/${groupId}/event${queryString}`);
   return result.data;
 }

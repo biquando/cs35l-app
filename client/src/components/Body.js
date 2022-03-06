@@ -65,6 +65,7 @@ function Body(props) {
         <Timeline
           events={events}
           selectedEvent={selectedEvent}
+          selectedGroup={selectedGroup}
           onChangeEvent={setSelectedEvent}
           loading={isEventsLoading}
         />
