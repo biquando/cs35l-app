@@ -39,7 +39,7 @@ module.exports.getEvent = async function (req, res) {
 
 module.exports.getEvents = async function (req, res) {
   try {
-    const queryString = req.query.query || "{}";
+    const queryString = decodeURIComponent(req.query.query || "{}");
     const queryObj = JSON.parse(queryString);
     const events = await Event.find(queryObj);
     res.json({

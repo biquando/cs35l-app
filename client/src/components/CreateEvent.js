@@ -4,52 +4,48 @@ import { Link } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-class CreateEventForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      eventname: "",
-      eventdate: new Date(),
-      details: null,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+function CreateEvent(props) {
+  const [name, setName] = React.useState("")
+  const [eventdate, setEventdate] = React.useState(false)
+  const [description, setDescription] = React.useState("")
 
-  handleChange(e) {
+  function handleChange(e) {
     const { name, value } = e.target;
-    console.log(name);
-    console.log(value);
-    this.setState({
-      [name]: value,
-    });
-    console.log("change");
+    switch(name) {
+      case "name":
+        setName(value)
+        break;
+
+      case "eventdate":
+        setEventdate(value)
+        break;
+        
+      case "description":
+        setDescription(value)
+        break;
+    }
   }
 
-  handleSubmit(e) {
+  function handleSubmit(e) {
     console.log("submit");
-    console.log(this.state.eventname, this.state.eventdate);
-
-    const { eventname, eventdate } = this.state;
     const event = {
-      eventname,
-      eventdate
+      name,
+      eventdate,
+      description
     };
-    console.log(this.state.eventname);
   }
 
-  render() {
     return (
-      <div className="center text-center">
+      <div className="text-center">
         <div className="inner-container">
-            <form onSubmit={this.handleSubmit} className="form-event">
-              <div className="eventname-input ">
+            <form onSubmit={handleSubmit} className="form-event">
+              <div className="eventname-input">
                 <input
-                  name="eventname"
+                  name="name"
                   type="text"
-                  value={this.state.eventname}
-                  onChange={this.handleChange}
-                  placeholder="New Event"
+                  value={name}
+                  onChange={handleChange}
+                  placeholder="Event Name"
                   autoFocus
                   className="form-control"
                 />
@@ -58,8 +54,8 @@ class CreateEventForm extends React.Component {
               <div className="date-time-picker">
                 {/* <DatePicker
                   name="eventdate"
-                  selected={this.state.eventdate}
-                  onChange={this.handleChange}
+                  selected={eventdate}
+                  onChange={handleChange}
                   showTimeSelect
                   timeFormat="HH:mm"
                   timeIntervals={15}
@@ -68,8 +64,23 @@ class CreateEventForm extends React.Component {
                 /> */}
                 <DatePicker 
                   name="eventdate"
-                  selected={this.state.eventdate}
-                  onChange={this.handleChange}
+                  placeholderText="Click to select the due date"
+                  selected={eventdate}
+                  onChange={(date) => {
+                    setEventdate(date)
+                  }}
+                  className="form-control"
+                />
+              </div>
+
+              <div className="event-description">
+                <input
+                  name="description"
+                  type="text"
+                  value={description}
+                  onChange={handleChange}
+                  placeholder="Event Description"
+                  autoFocus
                   className="form-control"
                 />
               </div>
@@ -77,20 +88,14 @@ class CreateEventForm extends React.Component {
               <div className="save-button">
                 <button
                   className="button btn btn-lg btn-primary btn-block"
-                  disabled={this.props.loadingSubmit}
                 >
-                  {this.props.loadingSubmit ? (
-                    <span className="spinner-border spinner-border-sm" />
-                  ) : (
-                    "Save"
-                  )}
+                  Save
                 </button>
               </div>
             </form>
           </div>
         </div>
     );
-  }
 }
 
-export default CreateEventForm;
+export default CreateEvent;
