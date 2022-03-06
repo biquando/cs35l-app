@@ -5,10 +5,11 @@ import { useUser, useGroups } from "../utils/swr";
 import { useAuth } from "../contexts/AuthContext";
 import { leaveGroup, deleteGroup } from "../utils/group";
 import NavBar from "./NavBar";
+import { updateUser } from "../utils/user";
 
 function UserPage(props) {
   const userId = useParams().user_id;
-  const { data: user } = useUser({ userId });
+  const { data: user, mutate: mutateUser } = useUser({ userId });
   const {
     data: groups,
     isValidating: isValidatingGroups,
@@ -32,7 +33,9 @@ function UserPage(props) {
   const [newText, setNewText] = useState("");
 
   async function confirmEdit() {
+    await updateUser({ userId, updates: { new_description: newText } });
     setEditing(false);
+    mutateUser();
   }
 
   return (
@@ -44,9 +47,20 @@ function UserPage(props) {
             <h1>{user?.username}</h1>
             {isEditing ? (
               <div>
-                <textarea className="form-control" rows="5">
-                  {newText}
-                </textarea>
+                <textarea
+                  className="form-control"
+                  rows="5"
+                  defaultValue={newText}
+                  onChange={(e) => setNewText(e.target.value)}
+                ></textarea>
+                <button
+                  className="badge bg-secondary rounded-pill"
+                  onClick={() => {
+                    setEditing(false);
+                  }}
+                >
+                  Cancel
+                </button>
                 <button
                   className="badge bg-success rounded-pill"
                   onClick={confirmEdit}
@@ -59,15 +73,17 @@ function UserPage(props) {
             ) : (
               <p>
                 {user?.description}{" "}
-                <button
-                  className="badge bg-light rounded-pill text-dark"
-                  onClick={() => {
-                    setNewText(user?.description);
-                    setEditing(true);
-                  }}
-                >
-                  Edit
-                </button>
+                {user?._id == currentUser?._id && (
+                  <button
+                    className="badge bg-light rounded-pill text-dark"
+                    onClick={() => {
+                      setNewText(user?.description);
+                      setEditing(true);
+                    }}
+                  >
+                    Edit
+                  </button>
+                )}
               </p>
             )}
             {groups?.length > 0 && <h4>Groups:</h4>}
