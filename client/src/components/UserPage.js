@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/userpage.css";
 import { useParams } from "react-router-dom";
 import { useUser, useGroups } from "../utils/swr";
@@ -28,6 +28,13 @@ function UserPage(props) {
     mutateGroups();
   }
 
+  const [isEditing, setEditing] = useState(false);
+  const [newText, setNewText] = useState("");
+
+  async function confirmEdit() {
+    setEditing(false);
+  }
+
   return (
     <div>
       <NavBar />
@@ -35,7 +42,34 @@ function UserPage(props) {
         <div className="parent-container expand">
           <div className="content-container">
             <h1>{user?.username}</h1>
-            <p>{user?.description}</p>
+            {isEditing ? (
+              <div>
+                <textarea className="form-control" rows="5">
+                  {newText}
+                </textarea>
+                <button
+                  className="badge bg-success rounded-pill"
+                  onClick={confirmEdit}
+                >
+                  Confirm
+                </button>
+                <br />
+                <br />
+              </div>
+            ) : (
+              <p>
+                {user?.description}{" "}
+                <button
+                  className="badge bg-light rounded-pill text-dark"
+                  onClick={() => {
+                    setNewText(user?.description);
+                    setEditing(true);
+                  }}
+                >
+                  Edit
+                </button>
+              </p>
+            )}
             {groups?.length > 0 && <h4>Groups:</h4>}
             {isGroupsLoading ? null : (
               <ul className="list-group">
