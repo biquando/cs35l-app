@@ -11,7 +11,9 @@ function Profile(props) {
 
   return (
     <div className="profile-card">
-      <div className="username">{user.username}</div>
+      <Link to={`/user/${user?._id}`} className="username link-dark">
+        {user.username}
+      </Link>
       <button className="logout-btn" onClick={handleLogout}>
         <div className="logout-text">Log Out</div>
       </button>
