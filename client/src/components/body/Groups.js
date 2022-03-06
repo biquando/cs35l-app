@@ -20,9 +20,11 @@ function Groups({ groups, onChangeGroup }) {
         ))}
       </div>
       <div className="sticky-bot">
-        <button className="add-group-btn button btn btn-md btn-primary">
-          +
-        </button>
+        <Link to="/create-group" className="">
+          <button className="add-group-btn button btn btn-md btn-primary">
+            +
+          </button>
+        </Link>
       </div>
     </div>
   );
