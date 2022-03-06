@@ -1,91 +1,94 @@
 import React from "react";
-import "../styles/createevent.css";
-import { Link } from "react-router-dom";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import NavBar from "./NavBar";
+import "../styles/creategroup.css";
+import { createGroup } from "../utils/group.js";
+import { useAuth } from "../contexts/AuthContext";
 
-class CreateGroup extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      eventname: "",
-      eventdate: new Date(),
+
+
+
+function CreateGroup(props){
+
+    const[state,setState] = useState({
+      name: "",
+      description: "",
       msg: null,
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+    });
 
-  handleChange(e) {
+    const { loading } = useAuth();
+    let navigate = useNavigate();
+
+ function handleChange(e) {
     const { name, value } = e.target;
     console.log(name);
     console.log(value);
-    this.setState({
-      [name]: value,
-    });
-    console.log("change");
+    setState((prev) => ({...prev, [name]:value}));
   }
 
-  handleSubmit(e) {
+ async function handleSubmit(e) {
     console.log("submit");
-    console.log(this.state.eventname, this.state.eventdate);
+    //console.log(this.state.groupname);
+    e.preventDefault();
 
-    const { eventname, eventdate } = this.state;
-    const event = {
-      eventname,
-      eventdate
-    };
-    console.log(this.state.eventname);
+    const {name, description} = state;
+    await createGroup({name,description});
+    navigate("/")
   }
 
-  render() {
+
     return (
-      <div className="center text-center">
-        <div className="inner-container">
-            <form onSubmit={this.handleSubmit} className="form-event">
-              <div className="eventname-input ">
-                <input
-                  name="eventname"
-                  type="text"
-                  value={this.state.eventname}
-                  onChange={this.handleChange}
-                  placeholder="New Event"
-                  autoFocus
-                  className="form-control"
-                />
-              </div>
+        <div>
+            <NavBar />
+            <div className="text-center">
+                    <div className="inner-container">
+                        <form onSubmit={handleSubmit} className="form-event">
+                          <div className="group-input ">
+                            <input
+                              name="name"
+                              type="text"
+                              value={state.name}
+                              onChange={handleChange}
+                              placeholder="Enter Group Name"
+                              className="form-control"
+                            />
+                            <div className = "group-descrip">
+                            <input
+                              name="description"
+                              type="text"
+                              value={state.description}
+                              onChange={handleChange}
+                              placeholder="Description"
+                              className="form-control"
+                            />
+                            </div>
 
-              <div className="date-time-picker">
-                <DatePicker
-                  name="eventdate"
-                  selected={this.state.eventdate}
-                  onChange={this.handleChange}
-                  showTimeSelect
-                  timeFormat="HH:mm"
-                  timeIntervals={15}
-                  timeCaption="time"
-                  dateFormat="MMMM d, yyyy h:mm aa"
-                />
-              </div>
+                          </div>
 
-              <div className="save-button">
-                <button
-                  className="button btn btn-lg btn-primary btn-block"
-                  disabled={this.props.loadingSubmit}
-                >
-                  {this.props.loadingSubmit ? (
-                    <span className="spinner-border spinner-border-sm" />
-                  ) : (
-                    "Save"
-                  )}
-                </button>
-              </div>
+                          <div className="add">
+                            <button
 
-            </form>
-          </div>
+                              className="button btn btn-lg btn-primary btn-block"
+                              disabled={loading}
+                            >
+                              {loading ? (
+                                <span className="spinner-border spinner-border-sm" />
+                              ) : (
+                                "Add"
+                              )}
+                            </button>
+                          </div>
+
+                        </form>
+                      </div>
+                    </div>
+
+
         </div>
+
     );
-  }
+
 }
 
 export default CreateGroup;
