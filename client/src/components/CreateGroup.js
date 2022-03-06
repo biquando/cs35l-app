@@ -65,9 +65,6 @@ function CreateGroup(props){
                             </div>
 
                           </div>
-            <div className = "group-owner">
-                <p>created by </p>
-                         </div>
 
                           <div className="add">
                             <button
