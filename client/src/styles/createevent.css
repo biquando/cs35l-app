@@ -1,7 +1,7 @@
   .eventname-input {
     position: absolute;
     top: 175px;
-    width: 50%;
+    width: 30%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -10,7 +10,7 @@
   .date-time-picker {
     position: absolute;
     top: 250px;
-    width: 50%;
+    width: 30%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
@@ -19,8 +19,8 @@
 
   .event-description {
     position: absolute;
-    top: 375px;
-    width: 50%;
+    top: 380px;
+    width: 30%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
