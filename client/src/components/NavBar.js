@@ -37,7 +37,7 @@ function NavBar(props) {
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={handleInputKeyDown}
         />
-        <div class="input-group-appen d">
+        <div class="input-group-append">
           <button
             class="btn btn-outline-secondary"
             type="button"
