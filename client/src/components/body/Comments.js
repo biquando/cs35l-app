@@ -67,7 +67,7 @@ function Comments(props) {
         ))}
       </div>
       <div className="sticky-bot">
-        <input
+        {/* <input
           disabled={props.disabled}
           name="username"
           type="comment"
@@ -76,18 +76,40 @@ function Comments(props) {
           placeholder="Add a comment..."
           autoFocus
           className="comment-input"
-          onKeyPress={submitCommentLine}
-        />
+        /> */}
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            disabled={props.disabled}
+            name="username"
+            value={state.text}
+            onChange={handleComment}
+            placeholder="Add a comment..."
+            autoFocus
+          />
+          <div className="input-group-append">
+            <button
+              onClick={submitCommentLine}
+              className="btn btn-primary"
+              type="button"
+              disabled={loading}
+              style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
+            >
+              Post
+            </button>
+          </div>
+        </div>
       </div>
 
-      <button
+      {/* <button
         onClick={submitCommentLine}
         type="submit"
         className="comment-button"
         disabled={loading}
       >
         Post
-      </button>
+      </button> */}
     </div>
   );
 }
