@@ -39,15 +39,19 @@ function Comments(props) {
     e.preventDefault();
     const { groupId, eventId, text } = state;
     setLoading(true);
+<<<<<<< HEAD
     setState((prev) => ({ ...prev, text: "" }));
     await props.onPostMessage(text);
+=======
+    await createMessage({ groupId, eventId, text });
+>>>>>>> a971161 (Add index to map)
     setLoading(false);
   };
 
   return (
     <div className="parent-container expand">
       <div className="content-container">
-        {props.messages?.map((comment) => (
+        {props.messages?.map((index, comment) => (
           <Comment userId={comment.user_id} text={comment.text} />
         ))}
       </div>
