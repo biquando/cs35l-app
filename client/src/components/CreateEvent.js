@@ -103,7 +103,7 @@ function CreateEvent(props) {
 
           <div className="event-button-container">
             <button
-              className="button button-size btn btn-lg btn-primary btn-block"
+              className="button button-size btn btn-lg btn-secondary btn-block"
               onClick={() => {
                 navigate("/");
               }}
