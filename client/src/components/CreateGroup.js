@@ -70,7 +70,7 @@ function CreateGroup(props) {
               </div>
             </div>
 
-            <div className="">
+            <div>
               <button
                 className="button btn btn-lg btn-primary btn-block"
                 disabled={loading}
