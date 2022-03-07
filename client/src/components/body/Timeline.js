@@ -74,10 +74,19 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
       <div className="content-container" style={{ width: "350px" }}>
         {selectedGroup && (
           <>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
-              <h5>{selectedGroup.name}</h5>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              <h5 style={{ marginBottom: "0" }}>{selectedGroup.name}</h5>
               <span
-                style={{ cursor: "pointer", opacity: "0.8" }}
+                style={{
+                  cursor: "pointer",
+                  opacity: "0.8",
+                }}
                 onClick={handleCopyToClipboard}
               >
                 <FontAwesomeIcon icon={faCopy} />

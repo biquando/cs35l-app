@@ -9,12 +9,15 @@ import Comments from "./body/Comments";
 import { useAuth } from "../contexts/AuthContext";
 import { useEvents, useGroups, useMessages } from "../utils/swr";
 import { createMessage } from "../utils/message";
+import { joinGroup } from "../utils/group";
 
 function Body(props) {
   const [selectedGroup, setSelectedGroup] = React.useState(null);
   const [selectedEvent, setSelectedEvent] = React.useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
   const { token } = useAuth();
+
+  const [joinedGroupId, setJoinedGroupId] = React.useState(null);
 
   const { user } = useAuth();
   const {
@@ -36,8 +39,24 @@ function Body(props) {
   );
 
   React.useEffect(() => {
-    if (token) searchParams.get("join");
+    const queryJoinGroupId = searchParams.get("join");
+    const localStorageJoinGroupId = localStorage.getItem(JOIN_GROUP_ID);
+    const joinGroupId = queryJoinGroupId || localStorageJoinGroupId;
+    if (token && (queryJoinGroupId || localStorageJoinGroupId)) {
+      handleJoinGroup(joinGroupId);
+      localStorage.removeItem(JOIN_GROUP_ID);
+    }
   }, [!!token]);
+
+  React.useEffect(() => {
+    if (joinedGroupId) {
+      const joinedGroup = groups.find((group) => group._id === joinedGroupId);
+      if (joinedGroup) {
+        setSelectedGroup(joinedGroup);
+        setJoinedGroupId(null);
+      }
+    }
+  }, [joinedGroupId, groups]);
 
   React.useEffect(() => {
     if (!groups || selectedGroup || isValidatingGroups) return;
@@ -65,6 +84,12 @@ function Body(props) {
         initialEvent
     );
   }, [selectedGroup?._id, !!events]);
+
+  async function handleJoinGroup(joinGroupId) {
+    await joinGroup({ groupId: joinGroupId });
+    setJoinedGroupId(joinGroupId);
+    mutateGroups();
+  }
 
   function handleChangeGroup(group) {
     setSelectedGroup(group);
@@ -127,6 +152,7 @@ function Body(props) {
 export default Body;
 
 const SELECTED_GROUP_KEY = "selectedGroup";
+const JOIN_GROUP_ID = "joinGroupId";
 const getEventKey = (groupId) => `selectedEvent-${groupId}`;
 
 function getInitialGroup(groups) {
