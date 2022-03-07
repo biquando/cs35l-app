@@ -39,79 +39,81 @@ function UserPage(props) {
   }
 
   return (
-    <div>
+    <div className="page-wrapper">
       <NavBar />
-      <div className="user-page">
-        <div className="parent-container expand">
-          <div className="content-container">
-            <h1>{user?.username}</h1>
-            {isEditing ? (
-              <div>
-                <textarea
-                  className="form-control"
-                  rows="5"
-                  defaultValue={newText}
-                  onChange={(e) => setNewText(e.target.value)}
-                ></textarea>
-                <button
-                  className="badge bg-secondary rounded-pill"
-                  onClick={() => {
-                    setEditing(false);
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="badge bg-success rounded-pill"
-                  onClick={confirmEdit}
-                >
-                  Confirm
-                </button>
-                <br />
-                <br />
-              </div>
-            ) : (
-              <p>
-                {user?.description}{" "}
-                {user?._id == currentUser?._id && (
+      <div className="body-wrapper">
+        <div className="user-page">
+          <div className="parent-container expand">
+            <div className="content-container">
+              <h1>{user?.username}</h1>
+              {isEditing ? (
+                <div>
+                  <textarea
+                    className="form-control"
+                    rows="5"
+                    defaultValue={newText}
+                    onChange={(e) => setNewText(e.target.value)}
+                  ></textarea>
                   <button
-                    className="badge bg-light rounded-pill text-dark"
+                    className="badge bg-secondary rounded-pill"
                     onClick={() => {
-                      setNewText(user?.description);
-                      setEditing(true);
+                      setEditing(false);
                     }}
                   >
-                    Edit
+                    Cancel
                   </button>
-                )}
-              </p>
-            )}
-            {groups?.length > 0 && <h4>Groups:</h4>}
-            {isGroupsLoading ? null : (
-              <ul className="list-group">
-                {groups?.map((group) => (
-                  <li className="list-group-item d-flex justify-content-between align-items-start">
-                    <div>{group.name}</div>
-                    {user?._id == currentUser?._id &&
-                      (user?._id != group.owner_id ? (
-                        <button
-                          className="badge bg-secondary rounded-pill"
-                          onClick={() => handleLeaveGroup(group._id)}
-                        >
-                          Leave
-                        </button>
-                      ) : (
-                        <button
-                          className="badge bg-danger rounded-pill"
-                          onClick={() => handleDeleteGroup(group._id)}
-                        >
-                          Delete
-                        </button>
-                      ))}
-                  </li>
-                ))}
-              </ul>
-            )}
+                  <button
+                    className="badge bg-success rounded-pill"
+                    onClick={confirmEdit}
+                  >
+                    Confirm
+                  </button>
+                  <br />
+                  <br />
+                </div>
+              ) : (
+                <p>
+                  {user?.description}{" "}
+                  {user?._id == currentUser?._id && (
+                    <button
+                      className="badge bg-light rounded-pill text-dark"
+                      onClick={() => {
+                        setNewText(user?.description);
+                        setEditing(true);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  )}
+                </p>
+              )}
+              {groups?.length > 0 && <h4>Groups:</h4>}
+              {isGroupsLoading ? null : (
+                <ul className="list-group">
+                  {groups?.map((group) => (
+                    <li className="list-group-item d-flex justify-content-between align-items-start">
+                      <div>{group.name}</div>
+                      {user?._id == currentUser?._id &&
+                        (user?._id != group.owner_id ? (
+                          <button
+                            className="leave-group-button"
+                            onClick={() => handleLeaveGroup(group._id)}
+                          >
+                            Leave
+                          </button>
+                        ) : (
+                          <button
+                            className="leave-group-button"
+                            onClick={() => handleDeleteGroup(group._id)}
+                          >
+                            <div className="leave-group-text">Leave Group</div>
+                          </button>
+                        ))}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
       </div>
