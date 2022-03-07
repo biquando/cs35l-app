@@ -3,6 +3,7 @@ import { getGroup, getGroups } from "./group";
 import { getMessages } from "./message";
 import useSWR from "swr";
 import { getUser } from "./user";
+import { getSearch } from "./search";
 
 // NOTE: the strings I pass into swr don't act as endpoints.
 // They're just unique identifiers so swr can check if a
@@ -72,5 +73,12 @@ export function useUser({ userId }, isReady = true) {
   return useSWR(
     isReady ? `/user/${userId}` : null,
     async () => (await getUser({ userId })).data
+  );
+}
+
+export function useSearch({ query }, isReady = true) {
+  return useSWR(
+    isReady ? `/search/${query}` : null,
+    async () => (await getSearch({ query })).data
   );
 }

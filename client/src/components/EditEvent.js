@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/createevent.css";
+import "../styles/editevent.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import DatePicker from "react-datepicker";
@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { createEvent } from "../utils/event";
 import { useGroup } from "../utils/swr";
 
-function CreateEvent(props) {
+function EditEvent(props) {
   const [name, setName] = React.useState("")
   const [eventdate, setEventdate] = React.useState(false)
   const [description, setDescription] = React.useState("")
@@ -80,9 +80,9 @@ function CreateEvent(props) {
                 </div>
 
                 <div className="event-description">
-                  <textarea
+                  <input
                     name="description"
-                    rows="5"
+                    type="text"
                     value={description}
                     onChange={handleChange}
                     placeholder="Enter Event Description"
@@ -94,7 +94,7 @@ function CreateEvent(props) {
                   <button
                     className="button btn btn-lg btn-primary btn-block"
                   >
-                    Create
+                    Update
                   </button>
                 </div>
             </form>
@@ -104,4 +104,4 @@ function CreateEvent(props) {
     );
 }
 
-export default CreateEvent;
+export default EditEvent;

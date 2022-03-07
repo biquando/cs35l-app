@@ -1,7 +1,7 @@
 .group-input{
     position: absolute;
     width: 70%;
-    top: 120px;
+    top: 150px;
     left: 5%;
 }
 
@@ -16,7 +16,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 200px;
+    top: 75px;
     left: 0px;
 }
 .add{
@@ -24,3 +24,8 @@
     right: 10%;
     bottom: 10%;
 }
+
+.header {
+    font-size: 25px;
+    padding: 10px;
+  }

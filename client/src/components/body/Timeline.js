@@ -4,8 +4,12 @@ import { Link } from "react-router-dom";
 import "../../styles/timeline.css";
 import "../../styles/body.css";
 import { format, isSameDay } from "date-fns";
+import { useAuth } from "../../contexts/AuthContext";
 
 function Day(props) {
+  const { user } = useAuth();
+  const isEditable = props.selectedGroup?.owner_id === user?._id;
+
   return (
     <div>
       <div>
@@ -13,9 +17,30 @@ function Day(props) {
           <h6 className="">{format(props.date, "d LLLL, y")}</h6>
           <ul className="list-group">
             {props.events.map((event) => (
-              <li className="list-group-item shadow-realm">
-                <b>{event.title}</b>
+              <li
+                className="list-group-item shadow-realm"
+                style={{ position: "relative" }}
+              >
+                <b>{event.name}</b>
                 {event.description && <p>{event.description}</p>}
+                {isEditable ? (
+                  <Link
+                    to={`/group/${props.selectedGroup._id}/event/${event._id}/edit`}
+                  >
+                    <span
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "10px",
+                        right: "20px",
+                      }}
+                    >
+                      EDIT
+                    </span>
+                  </Link>
+                ) : null}
               </li>
             ))}
           </ul>
@@ -28,15 +53,17 @@ function Day(props) {
 
 function Timeline({ events, loading, selectedGroup }) {
   const days = useMemo(() => getDays(events), [events]);
+
   return (
     <div className="parent-container">
-      <div className="content-container">
+      <div className="content-container" style={{ width: "350px" }}>
         {days?.length ? (
           days.map((day) => (
             <Day
               key={day.date.toString()}
               date={day.date}
               events={day.events}
+              selectedGroup={selectedGroup}
             />
           ))
         ) : (
@@ -82,4 +109,5 @@ function getDays(events) {
       days.push({ date: new Date(event.end_date), events: [event] });
     }
   });
+  return days;
 }

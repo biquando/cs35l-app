@@ -44,6 +44,7 @@ function CreateGroup(props){
             <div className="text-center">
                     <div className="inner-container">
                         <form onSubmit={handleSubmit} className="form-event">
+                          <h1 className="header"> Create New Group </h1>
                           <div className="group-input ">
                             <input
                               name="name"
@@ -52,14 +53,15 @@ function CreateGroup(props){
                               onChange={handleChange}
                               placeholder="Enter Group Name"
                               className="form-control"
+                              autoFocus
                             />
                             <div className = "group-descrip">
-                            <input
+                            <textarea
                               name="description"
-                              type="text"
+                              rows="5"
                               value={state.description}
                               onChange={handleChange}
-                              placeholder="Description"
+                              placeholder="Enter Group Description"
                               className="form-control"
                             />
                             </div>
@@ -75,7 +77,7 @@ function CreateGroup(props){
                               {loading ? (
                                 <span className="spinner-border spinner-border-sm" />
                               ) : (
-                                "Add"
+                                "Create"
                               )}
                             </button>
                           </div>

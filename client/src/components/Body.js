@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/body.css";
 
@@ -29,15 +29,20 @@ function Body(props) {
   );
 
   React.useEffect(() => {
-    if (groups) {
-      setSelectedGroup(getInitialGroup(groups));
+    if (groups && !selectedGroup) {
+      const initialGroup = getInitialGroup(groups);
+      setSelectedGroup(initialGroup);
     }
   }, [!!groups]);
   React.useEffect(() => {
-    if (events) {
-      setSelectedEvent(getInitialEvent(events, selectedEvent));
+    if (events && !selectedEvent) {
+      setSelectedEvent(getInitialEvent(events, selectedGroup));
     }
-  }, [!!events]);
+  }, [!!events, selectedGroup?._id]);
+
+  React.useEffect(() => {
+    console.log(selectedGroup?._id);
+  }, [selectedGroup?._id]);
 
   const isGroupsLoading = !groups && isValidatingGroups;
   const isEventsLoading = isGroupsLoading || (!events && isValidatingEvents);
@@ -59,7 +64,7 @@ function Body(props) {
         <Groups
           groups={groups}
           selectedGroup={selectedGroup}
-          onChangeGroup={setSelectedGroup}
+          onChangeGroup={(group) => setSelectedGroup(group)}
           loading={isGroupsLoading}
         />
         <Timeline
@@ -87,17 +92,15 @@ const getEventKey = (groupId) => `selectedEvent-${groupId}`;
 function getInitialGroup(groups) {
   if (!groups.length) return null;
   const storedGroupId = localStorage.getItem(SELECTED_GROUP_KEY);
-  if (storedGroupId) {
-    return groups.find((group) => group._id === storedGroupId);
-  } else {
-    localStorage.setItem(SELECTED_GROUP_KEY, groups[0]._id);
-    return groups[0];
-  }
+  const initialGroup =
+    groups.find((group) => group._id === storedGroupId) || groups[0];
+  localStorage.setItem(SELECTED_GROUP_KEY, initialGroup);
+  return initialGroup;
 }
 
 function getInitialEvent(events, selectedGroup) {
   if (!events.length) return null;
-  const eventKey = getEventKey(selectedGroup._id);
+  const eventKey = getEventKey(selectedGroup?._id);
   const storedEventId = localStorage.getItem(eventKey);
   if (storedEventId) {
     return events.find((event) => event._id === storedEventId);

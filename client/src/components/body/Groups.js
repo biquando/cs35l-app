@@ -1,27 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AddGroupCard from "./AddGroupCard";
 import "../../styles/groups.css";
 import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Groups({ groups, onChangeGroup }) {
-  // const groupData = getGroups({ userIds: [] })
+function Groups({ groups, onChangeGroup, selectedGroup }) {
+  const groupInitials = groups?.map((group) => {
+    const wordList = group?.name.split(" ");
+    let initials = "";
+    let i = 0;
+    while (i < 5 && i < wordList.length) {
+      initials += wordList[i][0];
+      ++i;
+    }
+    return initials;
+  });
+  //console.log(groupInitials);
+
+  const [showAddGroupCard, setShowAddGroupCard] = useState(false);
+
+  const handleShowCard = () => {
+    setShowAddGroupCard(!showAddGroupCard);
+  };
+
   return (
     <div className="parent-container">
       <div className="content-container">
-        {groups?.map((group) => (
+        {groups?.map((group, index) => (
           <span
             className="btn-secondary group-box"
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              backgroundColor:
+                group._id === selectedGroup?._id ? "#0e6dfd" : undefined,
+            }}
             onClick={() => onChangeGroup(group)}
           >
-            <span className="group-title text-light">group</span>
+            <span className="group-title text-light">
+              {groupInitials[index]}
+            </span>
           </span>
         ))}
       </div>
+      {showAddGroupCard && <AddGroupCard />}
       <div className="sticky-bot">
-        <button className="add-group-btn button btn btn-md btn-primary">
-          +
+        <button
+          className="add-group-btn button btn btn-md btn-primary"
+          onClick={handleShowCard}
+        >
+          <span className="add-group-text">+</span>
         </button>
       </div>
     </div>

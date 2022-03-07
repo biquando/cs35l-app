@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
 
-import Profile from "./Profile";
+import ProfileCard from "./ProfileCard";
 
 function NavBar(props) {
   const [showProfile, setShowProfile] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setShowProfile(!showProfile);
   };
+
+  function handleRedirect() {
+    navigate(`/search?query=${searchText}`);
+  }
+
+  function handleInputKeyDown(e) {
+    if (e.key === "Enter" && searchText) handleRedirect();
+  }
 
   return (
     // navbar sticky-top
@@ -17,18 +28,38 @@ function NavBar(props) {
       <Link to="/" className="navbar-brand">
         <span className="logo text-dark">bubble</span>
       </Link>
-        <Link to ="/create-group" className="">
-            <span className="create-group">Create Group</span>
-        </Link>
-      <Link to="/"> Login </Link>
-      <Link to="/about"> SignUp </Link>
+      <div class="input-group nav-search-bar-container">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search for a keyword"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          onKeyDown={handleInputKeyDown}
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            onClick={handleRedirect}
+            disabled={!searchText}
+            style={{
+              height: "100%",
+              borderTopLeftRadius: 0,
+              borderBottomLeftRadius: 0,
+            }}
+          >
+            Button
+          </button>
+        </div>
+      </div>
       <button
         className="profile button btn btn-md btn-primary btn-block"
         onClick={handleClick}
       >
         Profile
       </button>
-      {showProfile && <Profile />}
+      {showProfile && <ProfileCard />}
     </nav>
   );
 }

@@ -1,11 +1,10 @@
-.profile-card {
+.add-group-card {
   border-radius: 10px;
   position: absolute;
-  margin-top: 55px;
-  margin-right: 16px;
-  right: 0;
+  left: 15px;
+  bottom: 68px;
   height: 80px;
-  width: 100px;
+  width: 130px;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   background-color: white;
@@ -13,21 +12,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: left;
+  align-items: center;
+  z-index: 1;
 }
 
-.username {
-  font-weight: bold;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  text-decoration: none;
-}
-.username:hover {
-  text-decoration: underline;
-}
-
-.logout-text {
+.add-group-text {
   text-decoration: none;
   color: #bababa;
 }
@@ -35,11 +24,12 @@
   color: #0e6dfd;
 }
 
-.logout-btn {
+.add-group-btn {
   border-radius: 10px;
   border-width: 0px;
+  display: flex;
 }
-.logout-btn:hover {
+.add-group-btn:hover {
   color: #b1caff;
   background-color: #b1caff;
 }

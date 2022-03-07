@@ -10,6 +10,8 @@ import UserPage from "./components/UserPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Link, Routes, Route } from "react-router-dom";
 import AuthContextProvider from "./contexts/AuthContext";
+import SearchPage from "./components/SearchPage";
+import EditEvent from "./components/EditEvent";
 
 function App() {
   return (
@@ -26,6 +28,11 @@ function App() {
               element={<CreateEvent />}
             />
             <Route path="/create-group" element={<CreateGroup />} />
+            <Route
+              path="/group/:groupId/event/:eventId/edit"
+              element={<EditEvent />}
+            />
+            <Route path="/search" element={<SearchPage />} />
           </Routes>
         </div>
       </AuthContextProvider>
