@@ -34,22 +34,22 @@ function Body(props) {
   );
 
   React.useEffect(() => {
-    if (groups && !selectedGroup) {
+    if (groups && !selectedGroup && !isValidatingGroups) {
       const initialGroup =
         groups.find((group) => group._id === searchParams.get("group_id")) ||
         getInitialGroup(groups);
       setSelectedGroup(initialGroup);
     }
-  }, [!!groups]);
+  }, [!!groups, isValidatingGroups]);
   React.useEffect(() => {
-    if (selectedGroup && events) {
+    if (selectedGroup && !selectedEvent && events && !isValidatingEvents) {
       const initialEvent = getInitialEvent(events, selectedGroup);
       setSelectedEvent(
         events.find((event) => event._id === searchParams.get("event_id")) ||
           initialEvent
       );
     }
-  }, [selectedGroup?._id, !!events]);
+  }, [selectedGroup?._id, !!events, isValidatingEvents]);
 
   function handleChangeGroup(group) {
     setSelectedGroup(group);
