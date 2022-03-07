@@ -25,7 +25,7 @@ function Day(props) {
                 {event.description && <p>{event.description}</p>}
                 {isEditable ? (
                   <Link
-                    to={`/group/${props.selectedGroup._id}/event/${event._id}`}
+                    to={`/group/${props.selectedGroup._id}/event/${event._id}/edit`}
                   >
                     <span
                       style={{
