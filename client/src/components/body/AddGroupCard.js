@@ -1,20 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/addgroupcard.css";
+import CreateGroupCard from "../CreateGroup";
 
 function AddGroupCard(props) {
+  const [showCreateGroupCard, setShowCreateGroupCard] = useState(false);
+
+  const toggleCreateGroupCard = () => {
+    setShowCreateGroupCard(!showCreateGroupCard);
+  };
+
+  const [showJoinGroupCard, setJoinCreateGroupCard] = useState(false);
+
+  const toggleJoinGroupCard = () => {
+    setJoinCreateGroupCard(!showJoinGroupCard);
+  };
+
   return (
-    <div className="add-group-card">
-      <Link to="/create-group" className="username link-dark">
-        <button className="logout-btn">
+    <div>
+      <div className="add-group-card">
+        <button className="logout-btn" onClick={toggleCreateGroupCard}>
           <div className="logout-text">Create Group</div>
         </button>
-      </Link>
-      <Link to="/join-group" className="username link-dark">
-        <button className="logout-btn">
+        <button className="logout-btn" onClick={toggleJoinGroupCard}>
           <div className="logout-text">Join Group</div>
         </button>
-      </Link>
+      </div>
+      {showCreateGroupCard ? (
+        <CreateGroupCard
+          onCreateGroupCard={toggleCreateGroupCard}
+          refreshGroups={props.refreshGroups}
+        />
+      ) : null}
+      {showJoinGroupCard ? (
+        <CreateGroupCard
+          onCreateGroupCard={toggleJoinGroupCard}
+          refreshGroups={props.refreshGroups}
+        />
+      ) : null}
     </div>
   );
 }

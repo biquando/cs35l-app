@@ -96,7 +96,7 @@ function EditEvent(props) {
                 rows="5"
                 value={newDescription}
                 onChange={handleChange}
-                className="form-control"
+                className="form-control event-description-textarea"
                 />
             </div>
 
