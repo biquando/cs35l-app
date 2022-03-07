@@ -33,7 +33,7 @@ function CreateGroup(props) {
     await createGroup({ name, description });
     // Since this is rendered both in App.js and the modal
     props.refreshGroups?.();
-    props.onCreateGroupCard?.();
+    props.onSetShowGroupCard?.();
     navigate("/");
   }
 
@@ -81,7 +81,7 @@ function CreateGroup(props) {
               <button
                 className="cancel-button-padding button btn btn-lg btn-secondary btn-block"
                 disabled={loading}
-                onClick={() => props.onCreateGroupCard()}
+                onClick={() => props.onSetShowGroupCard()}
               >
                 Cancel
               </button>

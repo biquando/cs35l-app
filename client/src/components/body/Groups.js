@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddGroupCard from "./AddGroupCard";
+import CreateGroupCard from "../CreateGroup";
 import "../../styles/groups.css";
 import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
@@ -18,10 +19,10 @@ function Groups({ groups, onChangeGroup, selectedGroup, refreshGroups }) {
   });
   //console.log(groupInitials);
 
-  const [showAddGroupCard, setShowAddGroupCard] = useState(false);
+  const [showGroupCard, setShowGroupCard] = useState(false);
 
   const handleShowCard = () => {
-    setShowAddGroupCard(!showAddGroupCard);
+    setShowGroupCard(!showGroupCard);
   };
 
   return (
@@ -43,7 +44,12 @@ function Groups({ groups, onChangeGroup, selectedGroup, refreshGroups }) {
           </span>
         ))}
       </div>
-      {showAddGroupCard && <AddGroupCard refreshGroups={refreshGroups} />}
+      {showGroupCard && (
+        <CreateGroupCard
+          refreshGroups={refreshGroups}
+          onSetShowGroupCard={handleShowCard}
+        />
+      )}
       <div className="sticky-bot">
         <button
           className="add-group-btn button btn btn-md btn-primary"
