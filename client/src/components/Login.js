@@ -54,11 +54,7 @@ function Login(props) {
               className="button btn btn-lg btn-primary btn-block"
               disabled={loading}
             >
-              {loading ? (
-                <span className="spinner-border spinner-border-sm" />
-              ) : (
-                "Login"
-              )}
+              Login
             </button>
           </form>
           <p>
