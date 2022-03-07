@@ -50,7 +50,7 @@ function NavBar(props) {
               borderBottomLeftRadius: 0,
             }}
           >
-            Button
+            Search
           </button>
         </div>
       </div>
