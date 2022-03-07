@@ -71,7 +71,10 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
 
   return (
     <div className="parent-container">
-      <div className="content-container" style={{ width: "350px" }}>
+      <div
+        className="right-timeline-border content-container"
+        style={{ width: "350px" }}
+      >
         {selectedGroup && (
           <>
             <div
@@ -113,7 +116,7 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
           </p>
         )}
       </div>
-      <div className="sticky-bot">
+      <div className="sticky-bot right-timeline-border">
         {selectedGroup && isEditable ? (
           <Link to={`/group/${selectedGroup._id}/create-event`}>
             <button

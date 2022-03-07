@@ -49,8 +49,12 @@ function Comments(props) {
 
   if (props.disabled) {
     return (
-      <div className="no-comment">
-        <p>no event selected</p>
+      <div className="parent-container expand">
+        <div className="content-container center-message">
+          <div className="no-comment">
+            <p style={{ color: "rgba(0,0,0,0.5)" }}>No event selected!</p>
+          </div>
+        </div>
       </div>
     );
   }
@@ -72,7 +76,7 @@ function Comments(props) {
           <Comment userId={comment.user_id} text={comment.text} />
         ))}
       </div>
-      <div className="sticky-bot">
+      <div className="comments-sticky-bot">
         {/* <input
           disabled={props.disabled}
           name="username"

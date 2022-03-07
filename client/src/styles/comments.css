@@ -3,12 +3,16 @@
 }
 
 .no-comment {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  right: 35%;
-  top: 50%;
-  font-size: 20px;
-  text-align: center;
-  opacity: 50%;
+}
+
+.center-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .comment-input {

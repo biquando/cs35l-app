@@ -47,3 +47,19 @@
   border-top-width: 1px;
   border-top-color: #bababa;
 }
+
+.comments-sticky-bot {
+  width: 100%;
+  padding: 0px;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  text-decoration: none;
+  background-color: white;
+
+  position: relative;
+  bottom: 0;
+
+  justify-content: center;
+  align-items: center;
+}
