@@ -25,7 +25,14 @@ function App() {
             <Route path="/user/:user_id" element={<UserPage />} />
             <Route
               path="/group/:groupId/create-event"
-              element={<CreateEvent />}
+              element={
+                <>
+                  <div>
+                    <Body />
+                  </div>
+                  <CreateEvent />
+                </>
+              }
             />
             <Route path="/create-group" element={<CreateGroup />} />
             <Route

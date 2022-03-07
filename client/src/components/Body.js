@@ -93,6 +93,7 @@ function Body(props) {
 
   function handleChangeGroup(group) {
     setSelectedGroup(group);
+    console.log({ group });
     localStorage.setItem(SELECTED_GROUP_KEY, group._id);
   }
 
@@ -115,8 +116,6 @@ function Body(props) {
   const isEventsLoading = isGroupsLoading || (!events && isValidatingEvents);
   const isMessagesLoading =
     isEventsLoading || (!messages && isValidatingMessages);
-
-  console.log({ selectedEvent });
 
   return (
     <div className="page-wrapper">
@@ -160,7 +159,7 @@ function getInitialGroup(groups) {
   const storedGroupId = localStorage.getItem(SELECTED_GROUP_KEY);
   const initialGroup =
     groups.find((group) => group._id === storedGroupId) || groups[0];
-  localStorage.setItem(SELECTED_GROUP_KEY, initialGroup);
+  localStorage.setItem(SELECTED_GROUP_KEY, initialGroup._id);
   return initialGroup;
 }
 
