@@ -13,7 +13,7 @@ function EditEvent(props) {
   const {token} = useAuth()
   const currentGroupId =  params.groupId
   const currentEventId =  params.eventId
-  const {data: group} = useGroup({groupId: params.groupId})
+  const {data: group} = useGroup({groupId: params.groupId}, !!token)
   const {data: event, mutate: mutateEvent, isValidating} = useEvent({groupId:currentGroupId, eventId:currentEventId}, !!token)
 
   const [newName, setNewName] = React.useState(event?.name)
@@ -26,11 +26,13 @@ function EditEvent(props) {
   async function handleDeleteEvent(currentGroupId, currentEventId) {
       await deleteEvent({ groupId:currentGroupId, eventId:currentEventId});
       mutateEvent();
+      navigate("/");
   }
 
   async function confirmEdit() {
     await updateEvent({ groupId:currentGroupId, eventId:currentEventId, updates: { name: newName, end_date: newEventdate, description: newDescription} });
     mutateEvent();
+    navigate("/");
   }
 
   function handleChange(e) {
@@ -107,14 +109,13 @@ function EditEvent(props) {
                   >
                     Cancel
                   </button>
-                </div>
+            </div>
 
             <div className="delete-button">
                 <button
                 className="button btn btn-lg btn-danger btn-block"
                 onClick={() => {
                     handleDeleteEvent(currentGroupId, currentEventId)
-                    navigate("/");
                     }}
                 >
                 Delete Event
@@ -126,7 +127,6 @@ function EditEvent(props) {
                 className="button btn btn-lg btn-primary btn-block"
                 onClick={() => {
                     confirmEdit();
-                    navigate("/");
                 }}
                 >
                 Update

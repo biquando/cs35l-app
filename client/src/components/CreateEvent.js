@@ -6,15 +6,17 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { createEvent } from "../utils/event";
 import { useGroup } from "../utils/swr";
+import { useAuth } from "../contexts/AuthContext";
 
 function CreateEvent(props) {
   const [name, setName] = React.useState("")
   const [eventdate, setEventdate] = React.useState(false)
   const [description, setDescription] = React.useState("")
+  const {token} = useAuth()
 
   const params = useParams()
   const currentGroupId =  params.groupId
-  const {data: group} = useGroup({groupId: params.groupId})
+  const {data: group} = useGroup({groupId: params.groupId}, !!token)
 
   let navigate = useNavigate();
 
