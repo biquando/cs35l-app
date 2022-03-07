@@ -46,6 +46,27 @@ function Comments(props) {
     setLoading(false);
   };
 
+<<<<<<< HEAD
+=======
+  return (
+    <div className="parent-container expand">
+      <div className="content-container">
+        {props.messages?.map((index, comment) => (
+          <Comment userId={comment.user_id} text={comment.text} />
+        ))}
+      </div>
+      <div className="sticky-bot">
+        <input
+          name="username"
+          type="comment"
+          value={state.text}
+          onChange={handleComment}
+          placeholder="Add a comment..."
+          autoFocus
+          className="comment-input"
+        />
+      </div>
+>>>>>>> abe891d1ecd5c62acad008e1d7abe2da1f0736c2
 
 
     console.log(props)

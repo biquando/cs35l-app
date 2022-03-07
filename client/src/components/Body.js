@@ -90,6 +90,7 @@ function Body(props) {
           messages={messages}
           loading={isMessagesLoading}
           onPostMessage={handlePostMessage}
+          disabled={!selectedEvent}
         />
       </div>
     </div>

@@ -17,7 +17,7 @@ function SearchPage(props) {
 
   return (
     <div>
-      <NavBar />
+      <NavBar searchText={queryString} />
       <h2>Search: "{queryString}"</h2>
       {!searchResults ? (
         <div className="spinner-border"></div>
@@ -28,7 +28,7 @@ function SearchPage(props) {
               <h4>Groups</h4>
               <ul className="list-group">
                 {searchResults.groups.map((g) => (
-                  <li className="list-group-item">
+                  <li key={g._id} className="list-group-item">
                     <div className="fw-bold">{g.name}</div>
                     {g.description}
                   </li>
@@ -42,7 +42,7 @@ function SearchPage(props) {
               <h4>Events</h4>
               <ul className="list-group">
                 {searchResults.events.map((e) => (
-                  <li className="list-group-item">
+                  <li key={e._id} className="list-group-item">
                     <div className="fw-bold">{e.name}</div>
                     {e.description}
                   </li>
@@ -56,7 +56,7 @@ function SearchPage(props) {
               <h4>Messages</h4>
               <ul className="list-group">
                 {searchResults.messages.map((m) => (
-                  <li className="list-group-item">
+                  <li key={m._id} className="list-group-item">
                     <div className="fw-bold">{m.username}</div>
                     {m.text}
                   </li>
