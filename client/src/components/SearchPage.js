@@ -36,7 +36,9 @@ function SearchPage(props) {
     <div>
       <NavBar searchText={queryString} />
       {!searchResults || !user ? (
-        <div className="spinner-border"></div>
+        <div className="text-center">
+          <div className="spinner-border"></div>
+        </div>
       ) : (
         <div className="search-container">
           <div className="inner-search-container">
