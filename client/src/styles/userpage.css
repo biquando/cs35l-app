@@ -56,3 +56,11 @@
   color: #b1caff;
   background-color: #b1caff;
 }
+
+.group-link {
+  text-decoration: none;
+}
+
+.group-link:hover {
+  text-decoration: underline;
+}

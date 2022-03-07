@@ -26,5 +26,10 @@
   bottom: 5.3%;
 }
 
-.divider {
+.user-link {
+  text-decoration: none;
+}
+
+.user-link:hover {
+  text-decoration: underline;
 }

@@ -13,8 +13,8 @@ function Comment(props) {
     <div>
       <div className="">
         <div className="">
-          <Link to={`/user/${props.userId}`}>
-            <b className="text-dark">{user?.username}</b>
+          <Link className="text-dark user-link" to={`/user/${props.userId}`}>
+            <b>{user?.username}</b>
           </Link>
           <p>{props.text}</p>
         </div>

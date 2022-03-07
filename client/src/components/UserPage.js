@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles/userpage.css";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useUser, useGroups } from "../utils/swr";
 import { useAuth } from "../contexts/AuthContext";
 import { leaveGroup, deleteGroup } from "../utils/group";
@@ -102,7 +102,12 @@ function UserPage(props) {
                   <ul className="list-group">
                     {groups?.map((group) => (
                       <li className="list-group-item d-flex justify-content-between align-items-start">
-                        <div>{group.name}</div>
+                        <Link
+                          to={`/?open=group&group_id=${group._id}`}
+                          className="text-dark group-link"
+                        >
+                          {group.name}
+                        </Link>
                         {user?._id == currentUser?._id &&
                           (user?._id != group.owner_id ? (
                             <button
