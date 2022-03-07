@@ -104,17 +104,17 @@ function CreateEvent(props) {
           <div className="event-button-container">
             <button
               className="button button-size btn btn-lg btn-primary btn-block"
-              onClick={handleSubmit}
-            >
-              Create
-            </button>
-            <button
-              className="button button-size btn btn-lg btn-primary btn-block"
               onClick={() => {
                 navigate("/");
               }}
             >
               Cancel
+            </button>
+            <button
+              className="button button-size btn btn-lg btn-primary btn-block"
+              onClick={handleSubmit}
+            >
+              Create
             </button>
           </div>
         </div>
