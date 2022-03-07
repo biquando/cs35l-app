@@ -28,19 +28,19 @@ function NavBar(props) {
       <Link to="/" className="navbar-brand">
         <span className="logo text-dark">bubble</span>
       </Link>
-      <div class="input-group nav-search-bar-container">
+      <div className="input-group nav-search-bar-container">
         <input
           type="text"
-          class="form-control"
+          classname="form-control"
           placeholder="Search for a keyword"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={handleInputKeyDown}
           autoFocus={props.searchText ? "true" : "false"}
         />
-        <div class="input-group-append">
+        <div className="input-group-append">
           <button
-            class="btn btn-outline-secondary"
+            classname="btn btn-outline-secondary"
             type="button"
             onClick={handleRedirect}
             disabled={!searchText}
