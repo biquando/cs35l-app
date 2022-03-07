@@ -1,81 +1,22 @@
-.center {
-    margin: auto;
-    width: 100%;
-    padding: 10px;
-  
-    background-color: #eeeeee;
-  
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  
-  .eventname-input {
-    position: absolute;
-    top: 150px;
-    left: 5%;
-    width: 70%;
-  }
-
   .update-button {
     position: absolute;
     bottom: 10%;
-    right: 50%
+    left: 45%;
   }
 
   .delete-button {
     position: absolute;
     bottom: 10%;
-    left: 70%
+    left: 60%
   }
 
   .cancel-button {
     position: absolute;
     bottom: 10%;
-    left: 20%;
-  }
-
-  .date-time-picker {
-    position: absolute;
-    top: 225px;
-    left: 5%;
-    width: 20%
-  }
-
-  .event-description {
-    position: absolute;
-    top: 300px;
-    left: 5%;
-    width: 70%;
+    left: 33%;
   }
   
   .header {
     font-size: 25px;
     padding: 10px;
-  }
-  
-  .form-event {
-    padding: 10px;
-    margin: auto;
-  }
-
-  .form-event .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 18px;
-  }
-  .form-event .form-control:focus {
-    z-index: 2;
-  }
-  
-  .form-event input[type="text"] {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
   }
