@@ -85,6 +85,7 @@ export default function AuthContextProvider({ children }) {
   function handleLogout() {
     removeAuthToken();
     navigate("/login");
+    setTimeout(() => window.location.reload(), 200);
   }
 
   return (
