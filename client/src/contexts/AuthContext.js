@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import {
   getStoredAuthToken,
   login,
@@ -26,8 +26,13 @@ export default function AuthContextProvider({ children }) {
   const [errorMessage, setErrorMessage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    const joinGroupId = searchParams.get("join");
+    if (joinGroupId) {
+      localStorage.setItem("joinGroupId", joinGroupId);
+    }
     initializeAuth();
   }, []);
 
