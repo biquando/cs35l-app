@@ -2,17 +2,17 @@ import React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../utils/swr.js";
-import { createMessage } from "../../utils/message.js"
+import { createMessage } from "../../utils/message.js";
 import "../../styles/comments.css";
 import "../../styles/body.css";
 
 function Comment(props) {
-  const {data: user } = useUser({userId: props.userId})
+  const { data: user } = useUser({ userId: props.userId });
   return (
     <div>
       <div className="">
         <div className="">
-          <b>{user.username}</b>
+          <b>{user?.username}</b>
           <p>{props.text}</p>
         </div>
       </div>
@@ -20,39 +20,29 @@ function Comment(props) {
   );
 }
 
-
-
 function Comments(props) {
-
-  const[state,setState] = useState({
-    groupId:"",
-    eventId:"",
+  const [state, setState] = useState({
+    groupId: "",
+    eventId: "",
     text: "",
-
   });
-  const [loading, setLoading] = React.useState(false)
-  const comments = [
-  ];
-
-
+  const [loading, setLoading] = React.useState(false);
+  const comments = [];
 
   const handleComment = (e) => {
     const { groupId, eventId, value: text } = e.target;
     console.log(text);
-    setState(prev => ({...prev, text}))
+    setState((prev) => ({ ...prev, text }));
   };
 
   const submitCommentLine = async (e) => {
-    console.log("commented");
-
     e.preventDefault();
     const { groupId, eventId, text } = state;
-    setLoading(true)
-    await createMessage({ groupId, eventId, text });
-    setLoading(false)
-
+    setLoading(true);
+    setState((prev) => ({ ...prev, text: "" }));
+    await props.onPostMessage(text);
+    setLoading(false);
   };
-
 
   return (
     <div className="parent-container expand">
@@ -73,10 +63,14 @@ function Comments(props) {
         />
       </div>
 
-      <button onClick = {submitCommentLine} type="submit"
-      className="comment-button"
-      disabled={loading}
-      >Post</button>
+      <button
+        onClick={submitCommentLine}
+        type="submit"
+        className="comment-button"
+        disabled={loading}
+      >
+        Post
+      </button>
     </div>
   );
 }
