@@ -91,7 +91,10 @@ function UserPage(props) {
               {isGroupsLoading ? null : (
                 <ul className="list-group">
                   {groups?.map((group) => (
-                    <li className="list-group-item d-flex justify-content-between align-items-start">
+                    <li
+                      key={group._id}
+                      className="list-group-item d-flex justify-content-between align-items-start"
+                    >
                       <div>{group.name}</div>
                       {user?._id == currentUser?._id &&
                         (user?._id != group.owner_id ? (

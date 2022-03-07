@@ -36,7 +36,7 @@ function NavBar(props) {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={handleInputKeyDown}
-          autoFocus={props.searchText ? "true" : "false"}
+          autoFocus={props.searchText ? true : false}
         />
         <div className="input-group-append">
           <button
