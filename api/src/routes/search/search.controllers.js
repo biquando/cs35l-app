@@ -66,7 +66,14 @@ module.exports.search = async function (req, res) {
       Event.find(eventSearch),
       Message.find(messageSearch),
     ]);
-    res.json({ data: { groups, events, messages } });
+
+    let messageGroupMap = {};
+    for (let m of messages) {
+      const mEvent = await Event.findById(m.event_id);
+      messageGroupMap[m._id] = mEvent.group_id;
+    }
+
+    res.json({ data: { groups, events, messages, messageGroupMap } });
   } catch (error) {
     res.status(400).json({
       error: error.message,

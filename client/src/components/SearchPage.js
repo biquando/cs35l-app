@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { useSearch } from "../utils/swr";
 import NavBar from "./NavBar";
 
@@ -28,10 +28,14 @@ function SearchPage(props) {
               <h4>Groups</h4>
               <ul className="list-group">
                 {searchResults.groups.map((g) => (
-                  <li key={g._id} className="list-group-item">
+                  <Link
+                    to={`/?open=group&group_id=${g._id}`}
+                    key={g._id}
+                    className="list-group-item"
+                  >
                     <div className="fw-bold">{g.name}</div>
                     {g.description}
-                  </li>
+                  </Link>
                 ))}
               </ul>
               <br />
@@ -42,10 +46,14 @@ function SearchPage(props) {
               <h4>Events</h4>
               <ul className="list-group">
                 {searchResults.events.map((e) => (
-                  <li key={e._id} className="list-group-item">
+                  <Link
+                    to={`/?open=event&group_id=${e.group_id}&event_id=${e._id}`}
+                    key={e._id}
+                    className="list-group-item"
+                  >
                     <div className="fw-bold">{e.name}</div>
                     {e.description}
-                  </li>
+                  </Link>
                 ))}
               </ul>
               <br />
@@ -56,10 +64,16 @@ function SearchPage(props) {
               <h4>Messages</h4>
               <ul className="list-group">
                 {searchResults.messages.map((m) => (
-                  <li key={m._id} className="list-group-item">
+                  <Link
+                    to={`/?open=message&group_id=${
+                      searchResults.messageGroupMap[m._id]
+                    }&event_id=${m.event_id}&message_id=${m._id}`}
+                    key={m._id}
+                    className="list-group-item"
+                  >
                     <div className="fw-bold">{m.username}</div>
                     {m.text}
-                  </li>
+                  </Link>
                 ))}
               </ul>
               <br />
