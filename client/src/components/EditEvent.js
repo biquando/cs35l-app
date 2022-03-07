@@ -129,7 +129,7 @@ function EditEvent(props) {
                     confirmEdit();
                 }}
                 >
-                Update
+                Update Event
                 </button>
             </div>
           </div>

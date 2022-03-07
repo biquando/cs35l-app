@@ -1,43 +1,41 @@
-    .center {
-    margin: auto;
-    width: 100%;
-    padding: 10px;
-  
-    background-color: #eeeeee;
-  
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-  }
-  
   .eventname-input {
     position: absolute;
-    top: 150px;
-    left: 5%;
-    width: 70%;
+    top: 175px;
+    width: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .date-time-picker {
+    position: absolute;
+    top: 250px;
+    width: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+  }
+
+  .event-description {
+    position: absolute;
+    top: 375px;
+    width: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
   }
 
   .save-button {
     position: absolute;
     bottom: 10%;
-    right: 10%;
+    right: 40%;
   }
 
-  .date-time-picker {
+  .cancel-button2 {
     position: absolute;
-    top: 225px;
-    left: 5%;
-    width: 20%
-  }
-
-  .event-description {
-    position: absolute;
-    top: 300px;
-    left: 5%;
-    width: 70%;
+    bottom: 10%;
+    left:40%
   }
   
   .header {
@@ -61,9 +59,3 @@
     z-index: 2;
   }
   
-  .form-event input[type="text"] {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    border-top-right-radius: 0;
-    border-top-left-radius: 0;
-  }

@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/createevent.css";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "./NavBar";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -54,52 +54,62 @@ function CreateEvent(props) {
       <div>
         <NavBar />
         <div className="text-center">
-          <div className="inner-container">
-            <form onSubmit={handleSubmit} className="form-event">
-                <h1 className="header"> Create New Event : {group?.name}</h1>
-                <div className="eventname-input">
-                  <input
-                    name="name"
-                    type="text"
-                    value={name}
-                    onChange={handleChange}
-                    placeholder="Enter Event Name"
-                    autoFocus
-                    className="form-control"
-                  />
-                </div>
+          <div className="inner-container, form-event">
+            <h1 className="header"> Create New Event : {group?.name}</h1>
+            <div className="eventname-input">
+              <input
+                name="name"
+                type="text"
+                value={name}
+                onChange={handleChange}
+                placeholder="Enter Event Name"
+                autoFocus
+                className="form-control"
+              />
+            </div>
 
-                <div className="date-time-picker">
-                  <DatePicker 
-                    name="eventdate"
-                    placeholderText="Click to select the due date"
-                    selected={eventdate}
-                    onChange={(date) => {
-                      setEventdate(date)
-                    }}
-                    className="form-control"
-                  />
-                </div>
+            <div className="date-time-picker">
+              <DatePicker 
+                name="eventdate"
+                placeholderText="Click to select the due date"
+                selected={eventdate}
+                onChange={(date) => {
+                  setEventdate(date)
+                }}
+                className="form-control"
+              />
+            </div>
 
-                <div className="event-description">
-                  <textarea
-                    name="description"
-                    rows="5"
-                    value={description}
-                    onChange={handleChange}
-                    placeholder="Enter Event Description"
-                    className="form-control"
-                  />
-                </div>
+            <div className="event-description">
+              <textarea
+                name="description"
+                rows="5"
+                value={description}
+                onChange={handleChange}
+                placeholder="Enter Event Description"
+                className="form-control"
+              />
+            </div>
 
-                <div className="save-button">
-                  <button
-                    className="button btn btn-lg btn-primary btn-block"
-                  >
-                    Create
-                  </button>
-                </div>
-            </form>
+            <div className="save-button">
+              <button
+                className="button btn btn-lg btn-primary btn-block"
+                onClick={handleSubmit}
+              >
+                Create
+              </button>
+            </div>
+            
+            <div className="cancel-button2">
+              <button
+                className="button btn btn-lg btn-secondary btn-block"
+                onClick={() => {
+                    navigate("/");
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </div>
       </div>
