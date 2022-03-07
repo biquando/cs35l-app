@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams, useSearchParams } from "react-router-dom";
 import "../styles/body.css";
 
 import NavBar from "./NavBar";
@@ -13,6 +13,7 @@ import { createMessage } from "../utils/message";
 function Body(props) {
   const [selectedGroup, setSelectedGroup] = React.useState(null);
   const [selectedEvent, setSelectedEvent] = React.useState(null);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { user } = useAuth();
   const { data: groups, isValidating: isValidatingGroups } = useGroups(
@@ -34,13 +35,19 @@ function Body(props) {
 
   React.useEffect(() => {
     if (groups && !selectedGroup) {
-      const initialGroup = getInitialGroup(groups);
+      const initialGroup =
+        groups.find((group) => group._id === searchParams.get("group_id")) ||
+        getInitialGroup(groups);
       setSelectedGroup(initialGroup);
     }
   }, [!!groups]);
   React.useEffect(() => {
     if (selectedGroup && events) {
-      setSelectedEvent(getInitialEvent(events, selectedGroup));
+      const initialEvent = getInitialEvent(events, selectedGroup);
+      setSelectedEvent(
+        events.find((event) => event._id === searchParams.get("event_id")) ||
+          initialEvent
+      );
     }
   }, [selectedGroup?._id, !!events]);
 
@@ -91,6 +98,7 @@ function Body(props) {
           loading={isMessagesLoading}
           onPostMessage={handlePostMessage}
           disabled={!selectedEvent}
+          highlightedMessageId={searchParams.get("message_id")}
         />
       </div>
     </div>

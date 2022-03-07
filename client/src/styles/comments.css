@@ -3,6 +3,10 @@
 }
 
 .no-comment{
+    position: fixed;
+    right:35%;
+    top: 50%;
+    font-size: 20px;
     text-align: center;
     opacity:50%;
 }

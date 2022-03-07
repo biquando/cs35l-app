@@ -50,7 +50,7 @@ function Comments(props) {
   if(props.disabled){
     return(
         <div className="no-comment">
-            <p>Select event</p>
+            <p>no event selected</p>
         </div>
     );
   }
