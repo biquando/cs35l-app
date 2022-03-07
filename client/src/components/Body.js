@@ -16,10 +16,11 @@ function Body(props) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const { user } = useAuth();
-  const { data: groups, isValidating: isValidatingGroups } = useGroups(
-    { userIds: [user?._id] },
-    !!user
-  );
+  const {
+    data: groups,
+    isValidating: isValidatingGroups,
+    mutate: mutateGroups,
+  } = useGroups({ userIds: [user?._id] }, !!user);
   const { data: events, isValidating: isValidatingEvents } = useEvents(
     { groupId: selectedGroup?._id },
     !!selectedGroup
@@ -27,29 +28,29 @@ function Body(props) {
   const {
     data: messages,
     isValidating: isValidatingMessages,
-    mutate,
+    mutate: mutateMessages,
   } = useMessages(
     { groupId: selectedGroup?._id, eventId: selectedEvent?._id },
     selectedGroup && selectedEvent
   );
 
   React.useEffect(() => {
-    if (groups && !selectedGroup) {
+    if (groups && !selectedGroup && !isValidatingGroups) {
       const initialGroup =
         groups.find((group) => group._id === searchParams.get("group_id")) ||
         getInitialGroup(groups);
       setSelectedGroup(initialGroup);
     }
-  }, [!!groups]);
+  }, [!!groups, isValidatingGroups]);
   React.useEffect(() => {
-    if (selectedGroup && events) {
+    if (selectedGroup && !selectedEvent && events && !isValidatingEvents) {
       const initialEvent = getInitialEvent(events, selectedGroup);
       setSelectedEvent(
         events.find((event) => event._id === searchParams.get("event_id")) ||
           initialEvent
       );
     }
-  }, [selectedGroup?._id, !!events]);
+  }, [selectedGroup?._id, !!events, isValidatingEvents]);
 
   function handleChangeGroup(group) {
     setSelectedGroup(group);
@@ -68,7 +69,7 @@ function Body(props) {
       groupId: selectedGroup._id,
       text,
     });
-    mutate();
+    mutateMessages();
   }
 
   const isGroupsLoading = !groups && isValidatingGroups;
@@ -85,6 +86,7 @@ function Body(props) {
           selectedGroup={selectedGroup}
           onChangeGroup={handleChangeGroup}
           loading={isGroupsLoading}
+          refreshGroups={mutateGroups}
         />
         <Timeline
           events={events}

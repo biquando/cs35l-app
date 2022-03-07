@@ -14,6 +14,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: left;
+  z-index: 1;
 }
 
 .username {

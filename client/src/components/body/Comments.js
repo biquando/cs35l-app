@@ -53,6 +53,10 @@ function Comments(props) {
     );
   }
 
+  function handleInputKeyDown(e) {
+    if (e.key === "Enter") submitCommentLine(e);
+  }
+
   return (
     <div className="parent-container expand">
       <div className="content-container">
@@ -86,6 +90,7 @@ function Comments(props) {
             value={state.text}
             onChange={handleComment}
             placeholder="Add a comment..."
+            onKeyDown={handleInputKeyDown}
             autoFocus
           />
           <div className="input-group-append">

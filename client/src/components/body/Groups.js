@@ -5,7 +5,7 @@ import "../../styles/groups.css";
 import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Groups({ groups, onChangeGroup, selectedGroup }) {
+function Groups({ groups, onChangeGroup, selectedGroup, refreshGroups }) {
   const groupInitials = groups?.map((group) => {
     const wordList = group?.name.split(" ");
     let initials = "";
@@ -43,7 +43,7 @@ function Groups({ groups, onChangeGroup, selectedGroup }) {
           </span>
         ))}
       </div>
-      {showAddGroupCard && <AddGroupCard />}
+      {showAddGroupCard && <AddGroupCard refreshGroups={refreshGroups} />}
       <div className="sticky-bot">
         <button
           className="add-group-btn button btn btn-md btn-primary"
