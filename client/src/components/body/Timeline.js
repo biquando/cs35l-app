@@ -5,6 +5,8 @@ import "../../styles/timeline.css";
 import "../../styles/body.css";
 import { format, isSameDay } from "date-fns";
 import { useAuth } from "../../contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
 function Day(props) {
   return (
@@ -54,12 +56,29 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
   const { user } = useAuth();
   const isEditable = selectedGroup?.owner_id === user?._id;
 
+  async function handleCopyToClipboard() {
+    await navigator.clipboard.writeText(
+      `${window.location.origin}/?join=${selectedGroup?._id}`
+    );
+    alert("Sharable link copied to clipboard");
+  }
+
   return (
     <div className="parent-container">
       <div className="content-container" style={{ width: "350px" }}>
         {selectedGroup && (
           <>
-            <h5>{selectedGroup.name}</h5>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <h5>{selectedGroup.name}</h5>
+              {isEditable && (
+                <span
+                  style={{ cursor: "pointer", opacity: "0.8" }}
+                  onClick={handleCopyToClipboard}
+                >
+                  <FontAwesomeIcon icon={faCopy} />
+                </span>
+              )}
+            </div>
             <hr className="divider" />
           </>
         )}
@@ -80,7 +99,7 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
         )}
       </div>
       <div className="sticky-bot">
-        {selectedGroup ? (
+        {selectedGroup && isEditable ? (
           <Link to={`/group/${selectedGroup._id}/create-event`}>
             <button className="button btn btn-md btn-primary btn-block">
               Create Event
