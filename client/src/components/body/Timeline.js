@@ -31,7 +31,7 @@ function Timeline({ events, loading, selectedGroup }) {
   console.log({ days });
   return (
     <div className="parent-container">
-      <div className="content-container">
+      <div className="content-container" style={{ width: "350px" }}>
         {days?.length ? (
           days.map((day) => (
             <Day
