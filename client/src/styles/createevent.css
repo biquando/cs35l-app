@@ -25,6 +25,10 @@
     margin-right: -50%;
     transform: translate(-50%, -50%);
   }
+  
+  .event-description-textarea{
+    resize: none;
+  }
 
   .save-button {
     position: absolute;

@@ -87,7 +87,7 @@ function CreateEvent(props) {
                 value={description}
                 onChange={handleChange}
                 placeholder="Enter Event Description"
-                className="form-control"
+                className="form-control event-description-textarea"
               />
             </div>
 
