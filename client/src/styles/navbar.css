@@ -16,3 +16,12 @@
 .profile {
   width: 100px;
 }
+
+.nav-search-bar-container {
+  width: 400px !important;
+  transition: width 0.3s ease;
+}
+
+.nav-search-bar-container:focus-within {
+  width: 600px !important;
+}
