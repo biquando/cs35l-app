@@ -16,6 +16,7 @@
 .leave-group-button {
   border-radius: 10px;
   border-width: 0px;
+  margin-right: 10px;
 }
 .leave-group-button:hover {
   background-color: #f7b7bb;

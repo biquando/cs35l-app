@@ -101,7 +101,7 @@ function UserPage(props) {
                 {isGroupsLoading ? null : (
                   <ul className="list-group">
                     {groups?.map((group) => (
-                      <li className="list-group-item d-flex justify-content-between align-items-start">
+                      <li className="list-group-item d-flex justify-content-between align-items-start list-group-modifier">
                         <Link
                           to={`/?open=group&group_id=${group._id}`}
                           className="text-dark group-link"

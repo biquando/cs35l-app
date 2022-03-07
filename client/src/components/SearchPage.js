@@ -5,6 +5,7 @@ import { useUser } from "../utils/swr";
 import { useSearch } from "../utils/swr";
 import NavBar from "./NavBar";
 import "../styles/searchpage.css";
+import "../styles/userpage.css";
 import { joinGroup } from "../utils/group";
 
 function SearchPage(props) {
@@ -57,17 +58,21 @@ function SearchPage(props) {
                         {g.description}
                       </Link>
                     ) : (
-                      <li key={g._id} className="list-group-item">
-                        <div className="fw-bold">
-                          {g.name}
+                      <li
+                        key={g._id}
+                        className="list-group-item list-group-modifier"
+                      >
+                        <div className="group-header">
+                          <b>{g.name}</b>
                           <button
-                            className="badge rounded-pill bg-primary"
+                            className="edit-user-description-btn"
                             onClick={() => handleJoinGroup(g._id)}
                           >
-                            Join
+                            <div className="edit-user-description-text">
+                              Join
+                            </div>
                           </button>
                         </div>
-
                         {g.description}
                       </li>
                     )
@@ -120,9 +125,17 @@ function SearchPage(props) {
                 <br />
               </div>
             )}
-            {searchResults.groups.length === 0 &&
-              searchResults.events.length === 0 &&
-              searchResults.messages.length === 0 && <p>No results.</p>}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                color: "rgba(0, 0, 0, 0.5)",
+              }}
+            >
+              {searchResults.groups.length === 0 &&
+                searchResults.events.length === 0 &&
+                searchResults.messages.length === 0 && <p>No results!</p>}
+            </div>
           </div>
         </div>
       )}
