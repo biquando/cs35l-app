@@ -4,7 +4,7 @@ import "../../styles/groups.css";
 import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
 
-function Groups({ groups, onChangeGroup }) {
+function Groups({ groups, onChangeGroup, selectedGroup }) {
   const groupInitials = groups?.map((group) => {
     const wordList = group?.name.split(" ");
     let initials = "";
@@ -23,7 +23,11 @@ function Groups({ groups, onChangeGroup }) {
         {groups?.map((group, index) => (
           <span
             className="btn-secondary group-box"
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              backgroundColor:
+                group._id === selectedGroup?._id ? "#0e6dfd" : undefined,
+            }}
             onClick={() => onChangeGroup(group)}
           >
             <span className="group-title text-light">
