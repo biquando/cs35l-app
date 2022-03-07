@@ -4,12 +4,21 @@ const { Group } = require("../../../models/group.model");
 module.exports.createEvent = async function (req, res) {
   try {
     const groupId = req.params.group_id;
+    const senderId = req.payload.user_id;
     const eventObj = {
       ...req.body,
       group_id: groupId,
       // omer: json can only hold primitive representations of dates (numbers, strings)
       date: new Date(req.body.date),
     };
+
+    const group = await Group.findById(groupId);
+    if (group.owner_id.toString() !== senderId) {
+      return res.status(403).json({
+        error: "You aren't authorized to create this event",
+      });
+    }
+
     const event = await Event.create(eventObj);
     res.json({
       data: event,
