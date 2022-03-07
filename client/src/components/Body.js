@@ -14,6 +14,7 @@ function Body(props) {
   const [selectedGroup, setSelectedGroup] = React.useState(null);
   const [selectedEvent, setSelectedEvent] = React.useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { token } = useAuth();
 
   const { user } = useAuth();
   const {
@@ -35,15 +36,20 @@ function Body(props) {
   );
 
   React.useEffect(() => {
-    if (groups && !selectedGroup && !isValidatingGroups) {
-      const initialGroup =
-        groups.find((group) => group._id === searchParams.get("group_id")) ||
-        getInitialGroup(groups);
-      setSelectedGroup(initialGroup);
-    }
+    if (token) searchParams.get("join");
+  }, [!!token]);
+  React.useEffect(() => {
+    if (!groups || selectedGroup || isValidatingGroups) return;
+    const initialGroup =
+      groups.find((group) => group._id === searchParams.get("group_id")) ||
+      getInitialGroup(groups);
+    setSelectedGroup(initialGroup);
   }, [!!groups, isValidatingGroups]);
   React.useEffect(() => {
-    if (selectedGroup && !selectedEvent && events && !isValidatingEvents) {
+    if (!selectedGroup || !events || isValidatingEvents) return;
+    if (!events.length) {
+      setSelectedEvent(null);
+    } else if (events[0].group_id !== selectedGroup._id || !selectedEvent) {
       const initialEvent = getInitialEvent(events, selectedGroup);
       setSelectedEvent(
         events.find((event) => event._id === searchParams.get("event_id")) ||
@@ -59,7 +65,7 @@ function Body(props) {
 
   function handleChangeEvent(event) {
     setSelectedEvent(event);
-    localStorage.setItem(getEventKey(selectedGroup._id, event._id));
+    localStorage.setItem(getEventKey(selectedGroup._id), event._id);
   }
 
   async function handlePostMessage(text) {
@@ -76,6 +82,8 @@ function Body(props) {
   const isEventsLoading = isGroupsLoading || (!events && isValidatingEvents);
   const isMessagesLoading =
     isEventsLoading || (!messages && isValidatingMessages);
+
+  console.log({ selectedEvent });
 
   return (
     <div className="page-wrapper">
