@@ -55,7 +55,7 @@ function NavBar(props) {
         </div>
       </div>
       <button
-        className="profile button btn btn-md btn-primary btn-block"
+        className="profile btn btn-md btn-primary btn-block"
         onClick={handleClick}
       >
         Profile

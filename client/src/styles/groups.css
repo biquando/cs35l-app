@@ -1,3 +1,7 @@
+.group-content-container {
+  width: 100px;
+}
+
 .group-box {
   margin-bottom: 16px;
   display: flex;
