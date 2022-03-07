@@ -1,12 +1,24 @@
 import React, { useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
+import { useUser } from "../utils/swr";
 import { useSearch } from "../utils/swr";
 import NavBar from "./NavBar";
+import "../styles/searchpage.css";
+import { joinGroup } from "../utils/group";
 
 function SearchPage(props) {
   const search = useLocation().search;
   const queryString = new URLSearchParams(search).get("query");
+  const navigate = useNavigate();
 
+  const { user: originalUser } = useAuth();
+  const { data: user, mutate: mutateUser } = useUser(
+    {
+      userId: originalUser?._id,
+    },
+    !!originalUser
+  );
   const {
     data: searchResults,
     isValidating,
@@ -15,11 +27,18 @@ function SearchPage(props) {
 
   useEffect(mutate, [isValidating]);
 
+  async function handleJoinGroup(groupId) {
+    await joinGroup({ groupId });
+    mutate();
+    mutateUser();
+    navigate(`/?open=group&group_id=${groupId}`);
+  }
+
   return (
     <div>
       <NavBar searchText={queryString} />
       <h2>Search: "{queryString}"</h2>
-      {!searchResults ? (
+      {!searchResults || !user ? (
         <div className="spinner-border"></div>
       ) : (
         <div>
@@ -27,16 +46,32 @@ function SearchPage(props) {
             <div>
               <h4>Groups</h4>
               <ul className="list-group">
-                {searchResults.groups.map((g) => (
-                  <Link
-                    to={`/?open=group&group_id=${g._id}`}
-                    key={g._id}
-                    className="list-group-item"
-                  >
-                    <div className="fw-bold">{g.name}</div>
-                    {g.description}
-                  </Link>
-                ))}
+                {searchResults.groups.map((g) =>
+                  user.group_ids.includes(g._id.toString()) ? (
+                    <Link
+                      to={`/?open=group&group_id=${g._id}`}
+                      key={g._id}
+                      className="list-group-item"
+                    >
+                      <div className="fw-bold">{g.name}</div>
+                      {g.description}
+                    </Link>
+                  ) : (
+                    <li key={g._id} className="list-group-item">
+                      <div className="fw-bold">
+                        {g.name}
+                        <button
+                          className="badge rounded-pill bg-primary"
+                          onClick={() => handleJoinGroup(g._id)}
+                        >
+                          Join
+                        </button>
+                      </div>
+
+                      {g.description}
+                    </li>
+                  )
+                )}
               </ul>
               <br />
             </div>
