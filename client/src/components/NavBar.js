@@ -31,7 +31,7 @@ function NavBar(props) {
       <div className="input-group nav-search-bar-container">
         <input
           type="text"
-          classname="form-control"
+          className="form-control"
           placeholder="Search for a keyword"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
@@ -40,7 +40,7 @@ function NavBar(props) {
         />
         <div className="input-group-append">
           <button
-            classname="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             type="button"
             onClick={handleRedirect}
             disabled={!searchText}
