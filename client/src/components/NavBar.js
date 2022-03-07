@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/navbar.css";
 
-import Profile from "./Profile";
+import ProfileCard from "./ProfileCard";
 
 function NavBar(props) {
   const [showProfile, setShowProfile] = useState(false);
@@ -25,7 +25,7 @@ function NavBar(props) {
       >
         Profile
       </button>
-      {showProfile && <Profile />}
+      {showProfile && <ProfileCard />}
     </nav>
   );
 }
