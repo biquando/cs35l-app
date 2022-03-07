@@ -1,3 +1,15 @@
 .rounded-pill {
   margin-left: 10px;
 }
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-search-container {
+  width: 960px;
+  margin-top: 75px;
+}

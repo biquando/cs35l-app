@@ -1,5 +1,5 @@
 // import "./App.css";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/timeline.css";
 import "../../styles/body.css";
@@ -63,6 +63,12 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
     alert("Sharable link copied to clipboard");
   }
 
+  const [showAddGroupCard, setShowAddGroupCard] = useState(false);
+
+  const handleShowCard = () => {
+    setShowAddGroupCard(!showAddGroupCard);
+  };
+
   return (
     <div className="parent-container">
       <div className="content-container" style={{ width: "350px" }}>
@@ -108,7 +114,10 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
       <div className="sticky-bot">
         {selectedGroup && isEditable ? (
           <Link to={`/group/${selectedGroup._id}/create-event`}>
-            <button className="button btn btn-md btn-primary btn-block">
+            <button
+              className="button btn btn-md btn-primary btn-block"
+              onClick={handleShowCard}
+            >
               Create Event
             </button>
           </Link>

@@ -70,7 +70,7 @@ function CreateGroup(props) {
               </div>
             </div>
 
-            <div className="">
+            <div>
               <button
                 className="button btn btn-lg btn-primary btn-block"
                 disabled={loading}
@@ -79,7 +79,7 @@ function CreateGroup(props) {
                 Create
               </button>
               <button
-                className="cancel-button-padding button btn btn-lg btn-primary btn-block"
+                className="cancel-button-padding button btn btn-lg btn-secondary btn-block"
                 disabled={loading}
                 onClick={() => props.onCreateGroupCard()}
               >
