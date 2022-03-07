@@ -18,9 +18,9 @@
 
 .add-group-text {
   text-decoration: none;
-  color: #bababa;
+  color: #878787;
 }
-.logout-text:hover {
+.add-group-text:hover {
   color: #0e6dfd;
 }
 

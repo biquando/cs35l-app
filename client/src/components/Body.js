@@ -23,7 +23,11 @@ function Body(props) {
     { groupId: selectedGroup?._id },
     !!selectedGroup
   );
-  const { data: messages, isValidating: isValidatingMessages } = useMessages(
+  const {
+    data: messages,
+    isValidating: isValidatingMessages,
+    mutate,
+  } = useMessages(
     { groupId: selectedGroup?._id, eventId: selectedEvent?._id },
     selectedGroup && selectedEvent
   );
@@ -35,27 +39,35 @@ function Body(props) {
     }
   }, [!!groups]);
   React.useEffect(() => {
-    if (events && !selectedEvent) {
+    if (selectedGroup && events) {
       setSelectedEvent(getInitialEvent(events, selectedGroup));
     }
-  }, [!!events, selectedGroup?._id]);
+  }, [selectedGroup?._id, !!events]);
 
-  React.useEffect(() => {
-    console.log(selectedGroup?._id);
-  }, [selectedGroup?._id]);
+  function handleChangeGroup(group) {
+    setSelectedGroup(group);
+    localStorage.setItem(SELECTED_GROUP_KEY, group._id);
+  }
 
-  const isGroupsLoading = !groups && isValidatingGroups;
-  const isEventsLoading = isGroupsLoading || (!events && isValidatingEvents);
-  const isMessagesLoading =
-    isEventsLoading || (!messages && isValidatingMessages);
+  function handleChangeEvent(event) {
+    setSelectedEvent(event);
+    localStorage.setItem(getEventKey(selectedGroup._id, event._id));
+  }
 
   async function handlePostMessage(text) {
+    console.log({ text });
     await createMessage({
       eventId: selectedEvent._id,
       groupId: selectedGroup._id,
       text,
     });
+    mutate();
   }
+
+  const isGroupsLoading = !groups && isValidatingGroups;
+  const isEventsLoading = isGroupsLoading || (!events && isValidatingEvents);
+  const isMessagesLoading =
+    isEventsLoading || (!messages && isValidatingMessages);
 
   return (
     <div className="page-wrapper">
@@ -64,20 +76,21 @@ function Body(props) {
         <Groups
           groups={groups}
           selectedGroup={selectedGroup}
-          onChangeGroup={(group) => setSelectedGroup(group)}
+          onChangeGroup={handleChangeGroup}
           loading={isGroupsLoading}
         />
         <Timeline
           events={events}
           selectedEvent={selectedEvent}
           selectedGroup={selectedGroup}
-          onChangeEvent={setSelectedEvent}
+          onChangeEvent={handleChangeEvent}
           loading={isEventsLoading}
         />
         <Comments
           messages={messages}
           loading={isMessagesLoading}
           onPostMessage={handlePostMessage}
+          disabled={!selectedEvent}
         />
       </div>
     </div>

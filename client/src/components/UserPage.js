@@ -39,79 +39,94 @@ function UserPage(props) {
   }
 
   return (
-    <div>
+    <div className="page-wrapper">
       <NavBar />
-      <div className="user-page">
-        <div className="parent-container expand">
-          <div className="content-container">
-            <h1>{user?.username}</h1>
-            {isEditing ? (
-              <div>
-                <textarea
-                  className="form-control"
-                  rows="5"
-                  defaultValue={newText}
-                  onChange={(e) => setNewText(e.target.value)}
-                ></textarea>
-                <button
-                  className="badge bg-secondary rounded-pill"
-                  onClick={() => {
-                    setEditing(false);
-                  }}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="badge bg-success rounded-pill"
-                  onClick={confirmEdit}
-                >
-                  Confirm
-                </button>
-                <br />
-                <br />
-              </div>
-            ) : (
-              <p>
-                {user?.description}{" "}
-                {user?._id == currentUser?._id && (
-                  <button
-                    className="badge bg-light rounded-pill text-dark"
-                    onClick={() => {
-                      setNewText(user?.description);
-                      setEditing(true);
-                    }}
-                  >
-                    Edit
-                  </button>
+      <div className="body-wrapper">
+        <div className="user-page">
+          <div className="user-page-container">
+            <div className="parent-container expand">
+              <div className="user-page-content-container">
+                <h1>{user?.username}</h1>
+                {isEditing ? (
+                  <div className="edit-user-description-container">
+                    <textarea
+                      className="form-control"
+                      rows="5"
+                      defaultValue={newText}
+                      onChange={(e) => setNewText(e.target.value)}
+                    ></textarea>
+                    <div className="edit-user-description-btn-container">
+                      <button
+                        className="edit-user-description-btn"
+                        onClick={() => {
+                          setEditing(false);
+                        }}
+                      >
+                        <div className="edit-user-description-text">Cancel</div>
+                      </button>
+                      <button
+                        className="edit-user-description-btn"
+                        onClick={confirmEdit}
+                      >
+                        <div className="edit-user-description-text">
+                          Confirm
+                        </div>
+                      </button>
+                    </div>
+                    <br />
+                    <br />
+                  </div>
+                ) : (
+                  <p>
+                    {user?.description}{" "}
+                    {user?._id == currentUser?._id && (
+                      <div>
+                        <br />
+                        <button
+                          className="edit-user-description-btn"
+                          onClick={() => {
+                            setNewText(user?.description);
+                            setEditing(true);
+                          }}
+                        >
+                          <div className="edit-user-description-text">
+                            Edit Description
+                          </div>
+                        </button>
+                      </div>
+                    )}
+                  </p>
                 )}
-              </p>
-            )}
-            {groups?.length > 0 && <h4>Groups:</h4>}
-            {isGroupsLoading ? null : (
-              <ul className="list-group">
-                {groups?.map((group) => (
-                  <li className="list-group-item d-flex justify-content-between align-items-start">
-                    <div>{group.name}</div>
-                    {user?._id == currentUser?._id &&
-                      (user?._id != group.owner_id ? (
-                        <button
-                          className="badge bg-secondary rounded-pill"
-                          onClick={() => handleLeaveGroup(group._id)}
-                        >
-                          Leave
-                        </button>
-                      ) : (
-                        <button
-                          className="badge bg-danger rounded-pill"
-                          onClick={() => handleDeleteGroup(group._id)}
-                        >
-                          Delete
-                        </button>
-                      ))}
-                  </li>
-                ))}
-              </ul>
-            )}
+                {groups?.length > 0 && <h4>Groups:</h4>}
+                {isGroupsLoading ? null : (
+                  <ul className="list-group">
+                    {groups?.map((group) => (
+                      <li className="list-group-item d-flex justify-content-between align-items-start">
+                        <div>{group.name}</div>
+                        {user?._id == currentUser?._id &&
+                          (user?._id != group.owner_id ? (
+                            <button
+                              className="leave-group-button"
+                              onClick={() => handleLeaveGroup(group._id)}
+                            >
+                              Leave
+                            </button>
+                          ) : (
+                            <button
+                              className="leave-group-button"
+                              onClick={() => handleDeleteGroup(group._id)}
+                            >
+                              <div className="leave-group-text">
+                                Leave Group
+                              </div>
+                            </button>
+                          ))}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </div>

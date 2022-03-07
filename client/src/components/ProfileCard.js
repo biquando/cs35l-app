@@ -6,8 +6,6 @@ import { useAuth } from "../contexts/AuthContext";
 
 function Profile(props) {
   const { user, handleLogout } = useAuth();
-  console.log("user object:\n");
-  console.log(user);
 
   return (
     <div className="profile-card">
