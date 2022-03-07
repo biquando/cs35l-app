@@ -38,6 +38,7 @@ function Body(props) {
   React.useEffect(() => {
     if (token) searchParams.get("join");
   }, [!!token]);
+
   React.useEffect(() => {
     if (!groups || selectedGroup || isValidatingGroups) return;
     const initialGroup =
@@ -46,17 +47,24 @@ function Body(props) {
     setSelectedGroup(initialGroup);
   }, [!!groups, isValidatingGroups]);
   React.useEffect(() => {
-    if (!selectedGroup || !events || isValidatingEvents) return;
-    if (!events.length) {
-      setSelectedEvent(null);
-    } else if (events[0].group_id !== selectedGroup._id || !selectedEvent) {
-      const initialEvent = getInitialEvent(events, selectedGroup);
-      setSelectedEvent(
-        events.find((event) => event._id === searchParams.get("event_id")) ||
-          initialEvent
-      );
-    }
-  }, [selectedGroup?._id, !!events, isValidatingEvents]);
+    if (selectedEvent || !events || isValidatingEvents) return;
+
+    const initialEvent = getInitialEvent(events, selectedGroup);
+    setSelectedEvent(
+      events.find((event) => event._id === searchParams.get("event_id")) ||
+        initialEvent
+    );
+  }, [!!events, isValidatingEvents]);
+
+  React.useEffect(() => {
+    if (!events) return;
+
+    const initialEvent = getInitialEvent(events, selectedGroup);
+    setSelectedEvent(
+      events.find((event) => event._id === searchParams.get("event_id")) ||
+        initialEvent
+    );
+  }, [selectedGroup?._id, !!events]);
 
   function handleChangeGroup(group) {
     setSelectedGroup(group);
