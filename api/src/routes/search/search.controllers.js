@@ -36,9 +36,6 @@ module.exports.search = async function (req, res) {
           },
         },
       ],
-      user_ids: {
-        $in: [user_id],
-      },
     };
     const eventSearch = {
       $or: [
