@@ -21,19 +21,25 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  text-decoration: none;
+}
+.username:hover {
+  text-decoration: underline;
 }
 
 .logout-text {
   text-decoration: none;
   color: #bababa;
 }
+.logout-text:hover {
+  color: #0e6dfd;
+}
 
 .logout-btn {
   border-radius: 10px;
   border-width: 0px;
 }
-/* for some reason not working */
-.logout-btn logout-btn:hover {
+.logout-btn:hover {
   color: #b1caff;
   background-color: #b1caff;
 }
