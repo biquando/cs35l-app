@@ -17,7 +17,7 @@ function SearchPage(props) {
 
   return (
     <div>
-      <NavBar />
+      <NavBar searchText={queryString} />
       <h2>Search: "{queryString}"</h2>
       {!searchResults ? (
         <div className="spinner-border"></div>

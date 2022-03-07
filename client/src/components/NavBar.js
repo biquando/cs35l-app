@@ -6,7 +6,7 @@ import ProfileCard from "./ProfileCard";
 
 function NavBar(props) {
   const [showProfile, setShowProfile] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(props.searchText || "");
 
   const navigate = useNavigate();
 
@@ -36,6 +36,7 @@ function NavBar(props) {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           onKeyDown={handleInputKeyDown}
+          autoFocus={props.searchText ? "true" : "false"}
         />
         <div class="input-group-append">
           <button
