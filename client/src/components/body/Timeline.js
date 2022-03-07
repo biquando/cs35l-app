@@ -70,14 +70,12 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
           <>
             <div style={{ display: "flex", justifyContent: "space-between" }}>
               <h5>{selectedGroup.name}</h5>
-              {isEditable && (
-                <span
-                  style={{ cursor: "pointer", opacity: "0.8" }}
-                  onClick={handleCopyToClipboard}
-                >
-                  <FontAwesomeIcon icon={faCopy} />
-                </span>
-              )}
+              <span
+                style={{ cursor: "pointer", opacity: "0.8" }}
+                onClick={handleCopyToClipboard}
+              >
+                <FontAwesomeIcon icon={faCopy} />
+              </span>
             </div>
             <hr className="divider" />
           </>
