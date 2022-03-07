@@ -31,14 +31,19 @@ function CreateGroup(props) {
 
     const { name, description } = state;
     await createGroup({ name, description });
+    // Since this is rendered both in App.js and the modal
+    props.refreshGroups?.();
+    props.onCreateGroupCard?.();
     navigate("/");
   }
 
   return (
-    <div className="parent-container">
-      <NavBar />
+    <div className="create-group-parent-container">
       <div className="create-group-page-container">
-        <div className="create-group-content-container">
+        <div
+          className="create-group-content-container"
+          style={{ opacity: "100%" }}
+        >
           <h1 className="group-header">{"Create Group"}</h1>
           <form onSubmit={handleSubmit}>
             <div className="group-input">
@@ -48,7 +53,7 @@ function CreateGroup(props) {
                   type="text"
                   value={state.name}
                   onChange={handleChange}
-                  placeholder="Enter a group name..."
+                  placeholder="Enter a name..."
                   className="form-control"
                   autoFocus
                 />
@@ -59,7 +64,7 @@ function CreateGroup(props) {
                   rows="5"
                   value={state.description}
                   onChange={handleChange}
-                  placeholder="Enter a group description..."
+                  placeholder="Enter a description..."
                   className="form-control"
                 />
               </div>
@@ -69,12 +74,16 @@ function CreateGroup(props) {
               <button
                 className="button btn btn-lg btn-primary btn-block"
                 disabled={loading}
+                onClick={handleSubmit}
               >
-                {loading ? (
-                  <span className="spinner-border spinner-border-sm" />
-                ) : (
-                  "Create"
-                )}
+                Create
+              </button>
+              <button
+                className="cancel-button-padding button btn btn-lg btn-primary btn-block"
+                disabled={loading}
+                onClick={() => props.onCreateGroupCard()}
+              >
+                Cancel
               </button>
             </div>
           </form>
