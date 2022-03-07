@@ -109,14 +109,18 @@ function UserPage(props) {
                               className="leave-group-button"
                               onClick={() => handleLeaveGroup(group._id)}
                             >
-                              Leave
+                              <div className="leave-group-text">
+                                Leave Group
+                              </div>
                             </button>
                           ) : (
                             <button
                               className="leave-group-button"
                               onClick={() => handleDeleteGroup(group._id)}
                             >
-                              <div className="leave-group-text">Delete</div>
+                              <div className="leave-group-text">
+                                Delete Group
+                              </div>
                             </button>
                           ))}
                       </li>
