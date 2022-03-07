@@ -80,17 +80,20 @@ function UserPage(props) {
                   <p>
                     {user?.description}{" "}
                     {user?._id == currentUser?._id && (
-                      <button
-                        className="edit-user-description-btn"
-                        onClick={() => {
-                          setNewText(user?.description);
-                          setEditing(true);
-                        }}
-                      >
-                        <div className="edit-user-description-text">
-                          Edit Description
-                        </div>
-                      </button>
+                      <div>
+                        <br />
+                        <button
+                          className="edit-user-description-btn"
+                          onClick={() => {
+                            setNewText(user?.description);
+                            setEditing(true);
+                          }}
+                        >
+                          <div className="edit-user-description-text">
+                            Edit Description
+                          </div>
+                        </button>
+                      </div>
                     )}
                   </p>
                 )}
