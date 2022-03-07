@@ -25,8 +25,6 @@ function SearchPage(props) {
     mutate,
   } = useSearch({ query: queryString });
 
-  useEffect(mutate, [isValidating]);
-
   async function handleJoinGroup(groupId) {
     await joinGroup({ groupId });
     mutate();
