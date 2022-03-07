@@ -7,9 +7,6 @@ import { format, isSameDay } from "date-fns";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Day(props) {
-  const { user } = useAuth();
-  const isEditable = props.selectedGroup?.owner_id === user?._id;
-
   return (
     <div>
       <div>
@@ -24,7 +21,7 @@ function Day(props) {
               >
                 <b>{event.name}</b>
                 {event.description && <p>{event.description}</p>}
-                {isEditable ? (
+                {props.isEditable ? (
                   <Link
                     to={`/group/${props.selectedGroup._id}/event/${event._id}/edit`}
                   >
@@ -54,10 +51,19 @@ function Day(props) {
 
 function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
   const days = useMemo(() => getDays(events), [events]);
+  const { user } = useAuth();
+  const isEditable = selectedGroup?.owner_id === user?._id;
 
   return (
     <div className="parent-container">
       <div className="content-container" style={{ width: "350px" }}>
+        {selectedGroup && (
+          <>
+            <h5>{selectedGroup.name}</h5>
+            <hr className="divider" />
+          </>
+        )}
+
         {days?.length ? (
           days.map((day) => (
             <Day
@@ -66,14 +72,11 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
               events={day.events}
               selectedGroup={selectedGroup}
               onChangeEvent={onChangeEvent}
+              isEditable={isEditable}
             />
           ))
         ) : (
-          <ul className="list-group">
-            <li className="list-group-item shadow-realm">
-              <b>{loading ? "Loading..." : "No events created"}</b>
-            </li>
-          </ul>
+          <b>{loading ? "Loading..." : "No events created"}</b>
         )}
       </div>
       <div className="sticky-bot">
