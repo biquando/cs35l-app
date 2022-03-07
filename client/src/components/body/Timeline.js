@@ -6,7 +6,7 @@ import "../../styles/body.css";
 import { format, isSameDay } from "date-fns";
 import { useAuth } from "../../contexts/AuthContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faCopy, faPen } from "@fortawesome/free-solid-svg-icons";
 
 function Day(props) {
   return (
@@ -27,18 +27,18 @@ function Day(props) {
                   <Link
                     to={`/group/${props.selectedGroup._id}/event/${event._id}/edit`}
                   >
-                    <span
+                    <FontAwesomeIcon
                       style={{
                         fontSize: "12px",
                         fontWeight: "bold",
                         cursor: "pointer",
                         position: "absolute",
-                        top: "10px",
-                        right: "20px",
+                        top: "13px",
+                        right: "13px",
+                        color: "rgba(0,0,0,0.5)",
                       }}
-                    >
-                      EDIT
-                    </span>
+                      icon={faPen}
+                    />
                   </Link>
                 ) : null}
               </li>
@@ -92,7 +92,10 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
                 }}
                 onClick={handleCopyToClipboard}
               >
-                <FontAwesomeIcon icon={faCopy} />
+                <FontAwesomeIcon
+                  style={{ color: "rgba(0,0,0,0.5)" }}
+                  icon={faCopy}
+                />
               </span>
             </div>
             <hr className="divider" />
