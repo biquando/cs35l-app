@@ -19,7 +19,8 @@ function Day(props) {
             {props.events.map((event) => (
               <li
                 className="list-group-item shadow-realm"
-                style={{ position: "relative" }}
+                style={{ position: "relative", cursor: "pointer" }}
+                onClick={() => props.onChangeEvent(event)}
               >
                 <b>{event.name}</b>
                 {event.description && <p>{event.description}</p>}
@@ -51,7 +52,7 @@ function Day(props) {
   );
 }
 
-function Timeline({ events, loading, selectedGroup }) {
+function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
   const days = useMemo(() => getDays(events), [events]);
 
   return (
@@ -64,6 +65,7 @@ function Timeline({ events, loading, selectedGroup }) {
               date={day.date}
               events={day.events}
               selectedGroup={selectedGroup}
+              onChangeEvent={onChangeEvent}
             />
           ))
         ) : (
