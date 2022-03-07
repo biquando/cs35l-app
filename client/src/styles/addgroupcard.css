@@ -1,0 +1,35 @@
+.add-group-card {
+  border-radius: 10px;
+  position: absolute;
+  left: 15px;
+  bottom: 68px;
+  height: 80px;
+  width: 130px;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  background-color: white;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+}
+
+.add-group-text {
+  text-decoration: none;
+  color: #bababa;
+}
+.logout-text:hover {
+  color: #0e6dfd;
+}
+
+.add-group-btn {
+  border-radius: 10px;
+  border-width: 0px;
+  display: flex;
+}
+.add-group-btn:hover {
+  color: #b1caff;
+  background-color: #b1caff;
+}

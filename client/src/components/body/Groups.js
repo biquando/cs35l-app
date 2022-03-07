@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AddGroupCard from "./AddGroupCard";
 import "../../styles/groups.css";
 import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
@@ -16,6 +17,12 @@ function Groups({ groups, onChangeGroup, selectedGroup }) {
     return initials;
   });
   //console.log(groupInitials);
+
+  const [showAddGroupCard, setShowAddGroupCard] = useState(false);
+
+  const handleShowCard = () => {
+    setShowAddGroupCard(!showAddGroupCard);
+  };
 
   return (
     <div className="parent-container">
@@ -36,12 +43,14 @@ function Groups({ groups, onChangeGroup, selectedGroup }) {
           </span>
         ))}
       </div>
+      {showAddGroupCard && <AddGroupCard />}
       <div className="sticky-bot">
-        <Link to="/create-group" className="">
-          <button className="add-group-btn button btn btn-md btn-primary">
-            <span className="add-group-text">+</span>
-          </button>
-        </Link>
+        <button
+          className="add-group-btn button btn btn-md btn-primary"
+          onClick={handleShowCard}
+        >
+          <span className="add-group-text">+</span>
+        </button>
       </div>
     </div>
   );
