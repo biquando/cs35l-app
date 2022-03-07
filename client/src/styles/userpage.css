@@ -1,14 +1,19 @@
 .user-page-container {
-  width: 900px;
+  width: 960px;
 }
 
 .user-page {
   display: flex;
   width: 100%;
+  justify-content: center;
+  background-color: white;
+}
+
+.user-page-content-container {
+  margin-top: 100px;
 }
 
 .leave-group-button {
-  border-radius: 15px;
   border-radius: 10px;
   border-width: 0px;
 }
@@ -24,5 +29,30 @@
   color: #e04555;
 }
 
+.edit-user-description-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-user-description-btn-container {
+  display: flex;
+  margin-top: 10px;
+}
+
+.edit-user-description-text {
+  text-decoration: none;
+  color: #878787;
+}
+.edit-user-description-text:hover {
+  color: #0e6dfd;
+}
+
 .edit-user-description-btn {
+  border-radius: 10px;
+  border-width: 0px;
+  margin-right: 10px;
+}
+.edit-user-description-btn:hover {
+  color: #b1caff;
+  background-color: #b1caff;
 }

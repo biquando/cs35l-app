@@ -39,12 +39,8 @@ function Comments(props) {
     e.preventDefault();
     const { groupId, eventId, text } = state;
     setLoading(true);
-<<<<<<< HEAD
     setState((prev) => ({ ...prev, text: "" }));
     await props.onPostMessage(text);
-=======
-    await createMessage({ groupId, eventId, text });
->>>>>>> a971161 (Add index to map)
     setLoading(false);
   };
 
