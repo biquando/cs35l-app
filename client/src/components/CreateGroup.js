@@ -53,11 +53,12 @@ function CreateGroup(props){
                               onChange={handleChange}
                               placeholder="Enter Group Name"
                               className="form-control"
+                              autoFocus
                             />
                             <div className = "group-descrip">
-                            <input
+                            <textarea
                               name="description"
-                              type="text"
+                              rows="5"
                               value={state.description}
                               onChange={handleChange}
                               placeholder="Enter Group Description"
@@ -76,7 +77,7 @@ function CreateGroup(props){
                               {loading ? (
                                 <span className="spinner-border spinner-border-sm" />
                               ) : (
-                                "Add"
+                                "Create"
                               )}
                             </button>
                           </div>

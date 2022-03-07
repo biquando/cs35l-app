@@ -54,7 +54,7 @@ function CreateEvent(props) {
         <div className="text-center">
           <div className="inner-container">
             <form onSubmit={handleSubmit} className="form-event">
-                <h1 className="header"> Create Event : {group?.name}</h1>
+                <h1 className="header"> Create New Event : {group?.name}</h1>
                 <div className="eventname-input">
                   <input
                     name="name"
@@ -80,9 +80,9 @@ function CreateEvent(props) {
                 </div>
 
                 <div className="event-description">
-                  <input
+                  <textarea
                     name="description"
-                    type="text"
+                    rows="5"
                     value={description}
                     onChange={handleChange}
                     placeholder="Enter Event Description"
@@ -94,7 +94,7 @@ function CreateEvent(props) {
                   <button
                     className="button btn btn-lg btn-primary btn-block"
                   >
-                    Save
+                    Create
                   </button>
                 </div>
             </form>
