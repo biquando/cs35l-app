@@ -26,7 +26,7 @@ function Groups({ groups, onChangeGroup, selectedGroup }) {
 
   return (
     <div className="parent-container">
-      <div className="content-container">
+      <div className="content-container group-content-container">
         {groups?.map((group, index) => (
           <span
             className="btn-secondary group-box"
@@ -49,7 +49,7 @@ function Groups({ groups, onChangeGroup, selectedGroup }) {
           className="add-group-btn button btn btn-md btn-primary"
           onClick={handleShowCard}
         >
-          <span className="add-group-text">+</span>
+          <div className="add-group-text">+</div>
         </button>
       </div>
     </div>
