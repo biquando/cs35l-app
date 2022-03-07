@@ -2,6 +2,11 @@
   flex: auto;
 }
 
+.no-comment{
+    text-align: center;
+    opacity:50%;
+}
+
 .comment-input {
   width: 100%;
   position: relative;
@@ -16,3 +21,4 @@
     position: relative;
     bottom: 5.3%;
 }
+
