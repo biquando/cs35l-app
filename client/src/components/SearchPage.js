@@ -84,7 +84,10 @@ function SearchPage(props) {
                       key={e._id}
                       className="list-group-item"
                     >
-                      <div className="fw-bold">{e.name}</div>
+                      <div className="justify-content-between d-flex">
+                        <div className="fw-bold">{e.name}</div>
+                        <span>{searchResults.groupNameMap[e._id]}</span>
+                      </div>
                       {e.description}
                     </Link>
                   ))}
@@ -104,7 +107,10 @@ function SearchPage(props) {
                       key={m._id}
                       className="list-group-item"
                     >
-                      <div className="fw-bold">{m.username}</div>
+                      <div className="justify-content-between d-flex">
+                        <div className="fw-bold">{m.username}</div>
+                        <span>{searchResults.eventNameMap[m._id]}</span>
+                      </div>
                       {m.text}
                     </Link>
                   ))}

@@ -65,12 +65,28 @@ module.exports.search = async function (req, res) {
     ]);
 
     let messageGroupMap = {};
-    for (let m of messages) {
+    let groupNameMap = {};
+    let eventNameMap = {};
+    for (const m of messages) {
       const mEvent = await Event.findById(m.event_id);
       messageGroupMap[m._id] = mEvent.group_id;
+      eventNameMap[m._id] = mEvent.name;
+    }
+    for (let e of events) {
+      const eGroup = await Group.findById(e.group_id);
+      groupNameMap[e._id] = eGroup.name;
     }
 
-    res.json({ data: { groups, events, messages, messageGroupMap } });
+    res.json({
+      data: {
+        groups,
+        events,
+        messages,
+        messageGroupMap,
+        groupNameMap,
+        eventNameMap,
+      },
+    });
   } catch (error) {
     res.status(400).json({
       error: error.message,
