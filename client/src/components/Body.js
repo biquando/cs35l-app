@@ -98,6 +98,7 @@ function Body(props) {
           loading={isMessagesLoading}
           onPostMessage={handlePostMessage}
           disabled={!selectedEvent}
+          selectedEvent={selectedEvent}
           highlightedMessageId={searchParams.get("message_id")}
         />
       </div>

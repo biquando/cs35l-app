@@ -15,7 +15,6 @@ function Comment(props) {
         <div className="">
           <b>{user?.username}</b>
           <p>{props.text}</p>
-
         </div>
       </div>
     </div>
@@ -46,48 +45,51 @@ function Comments(props) {
     setLoading(false);
   };
 
-
-  if(props.disabled){
-    return(
-        <div className="no-comment">
-            <p>no event selected</p>
-        </div>
+  if (props.disabled) {
+    return (
+      <div className="no-comment">
+        <p>no event selected</p>
+      </div>
     );
   }
 
+  return (
+    <div className="parent-container expand">
+      <div className="content-container">
+        {props.selectedEvent && (
+          <>
+            <h5>{props.selectedEvent.name}</h5>
+            <hr className="divider" />
+          </>
+        )}
+        {props.messages?.map((comment) => (
+          <Comment userId={comment.user_id} text={comment.text} />
+        ))}
+      </div>
+      <div className="sticky-bot">
+        <input
+          disabled={props.disabled}
+          name="username"
+          type="comment"
+          value={state.text}
+          onChange={handleComment}
+          placeholder="Add a comment..."
+          autoFocus
+          className="comment-input"
+          onKeyPress={submitCommentLine}
+        />
+      </div>
 
-    return (
-        <div className="parent-container expand">
-          <div className="content-container">
-            {props.messages?.map((comment) => (
-              <Comment userId={comment.user_id} text={comment.text} />
-            ))}
-          </div>
-          <div className="sticky-bot">
-            <input
-              disabled = {props.disabled}
-              name="username"
-              type="comment"
-              value={state.text}
-              onChange={handleComment}
-              placeholder="Add a comment..."
-              autoFocus
-              className="comment-input"
-              onKeyPress = {submitCommentLine}
-            />
-          </div>
-
-          <button
-            onClick={submitCommentLine}
-            type="submit"
-            className="comment-button"
-            disabled={loading}
-          >
-            Post
-          </button>
-        </div>
-      );
-
+      <button
+        onClick={submitCommentLine}
+        type="submit"
+        className="comment-button"
+        disabled={loading}
+      >
+        Post
+      </button>
+    </div>
+  );
 }
 
 export default Comments;
