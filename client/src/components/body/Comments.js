@@ -46,41 +46,16 @@ function Comments(props) {
     setLoading(false);
   };
 
-<<<<<<< HEAD
-=======
-  return (
-    <div className="parent-container expand">
-      <div className="content-container">
-        {props.messages?.map((index, comment) => (
-          <Comment userId={comment.user_id} text={comment.text} />
-        ))}
-      </div>
-      <div className="sticky-bot">
-        <input
-          name="username"
-          type="comment"
-          value={state.text}
-          onChange={handleComment}
-          placeholder="Add a comment..."
-          autoFocus
-          className="comment-input"
-        />
-      </div>
->>>>>>> abe891d1ecd5c62acad008e1d7abe2da1f0736c2
 
-
-    console.log(props)
-  if (props.disabled){
+  if(props.disabled){
     return(
-            <div className = "no-comment">
-                <p>Add an event</p>
-            </div>
+        <div className="no-comment">
+            <p>Select event</p>
+        </div>
     );
-
-
   }
 
-  else {
+
     return (
         <div className="parent-container expand">
           <div className="content-container">
@@ -112,7 +87,7 @@ function Comments(props) {
           </button>
         </div>
       );
-  }
+
 }
 
 export default Comments;
