@@ -26,6 +26,10 @@ function App() {
               element={<CreateEvent />}
             />
             <Route path="/create-group" element={<CreateGroup />} />
+            <Route
+              path="/group/:groupId/event/:eventId/edit"
+              element={<CreateGroup />}
+            />
           </Routes>
         </div>
       </AuthContextProvider>
