@@ -8,7 +8,7 @@
 }
 
 .create-group-parent-container {
-  z-index: 1;
+  z-index: 3;
   position: absolute;
   left: 0;
   top: 0;

@@ -25,11 +25,3 @@
   position: relative;
   bottom: 5.3%;
 }
-
-.user-link {
-  text-decoration: none;
-}
-
-.user-link:hover {
-  text-decoration: underline;
-}

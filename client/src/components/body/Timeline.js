@@ -108,7 +108,9 @@ function Timeline({ events, loading, selectedGroup, onChangeEvent }) {
             />
           ))
         ) : (
-          <b>{loading ? "Loading..." : "No events created"}</b>
+          <p style={{ color: "rgba(0,0,0,0.5)" }}>
+            {loading ? "Loading..." : "Create an event!"}
+          </p>
         )}
       </div>
       <div className="sticky-bot">

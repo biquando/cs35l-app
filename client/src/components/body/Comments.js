@@ -93,7 +93,6 @@ function Comments(props) {
             onChange={handleComment}
             placeholder="Add a comment..."
             onKeyDown={handleInputKeyDown}
-            autoFocus
           />
           <div className="input-group-append">
             <button
