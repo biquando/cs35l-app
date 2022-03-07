@@ -5,17 +5,30 @@ import "../../styles/body.css";
 import { useAuth } from "../../contexts/AuthContext";
 
 function Groups({ groups, onChangeGroup }) {
-  // const groupData = getGroups({ userIds: [] })
+  const groupInitials = groups?.map((group) => {
+    const wordList = group?.name.split(" ");
+    let initials = "";
+    let i = 0;
+    while (i < 5 && i < wordList.length) {
+      initials += wordList[i][0];
+      ++i;
+    }
+    return initials;
+  });
+  //console.log(groupInitials);
+
   return (
     <div className="parent-container">
       <div className="content-container">
-        {groups?.map((group) => (
+        {groups?.map((group, index) => (
           <span
             className="btn-secondary group-box"
             style={{ cursor: "pointer" }}
             onClick={() => onChangeGroup(group)}
           >
-            <span className="group-title text-light">group</span>
+            <span className="group-title text-light">
+              {groupInitials[index]}
+            </span>
           </span>
         ))}
       </div>
