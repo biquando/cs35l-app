@@ -1,65 +1,87 @@
-  .eventname-input {
-    position: absolute;
-    top: 175px;
-    width: 30%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-  }
+.eventname-input {
+  position: absolute;
+  top: 175px;
+  width: 30%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
 
-  .date-time-picker {
-    position: absolute;
-    top: 250px;
-    width: 30%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    z-index: 3;
-  }
+.date-time-picker {
+  position: absolute;
+  top: 250px;
+  width: 30%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
 
-  .event-description {
-    position: absolute;
-    top: 380px;
-    width: 30%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .event-description-textarea{
-    resize: none;
-  }
+.event-description {
+  position: absolute;
+  top: 380px;
+  width: 30%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}
 
-  .save-button {
-    position: absolute;
-    bottom: 10%;
-    right: 40%;
-  }
+.event-description-textarea {
+  resize: none;
+}
 
-  .cancel-button2 {
-    position: absolute;
-    bottom: 10%;
-    left:40%
-  }
-  
-  .header {
-    font-size: 25px;
-    padding: 10px;
-  }
-  
-  .form-event {
-    padding: 10px;
-    margin: auto;
-  }
+.save-button {
+  position: absolute;
+  bottom: 10%;
+  right: 40%;
+}
 
-  .form-event .form-control {
-    position: relative;
-    box-sizing: border-box;
-    height: auto;
-    padding: 10px;
-    font-size: 18px;
-  }
-  .form-event .form-control:focus {
-    z-index: 2;
-  }
-  
+.cancel-button2 {
+  position: absolute;
+  bottom: 10%;
+  left: 40%;
+}
+
+.header {
+  font-size: 25px;
+  padding: 10px;
+}
+
+.form-event {
+  padding: 10px;
+  margin: auto;
+}
+
+.form-event .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 18px;
+}
+.form-event .form-control:focus {
+  z-index: 2;
+}
+
+.name-date-input-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.event-button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 300px;
+}
+
+.button-size {
+  width: 100px;
+}
+
+.description-size {
+  width: 438px;
+  margin-bottom: 20px;
+}
