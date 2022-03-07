@@ -29,17 +29,20 @@ function Body(props) {
   );
 
   React.useEffect(() => {
-    if (groups) {
+    if (groups && !selectedGroup) {
       const initialGroup = getInitialGroup(groups);
-      console.log({ groups, initialGroup });
       setSelectedGroup(initialGroup);
     }
   }, [!!groups]);
   React.useEffect(() => {
-    if (events) {
-      setSelectedEvent(getInitialEvent(events, selectedEvent));
+    if (events && !selectedEvent) {
+      setSelectedEvent(getInitialEvent(events, selectedGroup));
     }
-  }, [!!events]);
+  }, [!!events, selectedGroup?._id]);
+
+  React.useEffect(() => {
+    console.log(selectedGroup?._id);
+  }, [selectedGroup?._id]);
 
   const isGroupsLoading = !groups && isValidatingGroups;
   const isEventsLoading = isGroupsLoading || (!events && isValidatingEvents);
@@ -61,7 +64,7 @@ function Body(props) {
         <Groups
           groups={groups}
           selectedGroup={selectedGroup}
-          onChangeGroup={setSelectedGroup}
+          onChangeGroup={(group) => setSelectedGroup(group)}
           loading={isGroupsLoading}
         />
         <Timeline
