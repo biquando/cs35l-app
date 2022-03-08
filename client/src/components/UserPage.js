@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "../styles/userpage.css";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useUser, useGroups } from "../utils/swr";
 import { useAuth } from "../contexts/AuthContext";
-import { leaveGroup, deleteGroup } from "../utils/group";
+import { leaveGroup, deleteGroup, joinGroup } from "../utils/group";
 import NavBar from "./NavBar";
 import { updateUser } from "../utils/user";
 
@@ -17,7 +17,12 @@ function UserPage(props) {
   } = useGroups({ userIds: [user?._id] }, !!user);
   const isGroupsLoading = !groups && isValidatingGroups;
 
-  const { user: currentUser } = useAuth();
+  const { user: originalUser } = useAuth();
+  const { data: currentUser, mutate: mutateCurrentUser } = useUser(
+    { userId: originalUser?._id },
+    !!originalUser
+  );
+  const navigate = useNavigate();
 
   async function handleLeaveGroup(groupId) {
     await leaveGroup({ groupId });
@@ -27,6 +32,13 @@ function UserPage(props) {
   async function handleDeleteGroup(groupId) {
     await deleteGroup({ groupId });
     mutateGroups();
+  }
+
+  async function handleJoinGroup(groupId) {
+    await joinGroup({ groupId });
+    mutateCurrentUser();
+    mutateGroups();
+    navigate(`/?open=group&group_id=${groupId}`);
   }
 
   const [isEditing, setEditing] = useState(false);
@@ -77,7 +89,7 @@ function UserPage(props) {
                     <br />
                   </div>
                 ) : (
-                  <p>
+                  <div>
                     {user?.description}{" "}
                     {user?._id == currentUser?._id && (
                       <div>
@@ -95,37 +107,59 @@ function UserPage(props) {
                         </button>
                       </div>
                     )}
-                  </p>
+                  </div>
                 )}
                 {groups?.length > 0 && <h4>Groups:</h4>}
                 {isGroupsLoading ? null : (
                   <ul className="list-group">
-                    {groups?.map((group) => (
-                      <li className="list-group-item d-flex justify-content-between align-items-start list-group-modifier">
-                        <Link
-                          to={`/?open=group&group_id=${group._id}`}
-                          className="text-dark group-link"
+                    {groups?.map((group) =>
+                      currentUser?.group_ids.includes(group._id) ? (
+                        <li
+                          key={group._id}
+                          className="list-group-item d-flex justify-content-between align-items-start list-group-modifier"
                         >
-                          {group.name}
-                        </Link>
-                        {user?._id == currentUser?._id &&
-                          (user?._id != group.owner_id ? (
-                            <button
-                              className="leave-group-button"
-                              onClick={() => handleLeaveGroup(group._id)}
+                          <div>
+                            <Link
+                              to={`/?open=group&group_id=${group._id}`}
+                              className="text-dark group-link stretched-link"
                             >
-                              <div className="leave-group-text">Leave</div>
-                            </button>
-                          ) : (
-                            <button
-                              className="leave-group-button"
-                              onClick={() => handleDeleteGroup(group._id)}
-                            >
-                              <div className="leave-group-text">Delete</div>
-                            </button>
-                          ))}
-                      </li>
-                    ))}
+                              {group.name}
+                            </Link>
+                          </div>
+                          <div>
+                            {user?._id == currentUser?._id &&
+                              (user?._id != group.owner_id ? (
+                                <button
+                                  className="leave-group-button"
+                                  onClick={() => handleLeaveGroup(group._id)}
+                                >
+                                  <div className="leave-group-text">Leave</div>
+                                </button>
+                              ) : (
+                                <button
+                                  className="leave-group-button"
+                                  onClick={() => handleDeleteGroup(group._id)}
+                                >
+                                  <div className="leave-group-text">Delete</div>
+                                </button>
+                              ))}
+                          </div>
+                        </li>
+                      ) : (
+                        <li
+                          key={group._id}
+                          className="list-group-item d-flex justify-content-between align-items-start list-group-modifier"
+                        >
+                          <div className="">{group.name}</div>
+                          <button
+                            className="join-group-button"
+                            onClick={() => handleJoinGroup(group._id)}
+                          >
+                            <div className="join-group-text">Join</div>
+                          </button>
+                        </li>
+                      )
+                    )}
                   </ul>
                 )}
               </div>

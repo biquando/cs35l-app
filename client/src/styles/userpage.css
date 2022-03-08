@@ -17,6 +17,8 @@
   border-radius: 10px;
   border-width: 0px;
   margin-right: 10px;
+  position: relative;
+  z-index: 2;
 }
 .leave-group-button:hover {
   background-color: #f7b7bb;
@@ -40,20 +42,24 @@
   margin-top: 10px;
 }
 
-.edit-user-description-text {
+.edit-user-description-text,
+.join-group-text {
   text-decoration: none;
   color: #878787;
 }
-.edit-user-description-text:hover {
+.edit-user-description-text:hover,
+.join-group-text:hover {
   color: #0e6dfd;
 }
 
-.edit-user-description-btn {
+.edit-user-description-btn,
+.join-group-button {
   border-radius: 10px;
   border-width: 0px;
   margin-right: 10px;
 }
-.edit-user-description-btn:hover {
+.edit-user-description-btn:hover,
+.join-group-button:hover {
   color: #b1caff;
   background-color: #b1caff;
 }
