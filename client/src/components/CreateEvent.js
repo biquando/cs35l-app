@@ -63,7 +63,9 @@ function CreateEvent(props) {
           className="create-group-content-container"
           style={{ opacity: "100%" }}
         >
-          <h1 className="group-header">Create Event</h1>
+          <h2 className="group-header" style={{ fontSize: "25px" }}>
+            Create Event
+          </h2>
           <div className="name-date-input-container">
             <div className="group-input">
               <input
