@@ -3,12 +3,14 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useUser } from "../../utils/swr.js";
 import { createMessage } from "../../utils/message.js";
+import { format } from 'date-fns';
 import "../../styles/comments.css";
 import "../../styles/body.css";
 
 function Comment(props) {
   const { data: user } = useUser({ userId: props.userId });
-
+  // FOR OMER --> took this out from the return, but you can put it back in to see what happens
+  //<h6 className="comment-time">{format(props.createdAt, "PPpp")}</h6>
   return (
     <div>
       <div className="">
@@ -16,6 +18,7 @@ function Comment(props) {
           <Link className="text-dark user-link" to={`/user/${props.userId}`}>
             <b>{user?.username}</b>
           </Link>
+          <h6 className="comment-time">{props.createdAt}</h6>
           <p>{props.text}</p>
         </div>
       </div>
@@ -24,6 +27,7 @@ function Comment(props) {
 }
 
 function Comments(props) {
+
   const [state, setState] = useState({
     groupId: "",
     eventId: "",
@@ -33,14 +37,14 @@ function Comments(props) {
   const comments = [];
 
   const handleComment = (e) => {
-    const { groupId, eventId, value: text } = e.target;
+    const { groupId, eventId, value: text} = e.target;
     console.log(text);
     setState((prev) => ({ ...prev, text }));
   };
 
   const submitCommentLine = async (e) => {
     e.preventDefault();
-    const { groupId, eventId, text } = state;
+    const { groupId, eventId, text} = state;
     setLoading(true);
     setState((prev) => ({ ...prev, text: "" }));
     await props.onPostMessage(text);
@@ -73,7 +77,7 @@ function Comments(props) {
           </>
         )}
         {props.messages?.map((comment) => (
-          <Comment userId={comment.user_id} text={comment.text} />
+          <Comment userId={comment.user_id} text={comment.text} createdAt={comment.createdAt}/>
         ))}
       </div>
       <div className="comments-sticky-bot">
