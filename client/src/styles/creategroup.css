@@ -46,6 +46,7 @@
 .group-header {
   font-size: 25px;
   margin-bottom: 20px;
+  padding-bottom: 20px;
 }
 
 .form-control {

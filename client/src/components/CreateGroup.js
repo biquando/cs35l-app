@@ -44,7 +44,9 @@ function CreateGroup(props) {
           className="create-group-content-container"
           style={{ opacity: "100%" }}
         >
-          <h1 className="group-header">{"Create Group"}</h1>
+          <h1 className="group-header" style={{ fontSize: "25px" }}>
+            {"Create Group"}
+          </h1>
           <form onSubmit={handleSubmit}>
             <div className="group-input">
               <div className="group-descrip">
