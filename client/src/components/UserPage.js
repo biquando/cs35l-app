@@ -109,6 +109,7 @@ function UserPage(props) {
                     )}
                   </div>
                 )}
+                <br />
                 {groups?.length > 0 && <h4>Groups:</h4>}
                 {isGroupsLoading ? null : (
                   <ul className="list-group">
