@@ -9,12 +9,9 @@
   position: fixed;
 }
 
-.comment-time{
-    display: flex;
-    position: relative;
-    left: 80%;
-    opacity: 50%;
-    font-size: 10px;
+.comment-time {
+  opacity: 50%;
+  font-size: 10px;
 }
 
 .center-message {

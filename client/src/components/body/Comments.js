@@ -15,13 +15,28 @@ function Comment(props) {
     <div>
       <div className="">
         <div className="">
-          <Link className="text-dark user-link" to={`/user/${props.userId}`}>
-            <b>{user?.username}</b>
-          </Link>
-          <h6 className="comment-time">
-            {format(new Date(props.createdAt), "h:mm aaa, LLL d, y")}
-          </h6>
-          <p>{props.text}</p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <div>
+              <Link
+                className="text-dark user-link"
+                to={`/user/${props.userId}`}
+              >
+                <b>{user?.username}</b>
+              </Link>
+              <span>
+                <p>{props.text}</p>
+              </span>
+            </div>
+            <h6 className="comment-time">
+              {format(new Date(props.createdAt), "h:mm aaa, LLL d, y")}
+            </h6>
+          </div>
         </div>
       </div>
     </div>
