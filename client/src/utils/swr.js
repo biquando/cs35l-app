@@ -65,7 +65,12 @@ export function useEvent({ groupId, eventId }, isReady = true) {
 export function useMessages({ groupId, eventId }, isReady = true) {
   return useSWR(
     isReady ? `/group/${groupId}/event/${eventId}/message` : null,
-    async () => (await getMessages({ groupId, eventId })).data
+    async () => (await getMessages({ groupId, eventId })).data,
+    {
+      refreshInterval:
+        // pings server every 1 second, not very efficient but makes it realtime.
+        1000,
+    }
   );
 }
 
