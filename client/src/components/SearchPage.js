@@ -55,7 +55,7 @@ function SearchPage(props) {
                         className="list-group-item"
                       >
                         <div className="fw-bold">{g.name}</div>
-                        {g.description}
+                        <div>{g.description}</div>
                       </Link>
                     ) : (
                       <li
